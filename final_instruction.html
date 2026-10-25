@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/x-icon" href="fav_icon2.ico">
-  <title>cbt.wisdomschools.org</title>
+  <title>cbt.canaanlandschools.org</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     * {
@@ -20,7 +20,7 @@
       --background-color: #f5f5f5;
       --text-color: #333;
       --card-bg: white;
-      --header-bg: gold; /*#008000;*/
+      --header-bg: brown; /*#008000;*/
       --header-text: white;
       --nav-bg: #006400;
       --input-border: #ddd;
@@ -30,7 +30,7 @@
       --primary-color: #4CAF50;
       --secondary-color: #ff5252;
       --background-color: #2c2c2c;
-      --text-color: #f0f0f0;
+      --text-color: red; /*#f0f0f0;*/
       --card-bg: #3c3c3c;
       --header-bg: #2e7d32;
       --header-text: #f0f0f0;
@@ -40,7 +40,7 @@
 
     body {
       background-color: var(--background-color);
-      color: var(--text-color);
+      color: red;
       transition: background-color 0.3s, color 0.3s;
       position: relative;
       z-index: 1;
@@ -53,7 +53,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: url('img/wisdom_logo1.png') no-repeat center center;
+      background: url('img/Ctemplogo.jpg') no-repeat center center;
       background-size: 300px 300px;
       opacity: 0.1;
       z-index: 0;
@@ -179,6 +179,34 @@
     .logout-btn:hover {
       background-color: #b30000;
     }
+
+       .marquee-container {
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+            background: white;
+            padding: 10px 0;
+        }
+    
+        /* Moving text animation */
+        .marquee-text {
+            display: inline-block;
+            color: red;
+            font-size: 24px;
+            font-weight: bold;
+            animation: marquee 10s linear infinite;
+        }
+
+        /* Keyframes for moving text */
+        @keyframes marquee {
+            from {
+                transform: translateX(100%);
+            }
+            to {
+                transform: translateX(-100%);
+            }
+        }
+        
   </style>
 </head>
 <body>
@@ -191,14 +219,18 @@
           <img src="img/wisdom_logo1.jpg" alt="School Logo">
         </div>
       </div>
-      <p>WISDOM FOUNDATION SCHOOLS EGBEWA ADO EKITI </p>
-      <p>2026/2027 FIRST TERM COMPUTER BASED TEST EXAMINATION</p>
+      <p style="color: lime; font-size: 18px; font-weight: 20px;">2026/2027 FIRST TERM COMPUTER BASED TEST EXAMINATION</p>
     </header>
 
     <div class="student-info">
       <img id="userImage" src="img/default_user.jpg" alt="Student Image">
       <h2 id="username">Student Name</h2>
     </div>
+
+
+    <div class="marquee-container">
+        <span class="marquee-text">2026/2027 FIRST TERM  EXAMINATION </span>
+     </div>
 
     <div class="instructions">
       <h3>Examination Instructions</h3>
@@ -245,7 +277,7 @@
     </div>
 
     <footer>
-      <p>&copy; 2026 cbt.wisdomschools.org</p>
+      <p>&copy; 2026 cbt.wisdomfoundationschools.org</p>
     </footer>
   </div>
 
