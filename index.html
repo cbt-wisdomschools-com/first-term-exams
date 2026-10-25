@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>cbt.wisdomschools.org</title>
-     <link rel="icon" type="image/x-icon" href="fav_icon2.ico">
+    <link rel="icon" type="image/x-icon" href="fav_icon2.ico">
     <style>
         * {
             margin: 0;
@@ -12,63 +12,103 @@
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-       
-            body {
-          margin: 0;
-          padding: 0;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          min-height: 100vh;
-          font-family: 'Jost', sans-serif;
-          background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
-          background-image: url("img/computerlab1.jpg");
-          background-repeat: no-repeat;
-          background-size: cover;
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            font-family: 'Jost', sans-serif;
+            background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
+            background-image: url("img/computerlab1.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
         }
 
-         .main {
-          width: 405px;
-          height: 450px;
-          background: #eee;
-          overflow: hidden;
-          border-radius: 25px;
-          box-shadow: 5px 20px 50px #000;
-          text-align: center;
-        }
         .login-container {
-            background-color: rgba(200,200,200,0.4);
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            background-color: rgba(200, 200, 200, 0.55);
+            border-radius: 25px;
+            box-shadow: 5px 20px 50px #000;
             width: 100%;
-            max-width: 400px;
-            padding: 40px;
+            max-width: 420px;
+            padding: 30px 35px 35px;
             text-align: center;
         }
-       
+
+        /* Logo wrapper keeps image centered and responsive */
+        .logo-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .logo-wrapper img {
+            display: block;
+            width: 100%;
+            max-width: 320px;
+            height: auto;
+            max-height: 110px;
+            object-fit: contain;
+        }
+
+        /* Marquee now sits neatly inside the container */
+        .marquee-container {
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+            background: gray;
+            border-radius: 6px;
+            padding: 8px 0;
+            margin-bottom: 15px;
+        }
+
+        .marquee-text {
+            display: inline-block;
+            color: red;
+            font-size: 16px;
+            font-weight: bold;
+            padding-left: 100%;
+            animation: marquee 12s linear infinite;
+        }
+
+        @keyframes marquee {
+            from { transform: translateX(0); }
+            to   { transform: translateX(-100%); }
+        }
+
+        /* Pause on hover for readability */
+        .marquee-container:hover .marquee-text {
+            animation-play-state: paused;
+        }
+
         h1 {
             color: #333;
             margin-bottom: 10px;
         }
-       
+
         .subtitle {
-            color: #666;
-            margin-bottom: 30px;
-        }
-       
-        .input-group {
+            color: lime;
+            font-size: 15px;
             margin-bottom: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
             text-align: left;
         }
-       
+
         label {
             display: block;
             margin-bottom: 5px;
             color: #555;
             font-weight: 500;
         }
-       
-        input {
+
+        input[type="text"],
+        input[type="password"] {
             width: 100%;
             padding: 12px 15px;
             border: 1px solid #ddd;
@@ -76,12 +116,13 @@
             font-size: 16px;
             transition: border 0.3s;
         }
-       
-        input:focus {
+
+        input[type="text"]:focus,
+        input[type="password"]:focus {
             border-color: #2575fc;
             outline: none;
         }
-       
+
         .login-btn {
             background: linear-gradient(to right, #6a11cb, #2575fc);
             color: white;
@@ -95,252 +136,200 @@
             transition: transform 0.2s, box-shadow 0.2s;
             margin-top: 10px;
         }
-       
+
         .login-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
-       
+
         .error-message {
             color: #e74c3c;
             margin-top: 15px;
             font-size: 14px;
             display: none;
         }
-       
-        .demo-accounts {
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid #eee;
-            text-align: left;
-        }
-       
-        .demo-accounts h3 {
-            color: #555;
-            margin-bottom: 10px;
-            font-size: 16px;
-        }
-       
-        .demo-accounts p {
-            font-size: 14px;
-            color: #777;
-            margin-bottom: 5px;
+
+        .footer-label {
+            display: block;
+            color: lime;
+            font-size: 18px;
+            margin-top: 15px;
         }
 
-           .marquee-container {
-            width: 100%;
-            overflow: hidden;
-            white-space: nowrap;
-            background: rgb(150,125,150);
-            padding: 10px 0;
-        }
-    
-        /* Moving text animation */
-        .marquee-text {
+        .home-link {
             display: inline-block;
-            color: gold;
-            font-size: 24px;
-            font-weight: bold;
-            animation: marquee 10s linear infinite;
+            margin-top: 10px;
+            color: red;
+            font-size: 18px;
+            text-decoration: none;
         }
 
-        /* Keyframes for moving text */
-        @keyframes marquee {
-            from {
-                transform: translateX(100%);
-            }
-            to {
-                transform: translateX(-100%);
-            }
+        .home-link:hover {
+            text-decoration: underline;
         }
-
-
     </style>
 </head>
 <body oncontextmenu="return false;">
-  <div class="container-xxxl center">
-
-    
-      </div>
-            
 
     <div class="login-container">
-        <div>
-      <img src="img/wisdom_logo1.png" style="margin-bottom:15px; width: 400px; height: 120px" />
-    </div>
+
+        <!-- Logo centered -->
+        <div class="logo-wrapper">
+            <img src="img/wisdom_logo1.png" alt="Wisdom Schools Logo" />
+        </div>
+
+        <!-- Marquee -->
+        <div class="marquee-container">
+            <span class="marquee-text">FIRST TERM EXAMINATIONS 2025/2026 ACADEMIC SESSION</span>
+        </div>
+
         <h3><label style="color: red; font-size: 25px;">CBT PORTAL</label></h3>
-          <div class="marquee-container">
-        <span class="marquee-text"> FIRST TERM EXAMINATIONS 2025/2026 ACADEMIC SESSION </span>
-    </div>
-        <p class="subtitle"  style="color: lime; font-size: 15px;">Please sign in to your account</p>
-       
+
+        <p class="subtitle">Please sign in to your account</p>
+
         <form id="loginForm">
             <div class="input-group">
-                <label for="username"  style="color: red; font-size: 18px; text-align: center;">Enter Your Username  Here</label>
+                <label for="username" style="color: red; font-size: 18px; text-align: center;">
+                    Enter Your Username Here
+                </label>
                 <input type="text" id="username" placeholder="Enter your username" required>
             </div>
-           
+
             <div class="input-group">
-                <label for="password"  style="color: orange; font-size: 18px; text-align: center;">Enter Your Password Here</label>
+                <label for="password" style="color: orange; font-size: 18px; text-align: center;">
+                    Enter Your Password Here
+                </label>
                 <input type="password" id="password" placeholder="Enter your password" required>
             </div>
+
             <div style="margin-top: 10px;">
-                      <label style="color: lime; font-size: 15px;">
-                        <input type="checkbox" id="altLoginCheck">
-                       Click the checkbox to verify and click on Sign In
-                      </label>
+                <label style="color: lime; font-size: 15px;">
+                    <input type="checkbox" id="altLoginCheck">
+                    Click the checkbox to verify and click on Sign In
+                </label>
             </div>
-           
+
             <button type="submit" class="login-btn">Sign In</button>
 
-           
             <div class="error-message" id="errorMessage">
                 Invalid username or password. Please try again.
             </div>
-            <label style="color: lime; font-size: 25px;">WISFOS CBT PORTAL...</label>
-             <a href="https://cbt-wisdomschools-com.github.io/home/" style="color: red; font-size: 18px;">Home</a>
+
+            <label class="footer-label">WISFOS CBT PORTAL...</label>
+            <a href="https://cbt-wisdomschools-com.github.io/home/" class="home-link">Home</a>
         </form>
     </div>
 
     <script>
-        // User data array with username, password, and image file
-     
         const users = [
+            // JSS1
+            { username: "Ademola Olamide",        password: "wfs101", image: "wfs101.png"},
+            { username: "Ige Promise",            password: "wfs102", image: "wfs102.png"},
+            { username: "Ojuoluwa David",         password: "wfs103", image: "wfs103.png"},
+            { username: "Tayo-Amos Samuel",       password: "wfs104", image: "wfs104.png"},
+            { username: "Adebayo Aishat",         password: "wfs105", image: "wfs105.png"},
+            { username: "Ajibade Fadesola",       password: "wfs106", image: "wfs106.png"},
+            { username: "Ayoola Veronica",        password: "wfs107", image: "wfs107.png"},
+            { username: "Chukwuemeka Tiffany",    password: "wfs108", image: "wfs108.png"},
+            { username: "Ifeanyi Peace",          password: "wfs109", image: "wfs109.png"},
+            { username: "Ogunmiloyo Anjola",      password: "wfs110", image: "wfs110.png"},
 
-                 //JSS1
+            // JSS2
+            { username: "Shehu Ahmeed",           password: "wfs201", image: "wfs201.png"},
+            { username: "Fasuan Obaloluwa",       password: "wfs202", image: "wfs202.png"},
+            { username: "Ojo Pemisire",           password: "wfs203", image: "wfs203.png"},
 
-                { username: "Ademola Olamide",        password: "wfs101", image: "wfs101.png"},
-                { username: "Ige Promise",            password: "wfs102", image: "wfs102.png"},
-                { username: "Ojuoluwa David",         password: "wfs103", image: "wfs103.png"},
-                { username: "Tayo-Amos Samuel",       password: "wfs104", image: "wfs104.png"},
-                { username: "Adebayo Aishat",         password: "wfs105", image: "wfs105.png"},
-                { username: "Ajibade Fadesola",       password: "wfs106", image: "wfs106.png"},
-                { username: "Ayoola Veronica",        password: "wfs107", image: "wfs107.png"},
-                { username: "Chukwuemeka Tiffany",    password: "wfs108", image: "wfs108.png"},
-                { username: "Ifeanyi Peace",          password: "wfs109", image: "wfs109.png"},
-                { username: "Ogunmiloyo Anjola",      password: "wfs110", image: "wfs110.png"},
+            // JSS3
+            { username: "George Emmanuel",        password: "wfs301", image: "wfs301.png"},
+            { username: "Adejemilua Peter",       password: "wfs302", image: "wfs302.png"},
+            { username: "Oke Ayobami",            password: "wfs303", image: "wfs303.png"},
+            { username: "Chukwuemeka Emmanuel",   password: "wfs305", image: "wfs305.png"},
+            { username: "Olorungbohunmi Ayo",     password: "wfs306", image: "wfs306.png"},
+            { username: "Dada Tiwalade",          password: "wfs307", image: "wfs307.png"},
+            { username: "Nafiu Habibat",          password: "wfs308", image: "wfs308.png"},
+            { username: "Fasuan Adetutu",         password: "wfs309", image: "wfs309.png"},
+            { username: "Salami Semilore",        password: "wfs310", image: "wfs310.jpg"},
+            { username: "Shinaola Treasure",      password: "wfs311", image: "wfs311.png"},
+            { username: "Adebisi Azeem",          password: "wfs312", image: "wfs312.png"},
+            { username: "Ajibade Adeola",         password: "wfs313", image: "wfs313.png"},
 
-                // JSS2 STUDENTS
-                { username: "Shehu Ahmeed",           password: "wfs201", image: "wfs201.png"},
-                { username: "Fasuan Obaloluwa",       password: "wfs202", image: "wfs202.png"},
-                { username: "Ojo Pemisire",           password: "wfs203", image: "wfs203.png"},
+            // SS1
+            { username: "Abdulateef Qudus",       password: "wfs401", image: "wfs401.png"},
+            { username: "Isaac Richard",          password: "wfs403", image: "wfs403.png"},
+            { username: "Ogunmiloyo Inioluwa",    password: "wfs404", image: "wfs404.png"},
+            { username: "Oladiti David",          password: "wfs405", image: "wfs405.png"},
+            { username: "Adebayo Khadijat",       password: "wfs406", image: "wfs406.png"},
+            { username: "Akindele Dunsi",         password: "wfs407", image: "wfs407.png"},
+            { username: "Olusola Divine",         password: "wfs408", image: "wfs408.png"},
+            { username: "Umar Fatima",            password: "wfs410", image: "wfs410.png"},
+            { username: "Ajisola Destiny",        password: "wfs411", image: "wfs411.png"},
+            { username: "Oladapo Fiyinfoluwa",    password: "wfs412", image: "wfs412.png"},
+            { username: "Salawudeen Abdulquadri", password: "wfs413", image: "wfs413.png"},
 
+            // SS2
+            { username: "Ajisafe Ezekeil",        password: "wfs501", image: "wfs501.png"},
+            { username: "Omolade Darasimi",       password: "wfs502", image: "wfs502.png"},
+            { username: "Owolabi Timilehin",      password: "wfs503", image: "wfs503.png"},
+            { username: "Umar Aliyu",             password: "wfs504", image: "wfs504.png"},
+            { username: "Oke Inumidun",           password: "wfs507", image: "wfs507.png"},
+            { username: "Lawal Desmond",          password: "wfs509", image: "wfs509.png"},
+            { username: "Adefisayo Abdul",        password: "wfs510", image: "wfs510.png"},
 
-                 // JSS3 STUDENTS
-                { username: "George Emmanuel",        password: "wfs301", image: "wfs301.png"},
-                { username: "Adejemilua Peter",       password: "wfs302", image: "wfs302.png"},
-                { username: "Oke Ayobami",            password: "wfs303", image: "wfs303.png"},
-                //{ username: "Ibrahim Abdulsalami",  password: "wfs304", image: "wfs304.png"},
-                { username: "Chukwuemeka Emmanuel",   password: "wfs305", image: "wfs305.png"},
-                { username: "Olorungbohunmi Ayo",     password: "wfs306", image: "wfs306.png"},
-                { username: "Dada Tiwalade",          password: "wfs307", image: "wfs307.png"},
-                { username: "Nafiu Habibat",          password: "wfs308", image: "wfs308.png"},
-                { username: "Fasuan Adetutu",         password: "wfs309", image: "wfs309.png"},
-                { username: "Salami Semilore",        password: "wfs310", image: "wfs310.jpg"},
-                { username: "Shinaola Treasure",      password: "wfs311", image: "wfs311.png"},
-                { username: "Adebisi Azeem",          password: "wfs312", image: "wfs312.png"},
-                { username: "Ajibade Adeola",         password: "wfs313", image: "wfs313.png"},
+            // SS3
+            { username: "Aborisadede Timilehin",  password: "wfs601", image: "wfs601.png"},
+            { username: "Adebisi Mahfouz",        password: "wfs602", image: "wfs602.png"},
+            { username: "Adekunle Samuel",        password: "wfs603", image: "wfs603.png"},
+            { username: "Adeyemi Obasanjo",       password: "wfs604", image: "wfs604.png"},
+            { username: "Ikpengwa Emmanuel",      password: "wfs605", image: "wfs605.png"},
+            { username: "Olofintoye Victor",      password: "wfs606", image: "wfs606.png"},
+            { username: "Olumide Erioluwa",       password: "wfs607", image: "wfs607.png"},
+            { username: "Oluwadare Praise",       password: "wfs608", image: "wfs608.png"},
+            { username: "Gabriel Victor",         password: "wfs609", image: "wfs609.png"},
+            { username: "Adeola Precious",        password: "wfs610", image: "wfs610.png"},
+            { username: "Afolalu Faith",          password: "wfs611", image: "wfs611.png"},
+            { username: "Olorunmaiye Nifemi",     password: "wfs612", image: "wfs612.png"},
+            { username: "Ariyo Elizabeth",        password: "wfs614", image: "wfs614.png"},
 
-                // SS1 STUDENTS
-                { username: "Abdulateef Qudus",       password: "wfs401", image: "wfs401.png"},
-                //{ username: "Afeez Abdulahi",       password: "wfs402", image: "wfs402.png"},
-                { username: "Isaac Richard",          password: "wfs403", image: "wfs403.png"},
-                { username: "Ogunmiloyo Inioluwa",    password: "wfs404", image: "wfs404.png"},
-                { username: "Oladiti David",          password: "wfs405", image: "wfs405.png"},
-                { username: "Adebayo Khadijat",       password: "wfs406", image: "wfs406.png"},
-                { username: "Akindele Dunsi",         password: "wfs407", image: "wfs407.png"},
-                { username: "Olusola Divine",         password: "wfs408", image: "wfs408.png"},
-                //{ username: "Onuchie Amarachukwu",  password: "wfs409", image: "wfs409.png"},
-                { username: "Umar Fatima",            password: "wfs410", image: "wfs410.png"},
-                { username: "Ajisola Destiny",        password: "wfs411", image: "wfs411.png"},
-                { username: "Oladapo Fiyinfoluwa",    password: "wfs412", image: "wfs412.png"},
-                { username: "Salawudeen Abdulquadri", password: "wfs413", image: "wfs413.png"},
+            // ADMIN
+            { username: "admin", password: "admin", image: "admin.png" }
+        ];
 
-                // SS2 STUDENTS
-                { username: "Ajisafe Ezekeil",        password: "wfs501", image: "wfs501.png"},
-                { username: "Omolade Darasimi",       password: "wfs502", image: "wfs502.png"},
-                { username: "Owolabi Timilehin",      password: "wfs503", image: "wfs503.png"},
-                { username: "Umar Aliyu",             password: "wfs504", image: "wfs504.png"},
-                //{ username: "Dada Faramade",        password: "wfs505", image: "wfs505.png"},
-                //{ username: "Bayode Goodness",      password: "wfs506", image: "wfs506.png"},
-                { username: "Oke Inumidun",           password: "wfs507", image: "wfs507.png"},
-                //{ username: "Akindele Mayorkun",    password: "wfs508", image: "wfs508.png"},
-                { username: "Lawal Desmond",          password: "wfs509", image: "wfs509.png"},
-                { username: "Adefisayo Abdul",        password: "wfs510", image: "wfs510.png"},
-
-                // SS3 STUDENTS
-                { username: "Aborisadede Timilehin",  password: "wfs601", image: "wfs601.png"},
-                { username: "Adebisi Mahfouz",        password: "wfs602", image: "wfs602.png"},
-                { username: "Adekunle Samuel",        password: "wfs603", image: "wfs603.png"},
-                { username: "Adeyemi Obasanjo",       password: "wfs604", image: "wfs604.png"},
-                { username: "Ikpengwa Emmanuel",      password: "wfs605", image: "wfs605.png"},
-                { username: "Olofintoye Victor",      password: "wfs606", image: "wfs606.png"},
-                { username: "Olumide Erioluwa",       password: "wfs607", image: "wfs607.png"},
-                { username: "Oluwadare Praise",       password: "wfs608", image: "wfs608.png"},
-                { username: "Gabriel Victor",         password: "wfs609", image: "wfs609.png"},
-                { username: "Adeola Precious",        password: "wfs610", image: "wfs610.png"},
-                { username: "Afolalu Faith",          password: "wfs611", image: "wfs611.png"},
-                { username: "Olorunmaiye Nifemi",     password: "wfs612", image: "wfs612.png"},
-                //{ username: "Olowoyo Kemisola",     password: "wfs613", image: "wfs613.png"},
-                { username: "Ariyo Elizabeth",        password: "wfs614", image: "wfs614.png"},
-
-                // ADMIN (optional)
-                { username: "admin", password: "admin", image: "admin.png" }
-            ];
-
-
-
-         // Handle form submission
         document.getElementById('loginForm').addEventListener('submit', function(event) {
             event.preventDefault();
-           
+
             const username = document.getElementById('username').value.toLowerCase().trim();
             const password = document.getElementById('password').value.trim();
             const errorMessage = document.getElementById('errorMessage');
             const altCheck = document.getElementById('altLoginCheck');
-           
-            // Check if credentials match any user (case-insensitive username match)
+
             const matchedUser = users.find(user =>
                 user.username.toLowerCase() === username && user.password === password
             );
-          if (matchedUser) {
-                // Check if user has paid
+
+            if (matchedUser) {
                 if (matchedUser.paid === false) {
                     alert("⚠️ You have not paid your school fees. You are not allowed access to the report portal.\n\nPlease contact the school administration to regularize your payment.");
                     window.location.href = 'Debtors.html';
-                    //return; // Stop execution, don't redirect
                 }
-       
-         
-                            
-                // User has paid, proceed with login
-                // Store user data in sessionStorage for the main page to use
+
                 sessionStorage.setItem('loggedInUser', JSON.stringify(matchedUser));
                 sessionStorage.setItem('username', matchedUser.username);
-                sessionStorage.setItem('image', `img/${matchedUser.image}`); // Add img/ prefix
-                
+                sessionStorage.setItem('image', `img/${matchedUser.image}`);
+
                 console.log("✅ Login successful for paid user:", matchedUser.username);
-                
-                // Check if alt login checkbox is checked
+
                 if (altCheck.checked) {
                     console.log("🔄 Running alternate validation...");
                     validateLoginComparison(username, password);
                 } else {
-                    // Redirect to the main page
                     window.location.href = 'final_instruction.html';
                 }
             } else {
-                // Show error message
                 errorMessage.style.display = 'block';
-               
-                // Clear password field
                 document.getElementById('password').value = '';
             }
         });
 
-        // =============================
-        // SECOND LOGIN METHOD (for comparison)
-        // =============================
         function validateLoginComparison(username, password) {
             if (!username || !password) {
                 alert("Please enter both username and password.");
@@ -352,23 +341,20 @@
             );
 
             if (user) {
-                // Check if user has paid
                 if (user.paid === false) {
                     alert("⚠️ You have not paid your school fees. You are not allowed access to the report portal.\n\nPlease contact the school administration to regularize your payment.");
-                       window.location.href = "Debtors.html";
+                    window.location.href = "Debtors.html";
                     return;
                 }
-                
-                // Store again to ensure both formats are available
+
                 sessionStorage.setItem('username', user.username);
-                sessionStorage.setItem('image', `img/${user.image}`); // Add img/ prefix
+                sessionStorage.setItem('image', `img/${user.image}`);
                 console.log("✅ Alternate validation passed for paid user");
                 window.location.href = 'final_instruction.html';
             } else {
                 alert("Invalid username or password in alternate check.");
             }
         }
-
     </script>
 </body>
 </html>
