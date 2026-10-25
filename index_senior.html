@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="fav_icon2.ico">
+  <title>portal.wisdomfoundationschools.org</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* ... (existing CSS unchanged) ... */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    :root {
+      --primary-color: #008000;
+      --secondary-color: #d90000;
+      --background-color: #f5f5f5;
+      --text-color: #333;
+      --card-bg: white;
+      --header-bg: blue;
+      --header-text: white;
+      --nav-bg: #006400;
+      --input-border: #ddd;
+    }
+
+    .dark-theme {
+      --primary-color: #4CAF50;
+      --secondary-color: #ff5252;
+      --background-color: #2c2c2c;
+      --text-color: #f0f0f0;
+      --card-bg: #3c3c3c;
+      --header-bg:linear-gradient(blue, aqua, fuchsia);
+      --header-text: #f0f0f0;
+      --nav-bg: #1b5e20;
+      --input-border: #555;
+    }
+
+    body {
+      position: relative;
+      z-index: 1;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('img/templogo1.jpg') no-repeat center center;
+      background-size: 300px 300px;
+      opacity: 0.1;
+      z-index: 0;
+      pointer-events: none;
+      background-color: white;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    nav {
+      background-color: rgba(200, 50, 100, 1.0); /*var(--nav-bg);*/
+      padding: 15px 0;
+      margin-bottom: 25px;
+      border-radius: 8px;
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+    }
+
+    .nav-links li {
+      margin-right: 20px;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+      padding: 5px 10px;
+      border-radius: 4px;
+    }
+
+    .nav-links a:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .theme-toggle {
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+      font-size: 20px;
+      margin-left: 15px;
+    }
+
+    header {
+      background: linear-gradient(gold, pink, yellow);/*background-color: var(--header-bg);*/
+      color: var(--header-text);
+      padding: 20px;
+      text-align: center;
+      border-radius: 8px;
+      margin-bottom: 25px;
+    }
+
+    .logo-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .logo {
+      width: 80px;
+      height: 80px;
+      background-color: white;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-right: 15px;
+      border: 2px solid var(--secondary-color);
+    }
+
+    h1 {
+      font-size: 28px;
+      margin-bottom: 5px;
+    }
+
+    .welcome-message {
+      background-color: var(--card-bg);
+      padding: 15px;
+      border-left: 5px solid var(--secondary-color);
+      margin: 20px 0;
+      font-size: 16px;
+      border-radius: 4px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      text-align: center; /* Center all content inside */
+    }
+
+    .exam-sections {
+      display: flex;
+      gap: 25px;
+      margin-bottom: 25px;
+    }
+
+    .exam-section {
+      background-color: var(--card-bg);
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      flex: 1;
+      overflow: hidden;
+    }
+
+    .section-header {
+      background: linear-gradient(gold, pink, brown); /*background-color: var(--header-bg);*/
+      color: var(--header-text);
+      padding: 15px 20px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .section-body {
+      padding: 25px;
+    }
+
+    /* Center password input */
+    .password-container {
+      text-align: center;
+    }
+    #examPassword {
+      width: 80%;
+      max-width: 300px;
+      padding: 8px 12px;
+      margin-top: 8px;
+      border: 1px solid var(--input-border);
+      border-radius: 4px;
+      background-color: var(--card-bg);
+      color: var(--text-color);
+    }
+
+    .btn {
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+
+    .btn:hover {
+      background-color: var(--nav-bg);
+    }
+
+    .windows-activate {
+      text-align: center;
+      margin-top: 30px;
+      color: var(--text-color);
+      font-size: 14px;
+      padding: 15px;
+      background-color: var(--card-bg);
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    #student-info {
+      margin-top: 20px;
+    }
+
+    @media (max-width: 900px) {
+      .exam-sections {
+        flex-direction: column;
+      }
+      .nav-container {
+        flex-direction: column;
+      }
+      .nav-links {
+        margin-top: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .nav-links li {
+        margin-bottom: 10px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .logo-container {
+        flex-direction: column;
+        text-align: center;
+      }
+      .logo {
+        margin-right: 0;
+        margin-bottom: 10px;
+      }
+    }
+  </style>
+</head>
+<body oncontextmenu="return false;">
+  <nav>
+    <div class="nav-container">
+      <ul class="nav-links">
+        <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="#"><i class="fas fa-info-circle"></i> About</a></li>
+        <li><a href="#"><i class="fas fa-question-circle"></i> Help</a></li>
+        <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+        <li><a href="#services"><i class="fas fa-cogs"></i> Services</a></li>
+        <li><a href="index.html"><i class="fas fa-sign-out-alt"></i> Sign Out</a></li>
+      </ul>
+      <div>
+        <button class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <header>
+      <div class="logo-container">
+        <div class="logo"><img src="img/templogo1.jpg" alt="School Logo" width="80" height="80"></div>
+      </div>
+      <p>WISDOM FOUNDATIONS, MODEL SCHOOLS TERMINAL ACADEMIC REPORT SHEET PORTAL</p>
+    </header>
+
+    <div class="welcome-message">
+      <div id="student-info">
+        <img id="userImage" width="50" height="50"><br><br>
+      </div>
+      <h2>Welcome, <span id="user"></span></h2>
+    </div>
+
+    <div class="exam-sections">
+      <div class="exam-section">
+        <div class="section-header">SELECT CLASS □</div>
+        <div class="section-body">
+          <label>Select Class:</label>
+          <select id="classSelect">
+            <option value="jss1">JSS1</option>
+            <option value="jss2">JSS2</option>
+            <option value="jss3">JSS3</option>
+            <!--<option value="ss1">SS1</option>
+            <option value="ss2">SS2</option>
+            <option value="ss3">SS3</option>-->
+          </select>
+        </div>
+      </div>
+
+      <div class="exam-section">
+        <div class="section-header">SELECT SESSION □</div>
+        <div class="section-body">
+          <label>Select Session:</label>
+          <select id="sessionSelect">
+            <option value="2024/2025">2024/2025</option>
+            <option value="2025/2026">2025/2026</option>
+            <option value="2026/2027">2026/2027</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="exam-section">
+        <div class="section-header">SELECT TERM □</div>
+        <div class="section-body">
+          <label>Select Term:</label>
+          <select id="termSelect">
+            <option value="First_term">First Term</option>
+            <option value="Second_term">Second Term</option>
+            <option value="Third_term">Third Term</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="exam-section">
+      <div class="section-header">ENTER PASSWORD □</div>
+      <div class="section-body">
+        <centre><label style="color: red; font-size: 18px;text-align: center;"><span style="visibility: hidden;">--------------------------------------------------------------------</span>Enter Password:</label></centre>
+        <div class="password-container">
+          <input type="password" id="examPassword">
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align:center; margin-top:20px;">
+      <button class="btn" type="submit" onclick="startExam()">View Result</button>
+    </div>
+
+    <div class="windows-activate">
+      <p>&copy; portal.wisdomfoundationschools.org</p>
+    </div>
+  </div>
+
+<script>
+
+// ================== ANTI‑CHEAT & GLOBAL KEY HANDLERS ==================
+
+// 1. Block context menu (right‑click)
+document.addEventListener('contextmenu', (event) => {
+    event.preventDefault();
+    alert("Right‑click is disabled during examination.");
+});
+
+// 2. Block Print (Ctrl+P) and Save (Ctrl+S) globally
+document.addEventListener('keydown', function (event) {
+    if ((event.ctrlKey && event.key === 'p') || (event.ctrlKey && event.key === 's')) {
+        event.preventDefault();
+        alert("Printing and saving are disabled .");
+        return false;
+    }
+});
+
+// 3. Block developer tools (F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U)
+document.addEventListener('keydown', function (e) {
+    if (e.key === 'F12' ||
+        (e.ctrlKey && e.shiftKey && e.key === 'I') ||
+        (e.ctrlKey && e.shiftKey && e.key === 'J') ||
+        (e.ctrlKey && e.key === 'u')) {
+        e.preventDefault();
+        alert("Developer tools are disabled during examination.");
+    }
+});
+
+// ================== EXAM NAVIGATION & ANSWER SELECTION ==================
+// This listener handles arrow navigation and multiple‑choice selection.
+// Note: Ctrl+S is no longer used here – it's blocked globally.
+document.addEventListener('keydown', function (event) {
+    if (currentSection === 'objectives') {
+        const key = event.key.toUpperCase();
+
+        // Answer selection for objectives (A, B, C, D)
+        if (['A', 'B', 'C', 'D'].includes(key)) {
+            const radio = document.querySelector(`input[name="option"][value="${key}"]`);
+            if (radio) {
+                radio.checked = true;
+                saveAnswer();
+            }
+        }
+
+        // Navigation with arrow keys
+        if (event.key === 'ArrowRight') {
+            nextQuestion();
+        } else if (event.key === 'ArrowLeft') {
+            prevQuestion();
+        }
+    } else if (currentSection === 'theory') {
+        // Navigation for theory
+        if (event.key === 'ArrowRight') {
+            nextTheoryQuestion();
+        } else if (event.key === 'ArrowLeft') {
+            prevTheoryQuestion();
+        }
+    }
+});
+
+
+// Define user credentials (same as login page)
+const users = [
+
+                             { username: "Shehu Ahmeed Marvelous", password: "wfs101", image: "wfs101.png", paid: true },
+
+                // JSS1 STUDENTS GIRLS
+                { username: "Fasuan Obaloluwa Adebowale", password: "wfs102", image: "wfs102.png", paid: true },
+
+               // JSS2 STUDENTS BOYS
+                { username: "George Emmanuel", password: "wfs201", image: "wfs201.png", paid: true },
+                { username: "Adejemilua Peter", password: "wfs202", image: "wfs202.png", paid: true },
+                { username: "Oke Ayobami", password: "wfs203", image: "wfs203.png", paid: true },
+                { username: "Ibrahim Abdulsalami", password: "wfs204", image: "wfs204.png", paid: true },
+                { username: "Chukwuemeka Emmanuel", password: "wfs205", image: "wfs205.png", paid: true },
+                { username: "Olorungbohunmi Ayo", password: "wfs206", image: "wfs206.png", paid: true },
+
+                { username: "Dada Tiwalade", password: "wfs207", image: "wfs207.png", paid: true },
+                { username: "Nofiu Habibat", password: "wfs208", image: "wfs208.png", paid: true },
+                { username: "Fasuan Adetutu", password: "wfs209", image: "wfs209.png", paid: true },
+
+                { username: "Salami Semilore", password: "wfs210", image: "wfs210.jpg", paid: true  },
+
+                // JSS2 STUDENTS GIRLS
+                { username: "Shinaola Treasure", password: "wfs211", image: "wfs211.png", paid: true },
+
+
+                // JSS3 STUDENTS BOYS
+                { username: "Abdulateef Qudus Ademola", password: "wfs301", image: "wfs301.png", paid: true },
+                { username: "Afeez Abdulahi Pelumi", password: "wfs302", image: "wfs302.png", paid: true },
+                { username: "Isaac Richard Feranmi", password: "wfs303", image: "wfs303.png", paid: true },
+                { username: "Ogunmiloyo Inioluwa David", password: "wfs304", image: "wfs304.png", paid: true },
+                { username: "Oladiti David Henry", password: "wfs305", image: "wfs305.png", paid: true },
+
+                // JSS3 STUDENTS GIRLS
+                { username: "Adebayo Khadijat Iyanu", password: "wfs306", image: "wfs306.png", paid: true },
+                { username: "Akindele Dunsi Faith", password: "wfs307", image: "wfs307.png", paid: true },
+                { username: "Olusola Divine Oluwaseun", password: "wfs308", image: "wfs308.png", paid: true },
+                { username: "Onuchie Amarachukwu Esther", password: "wfs309", image: "wfs309.png", paid: true },
+                { username: "Umar Fatima Lamine", password: "wfs310", image: "wfs310.png", paid: true },
+
+                  // SS1 STUDENTS BOYS
+                { username: "Ajisafe Ezekeil", password: "wfs401", image: "wfs401.png", paid: true },
+                { username: "Omolade Darasimi", password: "wfs402", image: "wfs402.png", paid: true },
+                { username: "Owolabi Timilehin Testimony", password: "wfs403", image: "wfs403.png", paid: true },
+                { username: "Umar Aliyu", password: "wfs404", image: "wfs404.png", paid: true },
+                { username: "Dada Faramade", password: "wfs405", image: "wfs405.png", paid: true },
+                { username: "Bayode Goodness Opemipo", password: "wfs406", image: "wfs406.png", paid: true },
+
+                // SS1 STUDENTS GIRLS
+                { username: "Oke Inumidun", password: "wfs407", image: "wfs407.png", paid: true },
+                { username: "Akindele Mayorkun Rachael", password: "wfs408", image: "wfs408.png", paid: true },
+                { username: "Lawal Desmond", password: "wfs409", image: "wfs409.png", paid: true },
+
+               
+                // SS2 STUDENTS BOYS
+                { username: "Aborisadede Timilehin Ayomide", password: "wfs501", image: "wfs501.png", paid: true },
+                { username: "Adebisi Mahfouz Adewole", password: "wfs502", image: "wfs502.png", paid: true },
+                { username: "Adekunle Samuel Ayomikun", password: "wfs503", image: "wfs503.png", paid: true },
+                { username: "Adeyemi Obasanjo Toheeb", password: "wfs504", image: "wfs504.png", paid: true },
+                { username: "Ikpengwa Emmanuel", password: "wfs505", image: "wfs505.png", paid: true },
+                { username: "Olofintoye Victor Omobarewa", password: "wfs506", image: "wfs506.png", paid: true },
+                { username: "Olumide Erioluwa Emmanuel", password: "wfs507", image: "wfs507.png", paid: true },
+                { username: "Oluwadare Praise Ayowamide", password: "wfs508", image: "wfs508.png", paid: true },
+                { username: "Gabriel Victor Kachisieme", password: "wfs509", image: "wfs509.png", paid: true },
+
+                // SS2 STUDENTS GIRLS
+                { username: "Adeola Precious Eniola", password: "wfs510", image: "wfs510.png", paid: true },
+                { username: "Afolalu Faith Toluwanimi", password: "wfs511", image: "wfs511.png", paid: true },
+                { username: "Olorunmaiye Nifemi Faith", password: "wfs512", image: "wfs512.png", paid: true },
+                { username: "Olowoyo Kemisola Glory", password: "wfs513", image: "wfs513.png", paid: true },
+                { username: "Ariyo Elizabeth Celestina", password: "wfs514", image: "wfs514.png", paid: true },
+
+                // SS3 STUDENTS BOYS
+                { username: "Abdulateef Abdulbasit", password: "wfs601", image: "wfs601.png", paid: true },
+                { username: "Adediran Ayomide", password: "wfs602", image: "wfs602.png", paid: true },
+                { username: "Atolagbe Peace", password: "wfs603", image: "wfs603.png", paid: true },
+                { username: "Chimobi Vincent", password: "wfs604", image: "wfs604.png", paid: true },
+                { username: "Dada Babalola Joshua", password: "wfs605", image: "wfs605.png", paid: true },
+                { username: "Enemchukwu Michael", password: "wfs606", image: "wfs606.png", paid: true },
+                { username: "Ifeanyi Augustine", password: "wfs607", image: "wfs607.png", paid: true },
+                { username: "Oladiti Inumidun", password: "wfs608", image: "wfs608.png", paid: true },
+                { username: "Olusola Dennis", password: "wfs609", image: "wfs609.png", paid: true },
+                { username: "Umar Muhammed", password: "wfs610", image: "wfs610.png", paid: true },
+
+                // SS3 STUDENTS GIRLS
+                { username: "Abe Favour", password: "wfs611", image: "wfs611.png", paid: true },
+                { username: "Afinjuomo Mercy", password: "wfs612", image: "wfs612.png", paid: true },
+                { username: "Ajisola Rachael", password: "wfs613", image: "wfs613.png", paid: true },
+                { username: "Enemchukwu Victoria", password: "wfs614", image: "wfs614.png", paid: true },
+                { username: "Omodaratan Diamond", password: "wfs615", image: "wfs615.png", paid: true },
+                { username: "Ibrahim Ganiyat Oluwaseun", password: "wfs616", image: "wfs616.png", paid: true },
+                { username: "Chibueze Victoria", password: "wfs617", image: "wfs617.png", paid: true },
+            
+            // ADMIN (always paid)
+            {username: "admin", password: "admin", image: "admin.png", paid: true}
+        ];
+
+// Get stored username from login (sessionStorage)
+const loggedInUsername = sessionStorage.getItem('username') || 'Student';
+const user = users.find(u => u.username.toLowerCase() === loggedInUsername.toLowerCase());
+
+// Set welcome message and image
+document.getElementById('user').innerText = loggedInUsername;
+if (user && user.image) {
+  document.getElementById('userImage').src = user.image;
+} else {
+  document.getElementById('userImage').src = 'img/default.png';
+}
+document.getElementById('user').innerText = sessionStorage.getItem('username');
+document.getElementById('userImage').src = sessionStorage.getItem('image');
+
+async function startExam() {
+    const enteredPassword = document.getElementById('examPassword').value;
+    const username = loggedInUsername;
+    const cls = document.getElementById('classSelect').value;
+    const session = document.getElementById('sessionSelect').value;
+    const term = document.getElementById('termSelect').value;
+
+    const matchedUser = users.find(u => u.username.toLowerCase() === username.toLowerCase());
+    if (!matchedUser) {
+        alert('User not found. Please log in again.');
+        return;
+    }
+    if (enteredPassword !== matchedUser.password) {
+        alert('Incorrect password. Please try again.');
+        return;
+    }
+
+    sessionStorage.setItem('class', cls);
+    sessionStorage.setItem('session', session);
+    sessionStorage.setItem('term', term);
+
+    const sanitizedUsername = username.replace(/[^a-zA-Z0-9]/g, '_');
+    const sanitizedClass = cls.replace(/[^a-zA-Z0-9]/g, '_');
+    const sanitizedTerm = term.replace(/[^a-zA-Z0-9]/g, '_');
+    const sanitizedSession = session.replace(/[^a-zA-Z0-9]/g, '_');
+
+    const filename = `${sanitizedUsername}_${sanitizedClass}_${sanitizedTerm}_${sanitizedSession}_result.html`;
+
+    // Check if the result file exists
+    try {
+        const response = await fetch(filename, { method: 'HEAD' });
+        if (response.ok) {
+            // File exists – redirect
+            window.location.href = filename;
+        } else {
+            // File not found – redirect to default page
+            alert('Result for the selected class/session/term has not been uploaded yet.');
+            window.location.href = 'default.html';
+        }
+    } catch (error) {
+        // Network error or CORS – fallback to default page
+        console.error('Error checking file existence:', error);
+        alert('Unable to verify result. Redirecting to default page.');
+        window.location.href = 'default.html';
+    }
+}
+// Theme toggle code (unchanged)
+const themeToggle = document.getElementById('themeToggle');
+const themeIcon = themeToggle.querySelector('i');
+themeToggle.addEventListener('click', () => {
+  document.body.classList.toggle('dark-theme');
+  if (document.body.classList.contains('dark-theme')) {
+    themeIcon.classList.remove('fa-moon');
+    themeIcon.classList.add('fa-sun');
+  } else {
+    themeIcon.classList.remove('fa-sun');
+    themeIcon.classList.add('fa-moon');
+  }
+});
+
+// Button hover effects (unchanged)
+const buttons = document.querySelectorAll('.btn');
+buttons.forEach(button => {
+  button.addEventListener('mouseenter', () => {
+    button.style.transform = 'translateY(-2px)';
+    button.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.2)';
+  });
+  button.addEventListener('mouseleave', () => {
+    button.style.transform = 'translateY(0)';
+    button.style.boxShadow = 'none';
+  });
+});
+
+
+
+
+
+</script>
+</body>
+</html>
