@@ -1,0 +1,1880 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="fav_icon2.ico">
+    <title>cbt.wisdom foundationschools.org - SOCIAL AND CITIZENSHIP STUDIES JSS2 Exam</title>
+    <script>
+         // Disable back navigation
+    history.pushState(null, null, location.href);
+    window.onpopstate = function () {
+        history.go(1);
+    };
+
+     let backClickCount = 0;
+            let allowBack = false;
+
+            history.pushState(null, null, location.href);
+
+            window.onpopstate = function () {
+                if (!allowBack) {
+                    backClickCount++;
+
+                    if (backClickCount >= 50) {
+                        allowBack = true;
+                        alert("You have tried 50 times. Going back now...");
+                        history.back();
+                        return;
+                    }
+
+                    showBackModal();
+                }
+            };
+
+            function showBackModal() {
+                document.getElementById("backModalOverlay").style.display = "flex";
+                document.getElementById("passwordContainer").style.display = "none";
+                document.getElementById("backPassword").value = "";
+               
+                document.getElementById("modalButtons").innerHTML = `
+                    <button onclick="handleYes()" style="padding: 10px 20px; margin: 5px; border: none; border-radius: 5px; background: limegreen; color: white; font-size: 16px; cursor: pointer;">Yes</button>
+                    <button onclick="closeBackModal()" style="padding: 10px 20px; margin: 5px; border: none; border-radius: 5px; background: crimson; color: white; font-size: 16px; cursor: pointer;">No</button>
+                `;
+            }
+
+            function closeBackModal() {
+                document.getElementById("backModalOverlay").style.display = "none";
+                history.pushState(null, null, location.href);
+            }
+
+            function handleYes() {
+                document.getElementById("passwordContainer").style.display = "block";
+                document.getElementById("modalButtons").innerHTML = `
+                    <button onclick="checkPassword()" style="padding: 10px 20px; margin: 5px; border: none; border-radius: 5px; background: limegreen; color: white; font-size: 16px; cursor: pointer;">Submit</button>
+                    <button onclick="closeBackModal()" style="padding: 10px 20px; margin: 5px; border: none; border-radius: 5px; background: crimson; color: white; font-size: 16px; cursor: pointer;">Cancel</button>
+                `;
+            }
+
+            function checkPassword() {
+                const correctPassword = "admin123";
+                const enteredPassword = document.getElementById("backPassword").value;
+
+                if (enteredPassword === correctPassword) {
+                    allowBack = true;
+                    document.getElementById("backModalOverlay").style.display = "none";
+                    history.back();
+                } else {
+                    alert("Incorrect password. Staying on this page.");
+                    closeBackModal();
+                }
+            }
+    </script>
+</head>
+         <div id="backModalOverlay" style="display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.8); color: #fff; font-family: Arial, sans-serif; justify-content: center; align-items: center; flex-direction: column;">
+                <div id="backModal" style="background: #222; padding: 30px; border-radius: 10px; text-align: center; width: 90%; max-width: 400px;">
+                    <p style="font-size: 18px; margin: 0 0 10px;">Do you really want to go back?</p>
+
+                    <div id="passwordContainer" style="display: none;">
+                        <p style="margin-top: 10px;">Enter password to go back:</p>
+                        <input type="password" id="backPassword" placeholder="Enter password"
+                            style="padding: 10px; width: 80%; margin-top: 10px; border-radius: 5px; border: none; font-size: 16px;">
+                    </div>
+
+                    <div id="modalButtons" style="margin-top: 20px;">
+                        <button onclick="handleYes()" style="padding: 10px 20px; margin: 5px; border: none; border-radius: 5px; background: limegreen; color: white; font-size: 16px; cursor: pointer;">Yes</button>
+                        <button onclick="closeBackModal()" style="padding: 10px 20px; margin: 5px; border: none; border-radius: 5px; background: crimson; color: white; font-size: 16px; cursor: pointer;">No</button>
+                    </div>
+                </div>
+            </div>
+                      
+
+    <style>
+        body {
+            position: relative;
+            z-index: 1;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f8f0;
+        }
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('img/wisdom_logo1.png') no-repeat center center;
+            background-size: 300px 300px;
+            opacity: 0.1;
+            z-index: 0;
+            pointer-events: none;
+        }
+        #logout-container {
+            text-align: right;
+            padding: 10px;
+            background: #2c3e50;
+        }
+        #datetime {
+            color:gold;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            margin: 10px 0;
+        }
+        #logout {
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            cursor: pointer;
+            font-size: 14px;
+            border-radius: 5px;
+        }
+        #header {
+            padding: 20px;
+            background: linear-gradient(to right, orange, purple);
+            color: white;
+            border-bottom: 5px solid #ff9800;
+        }
+        #logo img {
+            max-width: 200px;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+        #student-info {
+            margin-top: 20px;
+            text-align: center;
+        }
+        #student-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            display: block;
+            margin: 0 auto 10px;
+            border: 3px solid white;
+            background: #ddd;
+        }
+        #welcome-message {
+            color: #ffeb3b;
+            font-size: 24px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        #userAnswerCount {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 15px;
+            border-radius: 8px;
+            color: white;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            width: 200px;
+            z-index: 100;
+        }
+        #answeredLabel {
+            color: lime;
+            font-size: 18px;
+            font-weight: bold;
+            margin: 5px 0;
+        }
+        #unansweredLabel {
+            color: red;
+            font-size: 18px;
+            font-weight: bold;
+            margin: 5px 0;
+        }
+        .container {
+            margin: 20px auto;
+            width: 80%;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        #questionText {
+            width: 98%;
+            min-height: 100px;
+            resize: none;
+            padding: 15px;
+            font-size: 18px;
+            color: red; /*#333;*/
+            background-color: lime;/* #f9f9f9;*/
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            margin-bottom: 15px;
+            font-family: Arial, "Segoe UI Symbol", "Apple Symbols", sans-serif;
+        }
+        .option-group {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            padding: 12px;
+            background-color: #f5f5f5;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .option-group:hover {
+            background-color: #e8f5e8;
+        }
+        .option-group input {
+            margin-right: 15px;
+            transform: scale(1.3);
+        }
+        .option-group label {
+            font-weight: bold;
+            font-size: 16px;
+            color: #333;
+            font-family: Arial, "Segoe UI Symbol", "Apple Symbols", sans-serif;
+        }
+        .nav-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .btn-cool {
+            padding: 12px 25px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            background: #2e7d32;
+            color: white;
+            cursor: pointer;
+            transition: background 0.3s;
+            font-weight: bold;
+        }
+        .btn-cool:hover {
+            background: #1b5e20;
+        }
+        .questionButtons {
+            margin: 15px 0;
+            text-align: center;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 5px;
+        }
+        .question-btn {
+            margin: 3px;
+            padding: 8px 12px;
+            border-radius: 6px;
+            border: 1px solid #444;
+            cursor: pointer;
+            font-weight: bold;
+            background-color: #eee;
+            min-width: 40px;
+            transition: all 0.3s;
+        }
+        .question-btn:hover {
+            background-color: #d0f0d0;
+        }
+        #timer {
+            font-size: 24px;
+            font-weight: bold;
+            color: #e74c3c;
+            text-align: center;
+            margin: 10px 0;
+            background-color: #f9f9f9;
+            padding: 10px;
+            border-radius: 5px;
+            border: 2px solid #e74c3c;
+        }
+        .section-toggle {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        .section-btn {
+            padding: 12px 24px;
+            margin: 0 10px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .section-btn.active {
+            background-color: #2e7d32;
+            color: white;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        .section-btn:not(.active) {
+            background-color: #e0e0e0;
+            color: #333;
+        }
+        #theorySection {
+            display: none;
+            background: #fff9e6;
+            color: #333;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px auto;
+            width: 80%;
+            border: 2px solid #ff9800;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        #theoryQuestionText {
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 15px;
+            line-height: 1.6;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 5px;
+            border-left: 5px solid #ff9800;
+            font-family: Arial, sans-serif;
+        }
+        #theoryAnswer {
+            width: 100%;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+            resize: vertical;
+            min-height: 200px;
+            font-family: Arial, sans-serif;
+            margin-bottom: 15px;
+        }
+        .theory-nav-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        .theory-btn {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .theory-save-btn {
+            background-color: #28a745;
+            color: white;
+        }
+        .theory-save-btn:hover {
+            background-color: #218838;
+        }
+        .theory-prev-btn, .theory-next-btn {
+            background-color: #007bff;
+            color: white;
+        }
+        .theory-prev-btn:hover, .theory-next-btn:hover {
+            background-color: #0069d9;
+        }
+        .theory-submit-btn {
+            background-color: #dc3545;
+            color: white;
+        }
+        .theory-submit-btn:hover {
+            background-color: #c82333;
+        }
+        .theory-status {
+            text-align: center;
+            margin: 10px 0;
+            font-weight: bold;
+            color: #333;
+            padding: 10px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+        }
+        .windows-activate {
+            text-align: center;
+            margin-top: 30px;
+            color: #333;
+            font-size: 14px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin: 20px;
+        }
+        .exam-info {
+            text-align: center;
+            font-weight: bold;
+            margin: 10px 0;
+            color: #2c3e50;
+            font-size: 18px;
+        }
+        /* Math symbols styling */
+        sup, sub {
+            font-size: 0.75em;
+            line-height: 1;
+        }
+        sup {
+            vertical-align: super;
+        }
+        sub {
+            vertical-align: sub;
+        }
+        /* Theory Question Images */
+        .theory-image-container {
+            margin: 15px 0;
+            text-align: center;
+        }
+        .theory-image-wrapper {
+            display: inline-block;
+            max-width: 100%;
+            padding: 10px;
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .theory-question-image {
+            max-width: 100%;
+            max-height: 300px;
+            height: auto;
+            border-radius: 5px;
+            display: block;
+            margin: 0 auto;
+            background: #f0f0f0;
+            padding: 10px;
+        }
+        .image-caption {
+            font-style: italic;
+            color: #666;
+            margin-top: 8px;
+            font-size: 14px;
+            text-align: center;
+        }
+        /* Objective question images */
+        #questionImageContainer {
+            text-align: center;
+            margin: 15px 0;
+        }
+        .question-image {
+            max-width: 100%;
+            max-height: 250px;
+            height: auto;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            padding: 5px;
+            background: white;
+        }
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+         .marquee-container {
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+            background: rgb(150,125,150);
+            padding: 10px 0;
+        }
+    
+        /* Moving text animation */
+        .marquee-text {
+            display: inline-block;
+            color: gold;
+            font-size: 24px;
+            font-weight: bold;
+            animation: marquee 10s linear infinite;
+        }
+
+        /* Keyframes for moving text */
+        @keyframes marquee {
+            from {
+                transform: translateX(100%);
+            }
+            to {
+                transform: translateX(-100%);
+            }
+        }
+
+
+        /* Logo container - makes it a flex container for horizontal layout */
+#logo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    position: relative;
+    padding: 20px 0;
+}
+
+/* Style for the center/main logo */
+#logo img:not(.logo-left img):not(.logo-right img) {
+    max-width: 200px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+}
+
+/* Left logo container */
+.logo-left {
+    flex: 0 0 auto;
+    z-index: 1;
+    margin-left: 20px;
+}
+
+/* Right logo container */
+.logo-right {
+    flex: 0 0 auto;
+    z-index: 1;
+    margin-right: 20px;
+}
+
+/* Logo images inside left and right containers */
+.logo-left img,
+.logo-right img {
+    max-width: 100px;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+/* Hover effect for left and right logos */
+.logo-left img:hover,
+.logo-right img:hover {
+    transform: scale(1.1);
+}
+
+/* Responsive design for mobile */
+@media (max-width: 768px) {
+    #logo {
+        flex-direction: column;
+        gap: 15px;
+        padding: 10px 0;
+    }
+    
+    #logo img:not(.logo-left img):not(.logo-right img) {
+        position: static;
+        transform: none;
+        margin: 10px auto;
+    }
+    
+    .logo-left, .logo-right {
+        margin: 5px 0;
+    }
+    
+    .logo-left img,
+    .logo-right img {
+        max-width: 80px;
+    }
+}
+
+
+
+    </style>
+</head>
+<body oncontextmenu="return false">
+    <div id="header">
+        <div id="logout-container">
+            <button id="logout" onclick="logout()">Logout</button>
+                 <div class="marquee-container">
+        <span class="marquee-text">WISDOM FOUNDATION SCHOOLS  :  GATEWAY TO THE UNIVERSITY</span>
+    </div>
+        </div>
+        <div id="logo">
+            <img src="img/wisdom_logo1.png" alt="image">
+
+               <!--<div class="logo-left">
+                <img src="img/9ja1.png" alt="Nigeria Logo" >
+            </div>
+
+            <div class="logo-right">
+                <img src="img/nappps1.png" alt="NAPPS Logo" >
+            </div>-->
+        </div>
+
+           
+            
+
+        <div id="student-info">
+            <center><strong>ATTENTION! CLICK ON SUBMIT BUTTON BEFORE YOUR TIME IS UP TO SAVE YOUR SCORE</strong></center>
+            <center><p id="datetime"></p></center>
+              <div id="welcome-message">
+            <label id="usernameDisplay"></label>
+        </div>
+         <div class="student-info">
+          <img id="userImage" src="img/default_user.jpg" alt="Student Image" style="width:120px; height:120px; border-radius:50%; border:3px solid #008000; display:block; margin:0 auto;">
+      
+          <h2 id="username">Student Name</h2>
+           </div>
+
+     
+
+    
+        <center><h3>WISDOM FOUNDATION SCHOOLS EGBEWA  ADO EKITI </h3></center> 
+        <center><h3>FIRST TERM EXAMINATION 2026/2027 ACADEMIC SESSION</h3></center>
+       
+        <!-- SECTION TOGGLE BUTTONS -->
+        <div class="section-toggle">
+            <button id="objectivesBtn" class="section-btn active" onclick="showSection('objectives')">OBJECTIVE QUESTIONS</button>
+            <button id="theoryBtn" class="section-btn" onclick="showSection('theory')">THEORY QUESTIONS</button>
+        </div>
+       
+        <div class="exam-info">
+            Exam: <span id="examInfo" style="color: lime;">  SOCIAL STUDIES JSS2 (FIRST TERM)</span>
+        </div>
+       
+        <div id="timer"></div>
+    </div>
+   
+    <!-- OBJECTIVES SECTION -->
+    <div id="objectivesSection">
+        <div class="container">
+            <h5 style="color: #d35400; text-align: center;">INSTRUCTIONS: READ THE QUESTIONS CAREFULLY BEFORE YOU CHOOSE YOUR ANSWER</h5>
+            <div class="scroll-container">
+                <div id="questionText"></div>
+            </div>
+           
+            <div id="questionImageContainer"></div>
+           
+            <div class="option-group">
+                <label class="option"><strong>A.</strong><input type="radio" name="option" value="A"> <span id="optA"></span></label>
+            </div>
+            <div class="option-group">
+                <label class="option"><strong>B.</strong><input type="radio" name="option" value="B"> <span id="optB"></span></label>
+            </div>
+            <div class="option-group">
+                <label class="option"><strong>C.</strong><input type="radio" name="option" value="C"> <span id="optC"></span></label>
+            </div>
+            <div class="option-group">
+                <label class="option"><strong>D.</strong><input type="radio" name="option" value="D"> <span id="optD"></span></label>
+            </div>
+        </div>
+       
+        <div class="nav-buttons">
+            <button onclick="prevQuestion()" class="btn-cool">Previous</button>
+            <button onclick="nextQuestion()" class="btn-cool">Next</button>
+            <button onclick="submitExam()" class="btn-cool">Submit Objectives</button>
+        </div>
+       
+        <!-- Question navigation buttons -->
+        <div class="container">
+            <div id="questionButtons" class="questionButtons"></div>
+        </div>
+    </div>
+   
+    <!-- THEORY SECTION -->
+    <div id="theorySection">
+        <h3 style="text-align: center; color: #d35400; margin-bottom: 20px;">THEORY QUESTIONS SECTION</h3>
+        <div class="theory-status" id="theoryStatus">
+            Question 1 of 5 | Saved: 0/5
+        </div>
+        <div id="theoryQuestionContainer">
+            <p id="theoryQuestionText">Loading theory questions...</p>
+            <div id="theoryImageContainer"></div>
+            <textarea id="theoryAnswer" rows="8" placeholder="Write your detailed answer here..."></textarea>
+            <div class="theory-nav-buttons">
+                <button onclick="prevTheoryQuestion()" class="theory-btn theory-prev-btn">Previous</button>
+                <button onclick="saveTheoryAnswer()" class="theory-btn theory-save-btn">Save Answer</button>
+                <button onclick="nextTheoryQuestion()" class="theory-btn theory-next-btn">Next</button>
+                <button onclick="submitTheoryExam()" class="theory-btn theory-submit-btn">Submit Theory</button>
+            </div>
+        </div>
+    </div>
+   
+    <div id="userAnswerCount">
+        <p id="answeredLabel">Answered: 0/5</p>
+        <p id="unansweredLabel">Unanswered: 5/5</p>
+    </div>
+             <div class="marquee-container">
+        <span class="marquee-text"> SOCIAL STUDIES JSS2  FOR FIRST TERM EXAMINATIONS 2026/2027 ACADEMIC SESSION </span>
+    </div>
+   
+    <div class="windows-activate">
+        <p> &copy; cbt.<span style="color: red;">wisdom foundation</span><span style="color: green;">schools</span>.org</p>
+    </div>
+
+
+    <script>
+           // Get stored username and image from sessionStorage
+       
+            
+    
+        // ================== STATIC QUESTIONS DATA ==================
+  const staticObjectivesQuestions = [
+  {
+    "id": 1,
+    "question": "A legally recognized member of a state or country is called a…",
+    "options": {
+      "A": "alien.",
+      "B": "citizen.",
+      "C": "foreigner.",
+      "D": "resident."
+    },
+    "answer": "B",
+    "image": null
+  },
+  {
+    "id": 2,
+    "question": "The special relationship between an individual and a state, involving allegiance and protection, is known as…",
+    "options": {
+      "A": "nationality.",
+      "B": "citizenship.",
+      "C": "identity.",
+      "D": "sovereignty."
+    },
+    "answer": "B",
+    "image": null
+  },
+  {
+    "id": 3,
+    "question": "A foreigner living in a country who does not have the full rights of a citizen is called an…",
+    "options": {
+      "A": "immigrant.",
+      "B": "emigrant.",
+      "C": "alien.",
+      "D": "native."
+    },
+    "answer": "C",
+    "image": null
+  },
+  {
+    "id": 4,
+    "question": "The principle of acquiring citizenship by being born in a country is called…",
+    "options": {
+      "A": "Jus Sanguinis.",
+      "B": "Right of Blood.",
+      "C": "Jus Soli.",
+      "D": "Naturalisation."
+    },
+    "answer": "C",
+    "image": null
+  },
+  {
+    "id": 5,
+    "question": "Nigeria's primary principle for acquiring citizenship by birth is…",
+    "options": {
+      "A": "Jus Soli.",
+      "B": "Right of Soil.",
+      "C": "Naturalisation.",
+      "D": "Jus Sanguinis."
+    },
+    "answer": "D",
+    "image": null
+  },
+  {
+    "id": 6,
+    "question": "A person is a Nigerian citizen by birth if…",
+    "options": {
+      "A": "they are born in Nigeria, regardless of their parents' nationality.",
+      "B": "one or both of their parents or grandparents are Nigerian citizens.",
+      "C": "they have lived in Nigeria for 15 years.",
+      "D": "they marry a Nigerian citizen."
+    },
+    "answer": "B",
+    "image": null
+  },
+  {
+    "id": 7,
+    "question": "A foreign woman married to a Nigerian man can acquire citizenship through…",
+    "options": {
+      "A": "naturalisation.",
+      "B": "birth.",
+      "C": "registration.",
+      "D": "Jus Soli."
+    },
+    "answer": "C",
+    "image": null
+  },
+  {
+    "id": 8,
+    "question": "Which method of acquiring citizenship is a long process for a foreigner with no blood or marital ties to Nigeria?",
+    "options": {
+      "A": "Registration",
+      "B": "Naturalisation",
+      "C": "Birth by Jus Sanguinis",
+      "D": "Birth by Jus Soli"
+    },
+    "answer": "B",
+    "image": null
+  },
+  {
+    "id": 9,
+    "question": "A key requirement for naturalisation in Nigeria is that the person must have lived in the country for a continuous period of at least…",
+    "options": {
+      "A": "5 years.",
+      "B": "10 years.",
+      "C": "15 years.",
+      "D": "20 years."
+    },
+    "answer": "C",
+    "image": null
+  },
+  {
+    "id": 10,
+    "question": "A person seeking naturalisation in Nigeria must be willing to take an oath of…",
+    "options": {
+      "A": "office.",
+      "B": "secrecy.",
+      "C": "allegiance.",
+      "D": "service."
+    },
+    "answer": "C",
+    "image": null
+  },
+  {
+    "id": 11,
+    "question": "According to the 1999 Constitution, citizenship by registration applies to a person of full age whose ________ are Nigerian citizens.",
+    "options": {
+      "A": "parents",
+      "B": "siblings",
+      "C": "grandparents",
+      "D": "aunts"
+    },
+    "answer": "C",
+    "image": null
+  },
+  {
+    "id": 12,
+    "question": "Which of the following is NOT a requirement for naturalisation?",
+    "options": {
+      "A": "Being of full age (18+)",
+      "B": "Being of good character",
+      "C": "Being born in Nigeria",
+      "D": "Renouncing previous citizenship"
+    },
+    "answer": "C",
+    "image": null
+  },
+  {
+    "id": 13,
+    "question": "The chapter of the 1999 Nigerian Constitution that deals with citizenship is Chapter…",
+    "options": {
+      "A": "II.",
+      "B": "III.",
+      "C": "IV.",
+      "D": "V."
+    },
+    "answer": "B",
+    "image": null
+  },
+  {
+    "id": 14,
+    "question": "A person who is a citizen by virtue of their parents' nationality is a citizen by…",
+    "options": {
+      "A": "Registration.",
+      "B": "Naturalisation.",
+      "C": "Jus Soli.",
+      "D": "Jus Sanguinis."
+    },
+    "answer": "D",
+    "image": null
+  },
+  {
+    "id": 15,
+    "question": "The right to vote in Nigeria is a right granted to…",
+    "options": {
+      "A": "all residents.",
+      "B": "citizens only.",
+      "C": "aliens only.",
+      "D": "anyone over 18."
+    },
+    "answer": "B",
+    "image": null
+  },
+  {
+    "id": 16,
+    "question": "The privileges and freedoms guaranteed to every citizen by the constitution are known as…",
+    "options": {
+      "A": "duties.",
+      "B": "rights.",
+      "C": "responsibilities.",
+      "D": "obligations."
+    },
+    "answer": "B",
+    "image": null
+  },
+  {
+    "id": 17,
+    "question": "The chapter of the 1999 Constitution that lists Fundamental Human Rights is Chapter…",
+    "options": {
+      "A": "II.",
+      "B": "III.",
+      "C": "IV.",
+      "D": "V."
+    },
+    "answer": "C",
+    "image": null
+  },
+  {
+    "id": 18,
+    "question": "The right not to be tortured is an example of the Right to…",
+    "options": {
+      "A": "Life.",
+      "B": "Fair Hearing.",
+      "C": "Dignity of the Human Person.",
+      "D": "Freedom of Expression."
+    },
+    "answer": "C",
+    "image": null
+  },
+  {
+    "id": 19,
+    "question": "The duty of a citizen to pay taxes is listed in which section of the 1999 Constitution?",
+    "options": {
+      "A": "Section 24",
+      "B": "Section 25",
+      "C": "Section 34",
+      "D": "Section 39"
+    },
+    "answer": "A",
+    "image": null
+  },
+  {
+    "id": 20,
+    "question": "Rights and duties are described as \"two sides of the same coin\" because they are…",
+    "options": {
+      "A": "independent.",
+      "B": "separate.",
+      "C": "interdependent.",
+      "D": "optional."
+    },
+    "answer": "C",
+    "image": null
+  },
+  {
+    "id": 21,
+    "question": "Your Right to Life imposes a ________ on other citizens not to kill you.",
+    "options": {
+      "A": "right",
+      "B": "privilege",
+      "C": "duty",
+      "D": "freedom"
+    },
+    "answer": "C",
+    "image": null
+  },
+  {
+    "id": 22,
+    "question": "Which of the following is a duty of a citizen?",
+    "options": {
+      "A": "Right to Life",
+      "B": "Right to Freedom of Movement",
+      "C": "Obeying the law",
+      "D": "Right to Vote"
+    },
+    "answer": "C",
+    "image": null
+  },
+  {
+    "id": 23,
+    "question": "The right to use public roads is made possible because citizens perform their duty of…",
+    "options": {
+      "A": "voting.",
+      "B": "paying taxes.",
+      "C": "defending the country.",
+      "D": "being patriotic."
+    },
+    "answer": "B",
+    "image": null
+  },
+  {
+    "id": 24,
+    "question": "A citizen's right to freedom of speech comes with the duty to…",
+    "options": {
+      "A": "speak only in English.",
+      "B": "speak only to government officials.",
+      "C": "use it responsibly without inciting violence.",
+      "D": "always agree with the government."
+    },
+    "answer": "C",
+    "image": null
+  },
+  {
+    "id": 25,
+    "question": "The right to vote corresponds with the duty to…",
+    "options": {
+      "A": "sell your vote.",
+      "B": "vote responsibly and respect the results.",
+      "C": "vote for the ruling party.",
+      "D": "avoid elections."
+    },
+    "answer": "B",
+    "image": null
+  },
+  {
+    "id": 26,
+    "question": "Which of the following is NOT a right guaranteed in Chapter IV of the 1999 Constitution?",
+    "options": {
+      "A": "Right to Life",
+      "B": "Right to Free Education",
+      "C": "Right to Freedom from Discrimination",
+      "D": "Right to Fair Hearing"
+    },
+    "answer": "B",
+    "image": null
+  },
+  {
+    "id": 27,
+    "question": "The duty to respect national symbols includes respecting the…",
+    "options": {
+      "A": "President.",
+      "B": "National Anthem.",
+      "C": "Constitution.",
+      "D": "Police."
+    },
+    "answer": "B",
+    "image": null
+  },
+  {
+    "id": 28,
+    "question": "\"My right to swing my fist ends where your nose begins\" illustrates the concept of…",
+    "options": {
+      "A": "rights without limits.",
+      "B": "the interdependence of rights and duties.",
+      "C": "the supremacy of rights.",
+      "D": "absolute freedom."
+    },
+    "answer": "B",
+    "image": null
+  },
+  {
+    "id": 29,
+    "question": "A person's right to a fair trial is meaningless without the duty of the state to provide…",
+    "options": {
+      "A": "a prison.",
+      "B": "a lawyer and a court.",
+      "C": "a police officer.",
+      "D": "a newspaper."
+    },
+    "answer": "B",
+    "image": null
+  },
+  {
+    "id": 30,
+    "question": "Being willing to defend Nigeria from harm is a duty of a citizen known as…",
+    "options": {
+      "A": "paying taxes.",
+      "B": "being patriotic.",
+      "C": "voting.",
+      "D": "obeying the law."
+    },
+    "answer": "B",
+    "image": null
+  },
+  {
+    "id": 31,
+    "question": "The supreme law of a country is its…",
+    "options": {
+      "A": "constitution.",
+      "B": "criminal code.",
+      "C": "penal code.",
+      "D": "civil code."
+    },
+    "answer": "A",
+    "image": null
+  },
+  {
+    "id": 32,
+    "question": "Nigeria's current constitution is the…",
+    "options": {
+      "A": "1960 Constitution.",
+      "B": "1963 Constitution.",
+      "C": "1979 Constitution.",
+      "D": "1999 Constitution."
+    },
+    "answer": "D",
+    "image": null
+  },
+  {
+    "id": 33,
+    "question": "A constitution whose principles are written down in a single, unified document is called a(n) ________ constitution.",
+    "options": {
+      "A": "unwritten",
+      "B": "flexible",
+      "C": "written",
+      "D": "rigid"
+    },
+    "answer": "C",
+    "image": null
+  },
+  {
+    "id": 34,
+    "question": "The United Kingdom (UK) is a classic example of a country with a(n) ________ constitution.",
+    "options": {
+      "A": "written",
+      "B": "rigid",
+      "C": "federal",
+      "D": "unwritten"
+    },
+    "answer": "D",
+    "image": null
+  },
+  {
+    "id": 35,
+    "question": "A constitution that is very difficult to change or amend is known as a ________ constitution.",
+    "options": {
+      "A": "flexible",
+      "B": "rigid",
+      "C": "unitary",
+      "D": "federal"
+    },
+    "answer": "B",
+    "image": null
+  },
+  {
+    "id": 36,
+    "question": "The Nigerian constitution can be classified as…",
+    "options": {
+      "A": "written, rigid, and federal.",
+      "B": "unwritten, rigid, and federal.",
+      "C": "written, flexible, and federal.",
+      "D": "written, rigid, and unitary."
+    },
+    "answer": "A",
+    "image": null
+  },
+  {
+    "id": 37,
+    "question": "The constitution is often called the \"mother law\" because…",
+    "options": {
+      "A": "it is the oldest law.",
+      "B": "it is the longest law.",
+      "C": "all other laws derive their power from it.",
+      "D": "it protects mothers."
+    },
+    "answer": "C",
+    "image": null
+  },
+  {
+    "id": 38,
+    "question": "A major reason why Nigeria has a rigid constitution is to…",
+    "options": {
+      "A": "allow politicians to change it easily.",
+      "B": "protect it from being changed easily.",
+      "C": "make it simple to understand.",
+      "D": "copy the British system."
+    },
+    "answer": "B",
+    "image": null
+  },
+  {
+    "id": 39,
+    "question": "One importance of a constitution is that it…",
+    "options": {
+      "A": "creates political parties.",
+      "B": "defines the structure of government.",
+      "C": "gives power only to the President.",
+      "D": "makes laws for other countries."
+    },
+    "answer": "B",
+    "image": null
+  },
+  {
+    "id": 40,
+    "question": "A constitution that divides power between a central government and state governments is a ________ constitution.",
+    "options": {
+      "A": "unitary",
+      "B": "federal",
+      "C": "rigid",
+      "D": "flexible"
+    },
+    "answer": "B",
+    "image": null
+  },
+  {
+    "id": 41,
+    "question": "The \"rule of law\" principle means that…",
+    "options": {
+      "A": "the President is above the law.",
+      "B": "everyone, including the government, is under the law.",
+      "C": "the police make the laws.",
+      "D": "citizens can choose which laws to obey."
+    },
+    "answer": "B",
+    "image": null
+  },
+  {
+    "id": 42,
+    "question": "A flexible constitution is one that can be changed by a…",
+    "options": {
+      "A": "simple majority vote.",
+      "B": "two-thirds majority vote.",
+      "C": "special referendum.",
+      "D": "presidential decree."
+    },
+    "answer": "A",
+    "image": null
+  },
+  {
+    "id": 43,
+    "question": "The constitution protects citizens' rights by containing the chapter on…",
+    "options": {
+      "A": "Fundamental Objectives.",
+      "B": "Fundamental Human Rights.",
+      "C": "Citizenship.",
+      "D": "Public Service."
+    },
+    "answer": "B",
+    "image": null
+  },
+  {
+    "id": 44,
+    "question": "Ghana operates a ________ constitution, similar to Nigeria.",
+    "options": {
+      "A": "unitary",
+      "B": "federal",
+      "C": "written",
+      "D": "unwritten"
+    },
+    "answer": "C",
+    "image": null
+  },
+  {
+    "id": 45,
+    "question": "Any government action that contradicts the constitution is considered…",
+    "options": {
+      "A": "legal.",
+      "B": "illegal, null, and void.",
+      "C": "a valid policy.",
+      "D": "subject to a referendum."
+    },
+    "answer": "B",
+    "image": null
+  },
+  {
+    "id": 46,
+    "question": "The three arms of government are the Executive, the Legislature, and the…",
+    "options": {
+      "A": "Civil Service.",
+      "B": "Judiciary.",
+      "C": "Police.",
+      "D": "Media."
+    },
+    "answer": "B",
+    "image": null
+  },
+  {
+    "id": 47,
+    "question": "The principle of dividing government power among three branches to prevent dictatorship is called…",
+    "options": {
+      "A": "rule of law.",
+      "B": "separation of powers.",
+      "C": "checks and balances.",
+      "D": "federalism."
+    },
+    "answer": "B",
+    "image": null
+  },
+  {
+    "id": 48,
+    "question": "The arm of government responsible for making laws is the…",
+    "options": {
+      "A": "Executive.",
+      "B": "Judiciary.",
+      "C": "Legislature.",
+      "D": "Civil Service."
+    },
+    "answer": "C",
+    "image": null
+  },
+  {
+    "id": 49,
+    "question": "In Nigeria, the National Assembly is the name of the ________ at the federal level.",
+    "options": {
+      "A": "Executive",
+      "B": "Legislature",
+      "C": "Judiciary",
+      "D": "Civil Service"
+    },
+    "answer": "B",
+    "image": null
+  },
+  {
+    "id": 50,
+    "question": "The National Assembly is made up of two houses: the Senate and the…",
+    "options": {
+      "A": "House of Assembly.",
+      "B": "House of Chiefs.",
+      "C": "House of Representatives.",
+      "D": "House of Commons."
+    },
+    "answer": "C",
+    "image": null
+  }
+];
+
+const staticTheoryQuestions = [
+  {
+    "id": 1,
+    "question": "a) Define a \"citizen\" and differentiate a citizen from an \"alien\".\nb) List and explain the three main ways a person can acquire Nigerian citizenship as provided by the 1999 Constitution.",
+    "marks": null,
+    "image": null
+  },
+  {
+    "id": 2,
+    "question": "a) What is the difference between Jus Soli (Right of Soil) and Jus Sanguinis (Right of Blood)?\nb) Explain three (3) requirements a foreigner must meet to become a Nigerian citizen by naturalisation.",
+    "marks": null,
+    "image": null
+  },
+  {
+    "id": 3,
+    "question": "a) Define \"Citizen's Rights\" and list any four (4) examples from Chapter IV of the 1999 Constitution.\nb) What are the \"Responsibilities\" or \"Duties\" of a citizen? List three (3) examples.\nc) Explain what it means to say that rights and duties are \"interdependent\". Give one example.",
+    "marks": null,
+    "image": null
+  },
+  {
+    "id": 4,
+    "question": "a) What is a Constitution?\nb) Differentiate between a written and an unwritten constitution, giving one example of a country for each.\nc) How would you classify the Nigerian Constitution? Explain your answer.",
+    "marks": null,
+    "image": null
+  },
+  {
+    "id": 5,
+    "question": "a) What is the principle of \"Separation of Powers\"? Why is it important?\nb) List the three arms of government.\nc) State two (2) primary functions of the Judiciary.",
+    "marks": null,
+    "image": null
+  },
+  {
+    "id": 6,
+    "question": "a) What are \"Civic Virtues\"?\nb) Define the following virtues and give one practical example for each:\ni. Honesty\nii. Integrity\niii. Tolerance\nc) Why is tolerance particularly important in a country like Nigeria?",
+    "marks": null,
+    "image": null
+  },
+  {
+    "id": 7,
+    "question": "a) Differentiate between the \"Public Service\" and the \"Civil Service\".\nb) Explain three (3) reasons why the Public Service is important to a nation.\nc) List three (3) major challenges facing the Nigerian Public Service.",
+    "marks": null,
+    "image": null
+  },
+  {
+    "id": 8,
+    "question": "a) Define democracy.\nb) What is a political party? State three (3) functions of political parties.\nc) Describe the step-by-step process of voting on election day in Nigeria.",
+    "marks": null,
+    "image": null
+  },
+  {
+    "id": 9,
+    "question": "a) Define \"Human Trafficking\".\nb) Differentiate between human trafficking and human smuggling.\nc) List two (2) causes of human trafficking and two (2) consequences for the victims.",
+    "marks": null,
+    "image": null
+  },
+  {
+    "id": 10,
+    "question": "Read the scenario and answer the questions that follow.\nMr. and Mrs. Okonkwo are Nigerian citizens living in Lagos. Their daughter, Ada, was born in London, UK, while they were there on a business trip. Their neighbour, Mr. Dube, is a citizen of South Africa who has been living and working in Lagos for 18 years. Mr. Dube wants to become a Nigerian citizen.\na) By what method is Ada a Nigerian citizen? Explain your answer, mentioning the correct principle.\nb) Which method of acquiring citizenship should Mr. Dube apply for?\nc) List three (3) conditions Mr. Dube must fulfill to successfully acquire Nigerian citizenship.\nd) As a citizen, Mr. Dube will have certain rights and duties. Explain the interdependence of rights and duties using one example relevant to his situation.",
+    "marks": null,
+    "image": null
+  }
+];
+        // ================== APPLICATION VARIABLES ==================
+        let questions = [];
+        let currentQuestion = 0;
+        let userAnswers = [];
+        let theoryQuestions = [];
+        let currentTheory = 0;
+        let theoryAnswers = [];
+        let currentSection = 'objectives';
+       
+        // ================== INITIALIZATION ==================
+        window.onload = function () {
+            // Extract exam info from the page
+            const examInfoElement = document.getElementById('examInfo');
+            if (examInfoElement) {
+                const examInfoText = examInfoElement.textContent;
+                // Parse the text to extract subject and class
+                // This is a simple example - adjust based on your actual text format
+                localStorage.setItem('examSubject', 'EXAM');
+                localStorage.setItem('examClass', 'RESULT');
+            }
+            localStorage.setItem('examTerm', 'FIRST TERM 2026/2027');
+      
+             const username = sessionStorage.getItem('username');
+                const image = sessionStorage.getItem('image');
+
+                if (!username) {
+                  window.location.href = 'index.html';
+                } else {
+                  document.getElementById('username').innerText = username;
+                  
+              
+                /*document.getElementById('userImage').src =
+              'img/' + (sessionStorage.getItem('image') || 'default_user.jpg');*/
+                }
+            document.getElementById('userImage').src = sessionStorage.getItem('image') || 'img/default_user.jpg';
+           
+            // Load static questions
+            questions = staticObjectivesQuestions;
+            theoryQuestions = staticTheoryQuestions;
+           
+            userAnswers = new Array(questions.length);
+            theoryAnswers = new Array(theoryQuestions.length).fill('');
+           
+            updateDateTime();
+            setInterval(updateDateTime, 1000);
+           
+            displayQuestion();
+            renderQuestionButtons();
+            countUserSelections();
+            updateTheoryStatus();
+        };
+       
+                    // ================== TIMER ==================
+                let timeLeft = 60 * 60; // 90 minutes in seconds
+                const timerEl = document.getElementById('timer');
+                const timerInterval = setInterval(() => {
+                    const hours = Math.floor(timeLeft / 3600);
+                    const minutes = Math.floor((timeLeft % 3600) / 60);
+                    const seconds = timeLeft % 60;
+                    
+                    // Build display string
+                    let display = '';
+                    if (hours > 0) {
+                        display += `${hours} Hr:`;
+                    }
+                    if (minutes > 0 || hours > 0) { // show minutes if any hour or minute >0
+                        display += `${minutes} Min: `;
+                    }
+                    display += `${seconds} Sec`;
+                    
+                    timerEl.textContent = `Time Remaining: ${display}`;
+                    timeLeft--;
+                   
+                    // Change color when time is running out (less than 5 minutes)
+                    if (timeLeft < 300) { // 5 minutes = 300 seconds
+                        timerEl.style.color = 'red';
+                        timerEl.style.animation = 'pulse 1s infinite';
+                    }
+                   
+                    if (timeLeft < 0) {
+                        clearInterval(timerInterval);
+                        alert("Time is up! Your exam will be submitted automatically.");
+                        submitExam();
+                    }
+                }, 1000);
+       
+        // ================== SECTION TOGGLE ==================
+        function showSection(section) {
+            currentSection = section;
+            // Update button states
+            document.getElementById('objectivesBtn').classList.toggle('active', section === 'objectives');
+            document.getElementById('theoryBtn').classList.toggle('active', section === 'theory');
+           
+            // Show/hide sections
+            document.getElementById('objectivesSection').style.display = section === 'objectives' ? 'block' : 'none';
+            document.getElementById('theorySection').style.display = section === 'theory' ? 'block' : 'none';
+           
+            // Update navigation
+            if (section === 'theory') {
+                displayTheoryQuestion();
+            }
+        }
+       
+        // ================== MATH SYMBOL MAPPING ==================
+        function mapMathSymbol(text) {
+            if (!text) return '';
+           
+            return text
+                .replace(/&theta;/g, 'θ')
+                .replace(/&Theta;/g, 'Θ')
+                .replace(/&pi;/g, 'π')
+                .replace(/&Pi;/g, 'Π')
+                .replace(/&alpha;/g, 'α')
+                .replace(/&beta;/g, 'β')
+                .replace(/&gamma;/g, 'γ')
+                .replace(/&delta;/g, 'δ')
+                .replace(/&epsilon;/g, 'ε')
+                .replace(/&phi;/g, 'φ')
+                .replace(/&omega;/g, 'ω')
+                .replace(/&mu;/g, 'μ')
+                .replace(/&sigma;/g, 'σ')
+                .replace(/&lambda;/g, 'λ')
+                .replace(/&radic;/g, '√')
+                .replace(/&infin;/g, '∞')
+                .replace(/&int;/g, '∫')
+                .replace(/&sum;/g, '∑')
+                .replace(/&prod;/g, '∏')
+                .replace(/&part;/g, '∂')
+                .replace(/&deg;/g, '°')
+                .replace(/&times;/g, '×')
+                .replace(/&divide;/g, '÷')
+                .replace(/&plusmn;/g, '±')
+                .replace(/&le;/g, '≤')
+                .replace(/&ge;/g, '≥')
+                .replace(/&ne;/g, '≠')
+                .replace(/&frac12;/g, '½')
+                .replace(/&frac14;/g, '¼')
+                .replace(/&frac34;/g, '¾')
+                .replace(/\^(\d+)/g, '<sup>$1</sup>')
+                .replace(/\^\(([^)]+)\)/g, '<sup>$1</sup>')
+                .replace(/_(\d+)/g, '<sub>$1</sub>')
+                .replace(/_\(([^)]+)\)/g, '<sub>$1</sub>');
+        }
+       
+        // ================== OBJECTIVES FUNCTIONS ==================
+        function saveAnswer() {
+            const selected = document.querySelector('input[name="option"]:checked');
+            if (selected) {
+                userAnswers[currentQuestion] = selected.value;
+                countUserSelections();
+            }
+        }
+       
+        function displayQuestion() {
+            if (currentQuestion >= questions.length) return;
+           
+            const q = questions[currentQuestion];
+           
+            // Apply math symbol mapping
+            const questionText = mapMathSymbol(q.question);
+            const optA = mapMathSymbol(q.options.A);
+            const optB = mapMathSymbol(q.options.B);
+            const optC = mapMathSymbol(q.options.C);
+            const optD = mapMathSymbol(q.options.D);
+           
+            // Display question and options
+            document.getElementById('questionText').innerHTML = `${currentQuestion + 1}. ${questionText}`;
+            document.getElementById('optA').innerHTML = optA;
+            document.getElementById('optB').innerHTML = optB;
+            document.getElementById('optC').innerHTML = optC;
+            document.getElementById('optD').innerHTML = optD;
+           
+            // Handle question image
+            const imageContainer = document.getElementById('questionImageContainer');
+            if (q.image) {
+                imageContainer.innerHTML = `
+                    <div class="theory-image-wrapper">
+                        <img src="${q.image}" alt="Question Diagram" class="question-image">
+                    </div>
+                `;
+            } else {
+                imageContainer.innerHTML = '';
+            }
+           
+            // Clear and set radio buttons
+            const radios = document.getElementsByName('option');
+            radios.forEach(r => r.checked = false);
+           
+            if (userAnswers[currentQuestion]) {
+                document.querySelector(`input[name="option"][value="${userAnswers[currentQuestion]}"]`).checked = true;
+            }
+           
+            highlightCurrentButton();
+        }
+       
+        function nextQuestion() {
+            saveAnswer();
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                displayQuestion();
+            }
+        }
+       
+        function prevQuestion() {
+            saveAnswer();
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                displayQuestion();
+            }
+        }
+       
+        function renderQuestionButtons() {
+            const container = document.getElementById('questionButtons');
+            container.innerHTML = '';
+           
+            for (let i = 0; i < questions.length; i++) {
+                const btn = document.createElement('button');
+                btn.textContent = i + 1;
+                btn.className = 'question-btn';
+                btn.onclick = () => {
+                    saveAnswer();
+                    currentQuestion = i;
+                    displayQuestion();
+                };
+                container.appendChild(btn);
+            }
+            highlightCurrentButton();
+        }
+       
+        function highlightCurrentButton() {
+            document.querySelectorAll('.question-btn').forEach((btn, index) => {
+                const answered = userAnswers[index] !== undefined;
+                const current = index === currentQuestion;
+               
+                btn.style.backgroundColor = current ? '#5cb85c' : (answered ? '#337ab7' : '#eee');
+                btn.style.color = current || answered ? 'white' : 'black';
+                btn.style.border = current ? '2px solid #2e7d32' : '1px solid #444';
+            });
+        }
+       
+        function countUserSelections() {
+            let totalQuestions = questions.length;
+            let answeredCount = userAnswers.filter(answer => answer !== undefined).length;
+            let unansweredCount = totalQuestions - answeredCount;
+           
+            document.getElementById("answeredLabel").innerText = `Answered: ${answeredCount}/${totalQuestions}`;
+            document.getElementById("unansweredLabel").innerText = `Unanswered: ${unansweredCount}`;
+        }
+       
+
+   
+         function submitExam() {
+            saveAnswer();
+            showResult();
+        }
+       
+
+
+                    function showResult() {
+                        clearInterval(timerInterval);
+                        let score = 0;
+                        questions.forEach((q, i) => {
+                            if (userAnswers[i] === q.answer) score++;
+                        });
+                        
+                        const username = sessionStorage.getItem('username') || "Guest";
+                        const cls = sessionStorage.getItem('class');
+                        const sub = sessionStorage.getItem('subject');
+                        
+                        localStorage.setItem("examUser", username);
+                        localStorage.setItem("examScore", score);
+                        localStorage.setItem("totalQuestions", questions.length);
+                        localStorage.setItem("pendingClass", cls);
+                        localStorage.setItem("pendingSubject", sub);
+                        localStorage.setItem("pendingUsername", username);
+                        
+                        const examInfo = sessionStorage.getItem('examInfo') || 'TEST - RESULT (FIRST TERM)';
+                        localStorage.setItem("examInfo", examInfo);
+                        
+                        // Build the record
+                        const record = {
+                            username: username,
+                            class: cls,
+                            subject: sub,
+                            score: score,
+                            totalQuestions: questions.length,
+                            percentage: ((score / questions.length) * 100).toFixed(2) + '%',
+                            examInfo: examInfo,
+                            timestamp: new Date().toISOString()
+                        };
+                        
+                        // ------------------ 🌐 SEND TO GOOGLE SHEETS ------------------
+                        const API_URL = 'https://script.google.com/macros/s/AKfycbzW4zlbuW16fAFRcwg4ow8b6IAQEp4e2zIqLjL7zhdkkHvEDrDwwxT0PX46dwBIiXgm/exec'; // ← paste your web app URL here
+                        
+                        fetch(API_URL, {
+                            method: 'POST',
+                            mode: 'no-cors',        // required because Apps Script doesn't send CORS headers
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(record)
+                        }).catch(err => console.error('Failed to send to cloud:', err));
+                        // ---------------------------------------------------------------
+                        
+                        // (Optional) Keep local backup
+                        let records = JSON.parse(localStorage.getItem('examRecords') || '[]');
+                        records.push(record);
+                        localStorage.setItem('examRecords', JSON.stringify(records));
+                        
+                        // Download JSON (your existing code)
+                        const scoreDetails = {
+                            ...record,
+                            userAnswers: userAnswers,
+                            correctAnswers: questions.map(q => q.answer)
+                        };
+                        
+                        const blob = new Blob([JSON.stringify(scoreDetails, null, 2)], { type: 'application/json' });
+                        const url = URL.createObjectURL(blob);
+                        const a = document.createElement('a');
+                        a.href = url;
+                        a.download = `exam_results_${username}_${new Date().getTime()}.json`;
+                        a.style.display = 'none';
+                        document.body.appendChild(a);
+                        a.click();
+                        document.body.removeChild(a);
+                        URL.revokeObjectURL(url);
+                        
+                        console.log(`Exam completed. Waiting for confirmation.`);
+                        alert(`Objective Exam Completed!\nYour Score: ${score} out of ${questions.length}\n\nClick OK to view your results.`);
+                        window.location.href = "results.html";
+                    }
+
+
+
+            // Add these helper functions to your exam page
+            function getExamAttempts(cls) {
+                const key = `${cls}_exam_attempts`;
+                const stored = localStorage.getItem(key);
+                return stored ? JSON.parse(stored) : {};
+            }
+
+            function saveExamAttempts(cls, data) {
+                const key = `${cls}_exam_attempts`;
+                localStorage.setItem(key, JSON.stringify(data));
+            }
+                   
+        // ================== THEORY QUESTIONS ==================
+        function displayTheoryQuestion() {
+            if (theoryQuestions.length === 0) {
+                document.getElementById('theoryQuestionText').innerText = "No theory questions available.";
+                return;
+            }
+           
+            const tq = theoryQuestions[currentTheory];
+           
+            // Display question text (without math symbol mapping for theory)
+            document.getElementById('theoryQuestionText').innerText = mapMathSymbol(`${currentTheory + 1}. ${tq.question} ${tq.marks ? `[${tq.marks} marks]` : ''}`);
+                
+            document.getElementById('theoryAnswer').value = theoryAnswers[currentTheory] || "";
+           
+            // Handle theory question image
+            const theoryImageContainer = document.getElementById('theoryImageContainer');
+            if (tq.image) {
+                theoryImageContainer.innerHTML = `
+                    <div class="theory-image-wrapper">
+                        <img src="${tq.image}" alt="Theory Question Diagram" class="theory-question-image">
+                        <div class="image-caption">${tq.imageCaption || 'Diagram for question'}</div>
+                    </div>
+                `;
+            } else {
+                theoryImageContainer.innerHTML = '';
+            }
+           
+            updateTheoryStatus();
+        }
+       
+        function updateTheoryStatus() {
+            const savedCount = theoryAnswers.filter(answer => answer.trim() !== "").length;
+            document.getElementById("theoryStatus").innerText =
+                `Question ${currentTheory + 1} of ${theoryQuestions.length} | Saved: ${savedCount}/${theoryQuestions.length}`;
+        }
+       
+        function saveTheoryAnswer() {
+            const answer = document.getElementById('theoryAnswer').value.trim();
+            theoryAnswers[currentTheory] = answer;
+            localStorage.setItem(`theoryAnswer_${currentTheory}`, answer);
+            updateTheoryStatus();
+            alert("Theory answer saved successfully!");
+        }
+       
+        function nextTheoryQuestion() {
+            if (currentTheory < theoryQuestions.length - 1) {
+                currentTheory++;
+                displayTheoryQuestion();
+            } else {
+                alert("You've reached the last theory question.");
+            }
+        }
+       
+        function prevTheoryQuestion() {
+            if (currentTheory > 0) {
+                currentTheory--;
+                displayTheoryQuestion();
+            }
+        }
+       
+        function submitTheoryExam() {
+            const savedCount = theoryAnswers.filter(answer => answer.trim() !== "").length;
+            const confirmSubmit = confirm(
+                `Theory section completed!\n\n` +
+                `You have answered ${savedCount} out of ${theoryQuestions.length} theory questions.\n\n` +
+                `Are you sure you want to submit?`
+            );
+           
+            if (confirmSubmit) {
+                alert("Theory answers submitted successfully!");
+            }
+        }
+       
+        // ================== DATE & TIME ==================
+        function updateDateTime() {
+            let now = new Date();
+            let day = now.getDate();
+            let month = now.toLocaleString('default', { month: 'long' });
+            let year = now.getFullYear();
+            let suffix = "th";
+           
+            if (day === 1 || day === 21 || day === 31) suffix = "st";
+            else if (day === 2 || day === 22) suffix = "nd";
+            else if (day === 3 || day === 23) suffix = "rd";
+           
+            let hours = now.getHours();
+            let minutes = now.getMinutes();
+            let seconds = now.getSeconds();
+            let ampm = hours >= 12 ? "PM" : "AM";
+            hours = hours % 12 || 12;
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+           
+            let formattedDateTime = `${month} ${day}${suffix} ${year}, ${hours}:${minutes}:${seconds} ${ampm}`;
+            document.getElementById("datetime").innerText = formattedDateTime;
+        }
+       
+        // ================== KEYBOARD SHORTCUTS ==================
+        document.addEventListener('keydown', function (event) {
+            if (currentSection === 'objectives') {
+                const key = event.key.toUpperCase();
+               
+                // Answer selection for objectives
+                if (['A', 'B', 'C', 'D'].includes(key)) {
+                    const radio = document.querySelector(`input[name="option"][value="${key}"]`);
+                    if (radio) {
+                        radio.checked = true;
+                        saveAnswer();
+                    }
+                }
+               
+                // Navigation with arrows
+                if (event.key === 'ArrowRight') {
+                    nextQuestion();
+                } else if (event.key === 'ArrowLeft') {
+                    prevQuestion();
+                }
+            } else if (currentSection === 'theory') {
+                // Navigation for theory
+                if (event.key === 'ArrowRight') {
+                    nextTheoryQuestion();
+                } else if (event.key === 'ArrowLeft') {
+                    prevTheoryQuestion();
+                }
+               
+                // Save with Ctrl+S
+                if (event.ctrlKey && event.key === 's') {
+                    event.preventDefault();
+                    saveTheoryAnswer();
+                }
+            }
+        });
+       
+        // ================== ANTI-CHEAT & LOGOUT ==================
+        document.addEventListener('keydown', function (event) {
+            const key = event.key.toLowerCase();
+            if ((event.ctrlKey && (key === 'p' || key === 's')) && currentSection === 'objectives') {
+                event.preventDefault();
+                alert("Right-click and view source are disabled during examination.");
+                return false;
+            }
+        });
+       
+        document.addEventListener('contextmenu', (event) => {
+            event.preventDefault();
+            alert("Right-click is disabled during examination.");
+        });
+       
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I') ||
+                (e.ctrlKey && e.shiftKey && e.key === 'J') || (e.ctrlKey && e.key === 'u')) {
+                e.preventDefault();
+                alert("Developer tools are disabled during examination.");
+            }
+        });
+       
+        function logout() {
+            const confirmLogout = confirm("Are you sure you want to logout? Your progress may be lost.");
+            if (confirmLogout) {
+                window.location.href = "index.html";
+            }
+        }
+    </script>
+</body>
+</html>
