@@ -1,0 +1,2191 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="fav_icon2.ico">
+    <title>cbt.wisdom foundationschools.org - ENGLISH LANGUAGE SS1  Exam</title>
+    <script>
+         // Disable back navigation
+    history.pushState(null, null, location.href);
+    window.onpopstate = function () {
+        history.go(1);
+    };
+
+     let backClickCount = 0;
+            let allowBack = false;
+
+            history.pushState(null, null, location.href);
+
+            window.onpopstate = function () {
+                if (!allowBack) {
+                    backClickCount++;
+
+                    if (backClickCount >= 50) {
+                        allowBack = true;
+                        alert("You have tried 50 times. Going back now...");
+                        history.back();
+                        return;
+                    }
+
+                    showBackModal();
+                }
+            };
+
+            function showBackModal() {
+                document.getElementById("backModalOverlay").style.display = "flex";
+                document.getElementById("passwordContainer").style.display = "none";
+                document.getElementById("backPassword").value = "";
+               
+                document.getElementById("modalButtons").innerHTML = `
+                    <button onclick="handleYes()" style="padding: 10px 20px; margin: 5px; border: none; border-radius: 5px; background: limegreen; color: white; font-size: 16px; cursor: pointer;">Yes</button>
+                    <button onclick="closeBackModal()" style="padding: 10px 20px; margin: 5px; border: none; border-radius: 5px; background: crimson; color: white; font-size: 16px; cursor: pointer;">No</button>
+                `;
+            }
+
+            function closeBackModal() {
+                document.getElementById("backModalOverlay").style.display = "none";
+                history.pushState(null, null, location.href);
+            }
+
+            function handleYes() {
+                document.getElementById("passwordContainer").style.display = "block";
+                document.getElementById("modalButtons").innerHTML = `
+                    <button onclick="checkPassword()" style="padding: 10px 20px; margin: 5px; border: none; border-radius: 5px; background: limegreen; color: white; font-size: 16px; cursor: pointer;">Submit</button>
+                    <button onclick="closeBackModal()" style="padding: 10px 20px; margin: 5px; border: none; border-radius: 5px; background: crimson; color: white; font-size: 16px; cursor: pointer;">Cancel</button>
+                `;
+            }
+
+            function checkPassword() {
+                const correctPassword = "admin123";
+                const enteredPassword = document.getElementById("backPassword").value;
+
+                if (enteredPassword === correctPassword) {
+                    allowBack = true;
+                    document.getElementById("backModalOverlay").style.display = "none";
+                    history.back();
+                } else {
+                    alert("Incorrect password. Staying on this page.");
+                    closeBackModal();
+                }
+            }
+    </script>
+</head>
+         <div id="backModalOverlay" style="display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.8); color: #fff; font-family: Arial, sans-serif; justify-content: center; align-items: center; flex-direction: column;">
+                <div id="backModal" style="background: #222; padding: 30px; border-radius: 10px; text-align: center; width: 90%; max-width: 400px;">
+                    <p style="font-size: 18px; margin: 0 0 10px;">Do you really want to go back?</p>
+
+                    <div id="passwordContainer" style="display: none;">
+                        <p style="margin-top: 10px;">Enter password to go back:</p>
+                        <input type="password" id="backPassword" placeholder="Enter password"
+                            style="padding: 10px; width: 80%; margin-top: 10px; border-radius: 5px; border: none; font-size: 16px;">
+                    </div>
+
+                    <div id="modalButtons" style="margin-top: 20px;">
+                        <button onclick="handleYes()" style="padding: 10px 20px; margin: 5px; border: none; border-radius: 5px; background: limegreen; color: white; font-size: 16px; cursor: pointer;">Yes</button>
+                        <button onclick="closeBackModal()" style="padding: 10px 20px; margin: 5px; border: none; border-radius: 5px; background: crimson; color: white; font-size: 16px; cursor: pointer;">No</button>
+                    </div>
+                </div>
+            </div>
+                      
+
+    <style>
+        body {
+            position: relative;
+            z-index: 1;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f8f0;
+        }
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('img/wisdom_logo1.png') no-repeat center center;
+            background-size: 300px 300px;
+            opacity: 0.1;
+            z-index: 0;
+            pointer-events: none;
+        }
+        #logout-container {
+            text-align: right;
+            padding: 10px;
+            background: #2c3e50;
+        }
+        #datetime {
+            color:gold;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            margin: 10px 0;
+        }
+        #logout {
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            cursor: pointer;
+            font-size: 14px;
+            border-radius: 5px;
+        }
+        #header {
+            padding: 20px;
+            background: linear-gradient(to right, orange, purple);
+            color: white;
+            border-bottom: 5px solid #ff9800;
+        }
+        #logo img {
+            max-width: 200px;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+        #student-info {
+            margin-top: 20px;
+            text-align: center;
+        }
+        #student-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            display: block;
+            margin: 0 auto 10px;
+            border: 3px solid white;
+            background: #ddd;
+        }
+        #welcome-message {
+            color: #ffeb3b;
+            font-size: 24px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        #userAnswerCount {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 15px;
+            border-radius: 8px;
+            color: white;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            width: 200px;
+            z-index: 100;
+        }
+        #answeredLabel {
+            color: lime;
+            font-size: 18px;
+            font-weight: bold;
+            margin: 5px 0;
+        }
+        #unansweredLabel {
+            color: red;
+            font-size: 18px;
+            font-weight: bold;
+            margin: 5px 0;
+        }
+        .container {
+            margin: 20px auto;
+            width: 80%;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        #questionText {
+            width: 98%;
+            min-height: 100px;
+            resize: none;
+            padding: 15px;
+            font-size: 18px;
+            color: red; /*#333;*/
+            background-color: lime;/* #f9f9f9;*/
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            margin-bottom: 15px;
+            font-family: Arial, "Segoe UI Symbol", "Apple Symbols", sans-serif;
+        }
+        .option-group {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            padding: 12px;
+            background-color: #f5f5f5;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .option-group:hover {
+            background-color: #e8f5e8;
+        }
+        .option-group input {
+            margin-right: 15px;
+            transform: scale(1.3);
+        }
+        .option-group label {
+            font-weight: bold;
+            font-size: 16px;
+            color: #333;
+            font-family: Arial, "Segoe UI Symbol", "Apple Symbols", sans-serif;
+        }
+        .nav-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .btn-cool {
+            padding: 12px 25px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            background: #2e7d32;
+            color: white;
+            cursor: pointer;
+            transition: background 0.3s;
+            font-weight: bold;
+        }
+        .btn-cool:hover {
+            background: #1b5e20;
+        }
+        .questionButtons {
+            margin: 15px 0;
+            text-align: center;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 5px;
+        }
+        .question-btn {
+            margin: 3px;
+            padding: 8px 12px;
+            border-radius: 6px;
+            border: 1px solid #444;
+            cursor: pointer;
+            font-weight: bold;
+            background-color: #eee;
+            min-width: 40px;
+            transition: all 0.3s;
+        }
+        .question-btn:hover {
+            background-color: #d0f0d0;
+        }
+        #timer {
+            font-size: 24px;
+            font-weight: bold;
+            color: #e74c3c;
+            text-align: center;
+            margin: 10px 0;
+            background-color: #f9f9f9;
+            padding: 10px;
+            border-radius: 5px;
+            border: 2px solid #e74c3c;
+        }
+        .section-toggle {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        .section-btn {
+            padding: 12px 24px;
+            margin: 0 10px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .section-btn.active {
+            background-color: #2e7d32;
+            color: white;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        .section-btn:not(.active) {
+            background-color: #e0e0e0;
+            color: #333;
+        }
+        #theorySection {
+            display: none;
+            background: #fff9e6;
+            color: #333;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px auto;
+            width: 80%;
+            border: 2px solid #ff9800;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        #theoryQuestionText {
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 15px;
+            line-height: 1.6;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 5px;
+            border-left: 5px solid #ff9800;
+            font-family: Arial, sans-serif;
+        }
+        #theoryAnswer {
+            width: 100%;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+            resize: vertical;
+            min-height: 200px;
+            font-family: Arial, sans-serif;
+            margin-bottom: 15px;
+        }
+        .theory-nav-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        .theory-btn {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .theory-save-btn {
+            background-color: #28a745;
+            color: white;
+        }
+        .theory-save-btn:hover {
+            background-color: #218838;
+        }
+        .theory-prev-btn, .theory-next-btn {
+            background-color: #007bff;
+            color: white;
+        }
+        .theory-prev-btn:hover, .theory-next-btn:hover {
+            background-color: #0069d9;
+        }
+        .theory-submit-btn {
+            background-color: #dc3545;
+            color: white;
+        }
+        .theory-submit-btn:hover {
+            background-color: #c82333;
+        }
+        .theory-status {
+            text-align: center;
+            margin: 10px 0;
+            font-weight: bold;
+            color: #333;
+            padding: 10px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+        }
+        .windows-activate {
+            text-align: center;
+            margin-top: 30px;
+            color: #333;
+            font-size: 14px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin: 20px;
+        }
+        .exam-info {
+            text-align: center;
+            font-weight: bold;
+            margin: 10px 0;
+            color: #2c3e50;
+            font-size: 18px;
+        }
+        /* Math symbols styling */
+        sup, sub {
+            font-size: 0.75em;
+            line-height: 1;
+        }
+        sup {
+            vertical-align: super;
+        }
+        sub {
+            vertical-align: sub;
+        }
+        /* Theory Question Images */
+        .theory-image-container {
+            margin: 15px 0;
+            text-align: center;
+        }
+        .theory-image-wrapper {
+            display: inline-block;
+            max-width: 100%;
+            padding: 10px;
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .theory-question-image {
+            max-width: 100%;
+            max-height: 300px;
+            height: auto;
+            border-radius: 5px;
+            display: block;
+            margin: 0 auto;
+            background: #f0f0f0;
+            padding: 10px;
+        }
+        .image-caption {
+            font-style: italic;
+            color: #666;
+            margin-top: 8px;
+            font-size: 14px;
+            text-align: center;
+        }
+        /* Objective question images */
+        #questionImageContainer {
+            text-align: center;
+            margin: 15px 0;
+        }
+        .question-image {
+            max-width: 100%;
+            max-height: 250px;
+            height: auto;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            padding: 5px;
+            background: white;
+        }
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+         .marquee-container {
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+            background: rgb(150,125,150);
+            padding: 10px 0;
+        }
+    
+        /* Moving text animation */
+        .marquee-text {
+            display: inline-block;
+            color: gold;
+            font-size: 24px;
+            font-weight: bold;
+            animation: marquee 10s linear infinite;
+        }
+
+        /* Keyframes for moving text */
+        @keyframes marquee {
+            from {
+                transform: translateX(100%);
+            }
+            to {
+                transform: translateX(-100%);
+            }
+        }
+
+
+        /* Logo container - makes it a flex container for horizontal layout */
+#logo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    position: relative;
+    padding: 20px 0;
+}
+
+/* Style for the center/main logo */
+#logo img:not(.logo-left img):not(.logo-right img) {
+    max-width: 200px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+}
+
+/* Left logo container */
+.logo-left {
+    flex: 0 0 auto;
+    z-index: 1;
+    margin-left: 20px;
+}
+
+/* Right logo container */
+.logo-right {
+    flex: 0 0 auto;
+    z-index: 1;
+    margin-right: 20px;
+}
+
+/* Logo images inside left and right containers */
+.logo-left img,
+.logo-right img {
+    max-width: 100px;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+/* Hover effect for left and right logos */
+.logo-left img:hover,
+.logo-right img:hover {
+    transform: scale(1.1);
+}
+
+/* Responsive design for mobile */
+@media (max-width: 768px) {
+    #logo {
+        flex-direction: column;
+        gap: 15px;
+        padding: 10px 0;
+    }
+    
+    #logo img:not(.logo-left img):not(.logo-right img) {
+        position: static;
+        transform: none;
+        margin: 10px auto;
+    }
+    
+    .logo-left, .logo-right {
+        margin: 5px 0;
+    }
+    
+    .logo-left img,
+    .logo-right img {
+        max-width: 80px;
+    }
+}
+
+
+
+    </style>
+</head>
+<body oncontextmenu="return false">
+    <div id="header">
+        <div id="logout-container">
+            <button id="logout" onclick="logout()">Logout</button>
+                 <div class="marquee-container">
+        <span class="marquee-text">WISDOM FOUNDATION SCHOOLS  :  GATEWAY TO THE UNIVERSITY</span>
+    </div>
+        </div>
+        <div id="logo">
+            <img src="img/wisdom_logo1.png" alt="image">
+
+               <!--<div class="logo-left">
+                <img src="img/9ja1.png" alt="Nigeria Logo" >
+            </div>
+
+            <div class="logo-right">
+                <img src="img/nappps1.png" alt="NAPPS Logo" >
+            </div>-->
+        </div>
+
+           
+            
+
+        <div id="student-info">
+            <center><strong>ATTENTION! CLICK ON SUBMIT BUTTON BEFORE YOUR TIME IS UP TO SAVE YOUR SCORE</strong></center>
+            <center><p id="datetime"></p></center>
+              <div id="welcome-message">
+            <label id="usernameDisplay"></label>
+        </div>
+         <div class="student-info">
+          <img id="userImage" src="img/default_user.jpg" alt="Student Image" style="width:120px; height:120px; border-radius:50%; border:3px solid #008000; display:block; margin:0 auto;">
+      
+          <h2 id="username">Student Name</h2>
+           </div>
+
+     
+
+    
+        <center><h3>WISDOM FOUNDATION SCHOOLS EGBEWA  ADO EKITI </h3></center> 
+        <center><h3>FIRST TERM EXAMINATION 2026/2027 ACADEMIC SESSION</h3></center>
+       
+        <!-- SECTION TOGGLE BUTTONS -->
+        <div class="section-toggle">
+            <button id="objectivesBtn" class="section-btn active" onclick="showSection('objectives')">OBJECTIVE QUESTIONS</button>
+            <button id="theoryBtn" class="section-btn" onclick="showSection('theory')">THEORY QUESTIONS</button>
+        </div>
+       
+        <div class="exam-info">
+            Exam: <span id="examInfo" style="color: lime;">  ENGLISH LANGUAGE SS1  (FIRST TERM)</span>
+        </div>
+       
+        <div id="timer"></div>
+    </div>
+   
+    <!-- OBJECTIVES SECTION -->
+    <div id="objectivesSection">
+        <div class="container">
+            <h5 style="color: #d35400; text-align: center;">INSTRUCTIONS: READ THE QUESTIONS CAREFULLY BEFORE YOU CHOOSE YOUR ANSWER</h5>
+            <div class="scroll-container">
+                <div id="questionText"></div>
+            </div>
+           
+            <div id="questionImageContainer"></div>
+           
+            <div class="option-group">
+                <label class="option"><strong>A.</strong><input type="radio" name="option" value="A"> <span id="optA"></span></label>
+            </div>
+            <div class="option-group">
+                <label class="option"><strong>B.</strong><input type="radio" name="option" value="B"> <span id="optB"></span></label>
+            </div>
+            <div class="option-group">
+                <label class="option"><strong>C.</strong><input type="radio" name="option" value="C"> <span id="optC"></span></label>
+            </div>
+            <div class="option-group">
+                <label class="option"><strong>D.</strong><input type="radio" name="option" value="D"> <span id="optD"></span></label>
+            </div>
+        </div>
+       
+        <div class="nav-buttons">
+            <button onclick="prevQuestion()" class="btn-cool">Previous</button>
+            <button onclick="nextQuestion()" class="btn-cool">Next</button>
+            <button onclick="submitExam()" class="btn-cool">Submit Objectives</button>
+        </div>
+       
+        <!-- Question navigation buttons -->
+        <div class="container">
+            <div id="questionButtons" class="questionButtons"></div>
+        </div>
+    </div>
+   
+    <!-- THEORY SECTION -->
+    <div id="theorySection">
+        <h3 style="text-align: center; color: #d35400; margin-bottom: 20px;">THEORY QUESTIONS SECTION</h3>
+        <div class="theory-status" id="theoryStatus">
+            Question 1 of 5 | Saved: 0/5
+        </div>
+        <div id="theoryQuestionContainer">
+            <p id="theoryQuestionText">Loading theory questions...</p>
+            <div id="theoryImageContainer"></div>
+            <textarea id="theoryAnswer" rows="8" placeholder="Write your detailed answer here..."></textarea>
+            <div class="theory-nav-buttons">
+                <button onclick="prevTheoryQuestion()" class="theory-btn theory-prev-btn">Previous</button>
+                <button onclick="saveTheoryAnswer()" class="theory-btn theory-save-btn">Save Answer</button>
+                <button onclick="nextTheoryQuestion()" class="theory-btn theory-next-btn">Next</button>
+                <button onclick="submitTheoryExam()" class="theory-btn theory-submit-btn">Submit Theory</button>
+            </div>
+        </div>
+    </div>
+   
+    <div id="userAnswerCount">
+        <p id="answeredLabel">Answered: 0/5</p>
+        <p id="unansweredLabel">Unanswered: 5/5</p>
+    </div>
+             <div class="marquee-container">
+        <span class="marquee-text"> ENGLISH LANGUAGE SS1   FOR FIRST TERM EXAMINATIONS 2026/2027 ACADEMIC SESSION </span>
+    </div>
+   
+    <div class="windows-activate">
+        <p> &copy; cbt.<span style="color: red;">wisdom foundation</span><span style="color: green;">schools</span>.org</p>
+    </div>
+
+
+    <script>
+           // Get stored username and image from sessionStorage
+       
+            
+            
+    
+        // ================== STATIC QUESTIONS DATA ==================
+   const staticObjectivesQuestions = [
+                                
+                                      {
+                                        "id": 1,
+                                        "question": "In each of the following sentences, there is one underlined word and one gap. from the list of words lettered A to D, choose the one that is most nearly opposite in meaning to the underlined word and that will, at the same time, correctly fill the gap in the sentence. <br><br>The officer was expected to be.....by his boss, but he was <u>censured.</u>",
+                                        "options": {
+                                          "A": "questioned",
+                                          "B": "praised",
+                                          "C": "decorated",
+                                          "D": "guided"
+                                        },
+                                        "answer": "B",
+                                        "image": null
+                                      },
+                                      {
+                                        "id": 2,
+                                        "question": "In each of the following sentences, there is one underlined word and one gap. from the list of words lettered A to D, choose the one that is most nearly opposite in meaning to the underlined word and that will, at the same time, correctly fill the gap in the sentence<br><br>The honour that was <u>conferred</u> on the general has been....",
+                                        "options": {
+                                          "A": "withdrawn",
+                                          "B": "confirmed",
+                                          "C": "rejected",
+                                          "D": "destroyed"
+                                        },
+                                        "answer": "A",
+                                        "image": null
+                                      },
+                                      {
+                                        "id": 3,
+                                        "question": "In each of the following sentences, there is one underlined word and one gap. from the list of words lettered A to D, choose the one that is most nearly opposite in meaning to the underlined word and that will, at the same time, correctly fill the gap in the sentence<br><br>The <u>modest</u> young man was rewarded while his....brother was punished",
+                                        "options": {
+                                          "A": "intelligent",
+                                          "B": "handsome",
+                                          "C": "conceited",
+                                          "D": "wicked"
+                                        },
+                                        "answer": "C",
+                                        "image": null
+                                      },
+                                      {
+                                        "id": 4,
+                                        "question": "In each of the following sentences, there is one underlined word and one gap. from the list of words lettered A to D, choose the one that is most nearly opposite in meaning to the underlined word and that will, at the same time, correctly fill the gap in the sentence<br><br>Young people are known for their....which contrast with the <u>composure</u> of adults",
+                                        "options": {
+                                          "A": "ability",
+                                          "B": "instability",
+                                          "C": "activity",
+                                          "D": "credibility"
+                                        },
+                                        "answer": "B",
+                                        "image": null
+                                      },
+                                      {
+                                        "id": 5,
+                                        "question": "In each of the following sentences, there is one underlined word and one gap. from the list of words lettered A to D, choose the one that is most nearly opposite in meaning to the underlined word and that will, at the same time, correctly fill the gap in the sentence<br><br>It is a fact that <u>pride</u> is a less admirable quality than....",
+                                        "options": {
+                                          "A": "humility",
+                                          "B": "honesty",
+                                          "C": "affection",
+                                          "D": "tenderness"
+                                        },
+                                        "answer": "A",
+                                        "image": null
+                                      },
+                                      {
+                                        "id": 6,
+                                        "question": "In each of the following sentences, there is one underlined word and one gap. from the list of words lettered A to D, choose the one that is most nearly opposite in meaning to the underlined word and that will, at the same time, correctly fill the gap in the sentence<br><br>It is obvious that many people prefer <u>affluence</u> to....",
+                                        "options": {
+                                          "A": "scarcity",
+                                          "B": "thrift",
+                                          "C": "waste",
+                                          "D": "poverty"
+                                        },
+                                        "answer": "D",
+                                        "image": null
+                                      },
+                                      {
+                                        "id": 7,
+                                        "question": "In each of the following sentences, there is one underlined word and one gap. from the list of words lettered A to D, choose the one that is most nearly opposite in meaning to the underlined word and that will, at the same time, correctly fill the gap in the sentence<br><br>While some workers felt that the terms were <u>amicable</u>; others thought that they were....",
+                                        "options": {
+                                          "A": "strange",
+                                          "B": "disagreeable",
+                                          "C": "bad",
+                                          "D": "hostile"
+                                        },
+                                        "answer": "D",
+                                        "image": null
+                                      },
+                                      {
+                                        "id": 8,
+                                        "question": "In each of the following sentences, there is one underlined word and one gap. from the list of words lettered A to D, choose the one that is most nearly opposite in meaning to the underlined word and that will, at the same time, correctly fill the gap in the sentence<br><br>Now that the people of this community are living in <u>comfort</u>, I dont think they will want to go back to their days of....",
+                                        "options": {
+                                          "A": "disappointment",
+                                          "B": "hardship",
+                                          "C": "strife",
+                                          "D": "starvation"
+                                        },
+                                        "answer": "B",
+                                        "image": null
+                                      },
+                                      {
+                                        "id": 9,
+                                        "question": "In each of the following sentences, there is one underlined word and one gap. from the list of words lettered A to D, choose the one that is most nearly opposite in meaning to the underlined word and that will, at the same time, correctly fill the gap in the sentence<br><br>False witness <u>castigate</u> rather than....the accused",
+                                        "options": {
+                                          "A": "expose",
+                                          "B": "appease",
+                                          "C": "punish",
+                                          "D": "exonerate"
+                                        },
+                                        "answer": "D",
+                                        "image": null
+                                      },
+                                      {
+                                        "id": 10,
+                                        "question": "In each of the following sentences, there is one underlined word and one gap. from the list of words lettered A to D, choose the one that is most nearly opposite in meaning to the underlined word and that will, at the same time, correctly fill the gap in the sentence<br><br>The some teachers <u>dissuade</u> students from studying Mathematics, but others...them",
+                                        "options": {
+                                          "A": "motivate",
+                                          "B": "lure",
+                                          "C": "instruct",
+                                          "D": "reward"
+                                        },
+                                        "answer": "A",
+                                        "image": null
+                                      },
+                                      {
+                                        "id": 11,
+                                        "question": "From the word lettered A to D, choose the word that best completes each of the following sentences<br><br>After assuring the authorities that he would not escape, the prisoner was released on...",
+                                        "options": {
+                                          "A": "suspension",
+                                          "B": "recored",
+                                          "C": "parole",
+                                          "D": "probation"
+                                        },
+                                        "answer": "C",
+                                        "image": null
+                                      },
+                                      {
+                                        "id": 12,
+                                        "question": "From the word lettered A to D, choose the word that best completes each of the following sentences<br><br>A judge is required to....justice fairly.",
+                                        "options": {
+                                          "A": "defer",
+                                          "B": "dispense",
+                                          "C": "define",
+                                          "D": "dispel"
+                                        },
+                                        "answer": "B",
+                                        "image": null
+                                      },
+                                      
+                                      {
+                                        "id": 13,
+                                        "question": "From the word lettered A to D, choose the word that best completes each of the following sentences<br><br>The disease was....by the doctors as pneumonia.",
+                                        "options": {
+                                          "A": "diagnosed",
+                                          "B": "prescribed",
+                                          "C": "constructed",
+                                          "D": "decided"
+                                        },
+                                        "answer": "A",
+                                        "image": null
+                                      },
+                                      {
+                                        "id": 14,
+                                        "question": "From the word lettered A to D, choose the word that best completes each of the following sentences<br><br>The court granted an....against the eviction of the tenants.",
+                                        "options": {
+                                          "A": "adjournment",
+                                          "B": "injunction",
+                                          "C": "indictment",
+                                          "D": "adjudication"
+                                        },
+                                        "answer": "B",
+                                        "image": null
+                                      },
+                                      {
+                                        "id": 15,
+                                        "question": "From the word lettered A to D, choose the word that best completes each of the following sentences<br><br>He was given a certificate of....in English.",
+                                        "options": {
+                                          "A": "efficacy",
+                                          "B": "efficiency",
+                                          "C": "proficiency",
+                                          "D": "sufficiency"
+                                        },
+                                        "answer": "C",
+                                        "image": null
+                                      },
+                                      {
+                                        "id": 16,
+                                        "question": "From the word lettered A to D, choose the word that best completes each of the following sentences<br><br>The...years of a child's life mould his character",
+                                        "options": {
+                                          "A": "restrained",
+                                          "B": "constructive",
+                                          "C": "confllicting",
+                                          "D": "formative"
+                                        },
+                                        "answer": "D",
+                                        "image": null
+                                      },
+                                      {
+                                        "id": 17,
+                                        "question": "From the word lettered A to D, choose the word that best completes each of the following sentences<br><br>Public money should be used only for ............. purposes.",
+                                        "options": {
+                                          "A": "legitimate",
+                                          "B": "discreet",
+                                          "C": "legal",
+                                          "D": "executive"
+                                        },
+                                        "answer": "A",
+                                        "image": null
+                                      },
+                                      {
+                                        "id": 18,
+                                        "question": "From the word lettered A to D, choose the word that best completes each of the following sentences<br><br>The truth of the evidence is...",
+                                        "options": {
+                                          "A": "irreversible",
+                                          "B": "irrefutable",
+                                          "C": "irreparable",
+                                          "D": "irretrieveable"
+                                        },
+                                        "answer": "B",
+                                        "image": null
+                                      },
+                                      {
+                                        "id": 19,
+                                        "question": "From the word lettered A to D, choose the word that best completes each of the following sentences<br><br>As a millionaire he lives in ...",
+                                        "options": {
+                                          "A": "prudence",
+                                          "B": "affluence",
+                                          "C": "frugality",
+                                          "D": "abundance"
+                                        },
+                                        "answer": "B",
+                                        "image": null
+                                      },
+                                      {
+                                        "id": 20,
+                                        "question": "After each of the following sentence, a list of possible interpretations is given. choose the interpretation that you consider most appropriate for each sentence<br><br>On hearing the news, he flew off the handle. This means that he",
+                                        "options": {
+                                          "A": "changed his decision",
+                                          "B": "ran away",
+                                          "C": "felt very disappointed",
+                                          "D": "became very angry"
+                                        },
+                                        "answer": "D",
+                                        "image": null
+                                      },
+                                      {
+                                        "id": 21,
+                                        "question": "After each of the following sentence, a list of possible interpretations is given. choose the interpretation that you consider most appropriate for each sentence<br><br>John's money was barely enough to keep the wolf away from the door. This means that",
+                                        "options": {
+                                          "A": "John had killed the wolf",
+                                          "B": "the money was just sufficient",
+                                          "C": "the situation was just desperate",
+                                          "D": "john spent money lavishly"
+                                        },
+                                        "answer": "B",
+                                        "image": null
+                                      },
+                                      {
+                                        "id": 22,
+                                        "question": "After each of the following sentence, a list of possible interpretations is given. choose the interpretation that you consider most appropriate for each sentence<br><br>He was given the boot by the chairman. This mean that he was",
+                                        "options": {
+                                          "A": "offered a pair of boots",
+                                          "B": "promoted",
+                                          "C": "sacked",
+                                          "D": "sent to buy boots"
+                                        },
+                                        "answer": "C",
+                                        "image": null
+                                      },
+                                      {
+                                        "id": 23,
+                                        "question": "After each of the following sentence, a list of possible interpretations is given. choose the interpretation that you consider most appropriate for each sentence<br><br>Since he left home, he has been trying to find his feet. This means that he",
+                                        "options": {
+                                          "A": "has been suffering alot",
+                                          "B": "lost his pair of shoes",
+                                          "C": "has forgotten about his relatives",
+                                          "D": "has been trying to get used to his new situation"
+                                        },
+                                        "answer": "D",
+                                        "image": null
+                                      },
+                                      {
+                                        "id": 24,
+                                        "question": "After each of the following sentence, a list of possible interpretations is given. choose the interpretation that you consider most appropriate for each sentence<br><br>He finds it difficult to put out with her attitude. This means that he finds it difficult to",
+                                        "options": {
+                                          "A": "tolerate her behaviour",
+                                          "B": "understand her behaviour",
+                                          "C": "determine her behaviour",
+                                          "D": "consider her behaviour"
+                                        },
+                                        "answer": "A",
+                                        "image": null
+                                      },
+                                      {
+                                        "id": 25,
+                                        "question": "After each of the following sentence, a list of possible interpretations is given. choose the interpretation that you consider most appropriate for each sentence<br><br>The government troop extended the olive branch to the rebels. This means that the government troops",
+                                        "options": {
+                                          "A": "has reached a critical stage",
+                                          "B": "killed a lot of rebels",
+                                          "C": "were ready for peace",
+                                          "D": "defended their territory bravely"
+                                        },
+                                        "answer": "C",
+                                        "image": null
+                                      },
+                                      {
+                                        "id": 26,
+                                        "question": "After each of the following sentence, a list of possible interpretations is given. choose the interpretation that you consider most appropriate for each sentence<br><br>At the last minute, he had cold feet. This means that he",
+                                        "options": {
+                                          "A": "suddenly fell ill",
+                                          "B": "became nervous",
+                                          "C": "lost his imagination",
+                                          "D": "reject the offer"
+                                        },
+                                        "answer": "B",
+                                        "image": null
+                                      },
+                                      {
+                                        "id": 27,
+                                        "question": "After each of the following sentence, a list of possible interpretations is given. choose the interpretation that you consider most appropriate for each sentence<br><br>He was advised to pull himself together. This means that he was advised to",
+                                        "options": {
+                                          "A": "keep his plans secret",
+                                          "B": "change his mind",
+                                          "C": "control himself",
+                                          "D": "keep the matter to himself"
+                                        },
+                                        "answer": "C",
+                                        "image": null
+                                      },
+                                      {
+                                        "id": 28,
+                                        "question": "After each of the following sentence, a list of possible interpretations is given. choose the interpretation that you consider most appropriate for each sentence<br><br>He was sad to learn that his friend had gone around the bend. This means that his friend has",
+                                        "options": {
+                                          "A": "gone oversees",
+                                          "B": "gone mad",
+                                          "C": "lost his job",
+                                          "D": "been very ill"
+                                        },
+                                        "answer": "B",
+                                        "image": null
+                                      },
+                                      {
+                                        "id": 29,
+                                        "question": "After each of the following sentence, a list of possible interpretations is given. choose the interpretation that you consider most appropriate for each sentence<br><br>The young man quickly paid his debt to save his face. This means that the young man",
+                                        "options": {
+                                          "A": "wanted to avoid disgrace",
+                                          "B": "did not want to be slapped",
+                                          "C": "wanted to preserve his looks",
+                                          "D": "did not want to be a debtor"
+                                        },
+                                        "answer": "A",
+                                        "image": null
+                                      },
+                                      {
+                                        "id": 30,
+                                        "question": "From the words lettered A to D below each of the following sentences, choose the word or group of words that is nearest in meaning to the underlined word as it is used in the sentence.<br><br>Modou is endowed with a great potential.",
+                                        "options": {
+                                          "A": "enlightened",
+                                          "B": "provided",
+                                          "C": "gifted",
+                                          "D": "inspired"
+                                        },
+                                        "answer": "C",
+                                        "image": null
+                                      },
+                                      {
+                                        "id": 31,
+                                        "question": "From the words lettered A to D below each of the following sentences, choose the word or group of words that is nearest in meaning to the underlined word as it is used in the sentence.<br><br>Collaboration is essential to success of the team",
+                                        "options": {
+                                          "A": "desired",
+                                          "B": "indespensable",
+                                          "C": "effective",
+                                          "D": "appropraite"
+                                        },
+                                        "answer": "B",
+                                        "image": null
+                                      },
+                                      {
+                                        "id": 32,
+                                        "question": "From the words lettered A to D below each of the following sentences, choose the word or group of words that is nearest in meaning to the underlined word as it is used in the sentence.<br><br>I really wish to assure you that we now have a reliable leader.",
+                                        "options": {
+                                          "A": "Dependable",
+                                          "B": "realistic",
+                                          "C": "sensible",
+                                          "D": "resolute"
+                                        },
+                                        "answer": "A",
+                                        "image": null
+                                      },
+                                      
+                                        {
+                                          "id": 33,
+                                          "question": "From the words lettered A to D below each of the following sentences, choose the word or group of words that is nearest in meaning to the underlined word as it is used in the sentence.<br><br>Children often behave badly out of <u>ignorance</u>",
+                                          "options": {
+                                            "A": "illiteracy",
+                                            "B": "inexperience",
+                                            "C": "unfamiliarity",
+                                            "D": "simplicity"
+                                          },
+                                          "answer": "B",
+                                          "image": null
+                                        },
+                                        {
+                                          "id": 34,
+                                          "question": "From the words lettered A to D below each of the following sentences, choose the word or group of words that is nearest in meaning to the underlined word as it is used in the sentence.<br><br>This is a <u>chance</u> of a life time",
+                                          "options": {
+                                            "A": "an advantage",
+                                            "B": "a privilege",
+                                            "C": "an opportunity",
+                                            "D": "a possibility"
+                                          },
+                                          "answer": "C",
+                                          "image": null
+                                        },
+                                        {
+                                          "id": 35,
+                                          "question": "From the words lettered A to D below each of the following sentences, choose the word or group of words that is nearest in meaning to the underlined word as it is used in the sentence.<br><br>She lived a <u>virtuous</u> life",
+                                          "options": {
+                                            "A": "modest",
+                                            "B": "brave",
+                                            "C": "normal",
+                                            "D": "righteous"
+                                          },
+                                          "answer": "D",
+                                          "image": null
+                                        },
+                                        {
+                                          "id": 36,
+                                          "question": "From the words lettered A to D below each of the following sentences, choose the word or group of words that is nearest in meaning to the underlined word as it is used in the sentence.<br><br>Olu insisted on his <u>freedom</u> to choose his career.",
+                                          "options": {
+                                            "A": "wish",
+                                            "B": "independence",
+                                            "C": "ability",
+                                            "D": "right"
+                                          },
+                                          "answer": "D",
+                                          "image": null
+                                        },
+                                        {
+                                          "id": 37,
+                                          "question": "From the words lettered A to D below each of the following sentences, choose the word or group of words that is nearest in meaning to the underlined word as it is used in the sentence.<br><br><u>Hindering</u> justice may earn you a fine",
+                                          "options": {
+                                            "A": "impeding",
+                                            "B": "retarding",
+                                            "C": "stopping",
+                                            "D": "Delaying"
+                                          },
+                                          "answer": "A",
+                                          "image": null
+                                        },
+                                        {
+                                          "id": 38,
+                                          "question": "From the words lettered A to D below each of the following sentences, choose the word or group of words that is nearest in meaning to the underlined word as it is used in the sentence.<br><br>The professor's explanation of the point was very <u>lucid</u>",
+                                          "options": {
+                                            "A": "long",
+                                            "B": "clear",
+                                            "C": "prompt",
+                                            "D": "complicated"
+                                          },
+                                          "answer": "B",
+                                          "image": null
+                                        },
+                                        {
+                                          "id": 39,
+                                          "question": "From the words lettered A to D below each of the following sentences, choose the word or group of words that is nearest in meaning to the underlined word as it is used in the sentence.<br><br>The <u>luminous</u> hands of the clock attracted the baby",
+                                          "options": {
+                                            "A": "bright",
+                                            "B": "colourful",
+                                            "C": "glaring",
+                                            "D": "beautiful"
+                                          },
+                                          "answer": "A",
+                                          "image": null
+                                        },
+
+                                  {
+                                    "id": 40,
+                                    "question": "From the words or groups of words lettered A to D, choose the words or group of words that best completes each of the following sentences.<br><br>That utterance is quite unlike you, please, come.....it",
+                                    "options": {
+                                      "A": "through",
+                                      "B": "of",
+                                      "C": "off",
+                                      "D": "against"
+                                    },
+                                    "answer": "C",
+                                    "image": null
+                                  },
+                                  {
+                                    "id": 41,
+                                    "question": "From the words or groups of words lettered A to D, choose the words or group of words that best completes each of the following sentences.<br><br>If i...enough money, i would buy a car.",
+                                    "options": {
+                                      "A": "had",
+                                      "B": "have had",
+                                      "C": "had had",
+                                      "D": "have"
+                                    },
+                                    "answer": "A",
+                                    "image": null
+                                  },
+                                  {
+                                    "id": 42,
+                                    "question": "From the words or groups of words lettered A to D, choose the words or group of words that best completes each of the following sentences.<br><br>He should take.....the appointment next week.",
+                                    "options": {
+                                      "A": "in",
+                                      "B": "up",
+                                      "C": "on",
+                                      "D": "to"
+                                    },
+                                    "answer": "B",
+                                    "image": null
+                                  },
+                                  {
+                                    "id": 43,
+                                    "question": "From the words or groups of words lettered A to D, choose the words or group of words that best completes each of the following sentences.<br><br>In trying to escape, the thief ran......the police.",
+                                    "options": {
+                                      "A": "upon",
+                                      "B": "by",
+                                      "C": "into",
+                                      "D": "through"
+                                    },
+                                    "answer": "C",
+                                    "image": null
+                                  },
+                                  {
+                                    "id": 44,
+                                    "question": "From the words or groups of words lettered A to D, choose the words or group of words that best completes each of the following sentences.<br><br>I have always counted.....his friendship.",
+                                    "options": {
+                                      "A": "in",
+                                      "B": "to",
+                                      "C": "with",
+                                      "D": "on"
+                                    },
+                                    "answer": "D",
+                                    "image": null
+                                  },
+                                  {
+                                    "id": 45,
+                                    "question": "From the words or groups of words lettered A to D, choose the words or group of words that best completes each of the following sentences.<br><br>The caller was told to.....the line",
+                                    "options": {
+                                      "A": "hold off",
+                                      "B": "hold up",
+                                      "C": "hold on",
+                                      "D": "hold"
+                                    },
+                                    "answer": "C",
+                                    "image": null
+                                  },
+                                  {
+                                    "id": 46,
+                                    "question": "From the words or groups of words lettered A to D, choose the words or group of words that best completes each of the following sentences.<br><br>The coach.....him to have scored a goal",
+                                    "options": {
+                                      "A": "was expecting",
+                                      "B": "expected",
+                                      "C": "had expected",
+                                      "D": "has expected"
+                                    },
+                                    "answer": "C",
+                                    "image": null
+                                  },
+                                  {
+                                    "id": 47,
+                                    "question": "From the words or groups of words lettered A to D, choose the words or group of words that best completes each of the following sentences.<br><br>After eating all the mangoes, he shouldn't complain of stomach,......",
+                                    "options": {
+                                      "A": "isn't it",
+                                      "B": "would he",
+                                      "C": "should he",
+                                      "D": "should it"
+                                    },
+                                    "answer": "C",
+                                    "image": null
+                                  },
+                                  {
+                                    "id": 48,
+                                    "question": "From the words or groups of words lettered A to D, choose the words or group of words that best completes each of the following sentences.<br><br>Mary did her best.....failed to reach the pass mark",
+                                    "options": {
+                                      "A": "but",
+                                      "B": "however",
+                                      "C": "so",
+                                      "D": "and"
+                                    },
+                                    "answer": "A",
+                                    "image": null
+                                  },
+                                  {
+                                    "id": 49,
+                                    "question": "From the words or groups of words lettered A to D, choose the words or group of words that best completes each of the following sentences.<br><br>The authorities have shown no sign of giving.....to their demands.",
+                                    "options": {
+                                      "A": "off",
+                                      "B": "away",
+                                      "C": "over",
+                                      "D": "in"
+                                    },
+                                    "answer": "D",
+                                    "image": null
+                                  },
+                                  {
+                                    "id": 50,
+                                    "question": "From the words or groups of words lettered A to D, choose the words or group of words that best completes each of the following sentences.<br><br>We must hurry now for there is not.....time left",
+                                    "options": {
+                                      "A": "some",
+                                      "B": "much",
+                                      "C": "plenty",
+                                      "D": "any"
+                                    },
+                                    "answer": "B",
+                                    "image": null
+                                  },
+                                  {
+                                    "id": 51,
+                                    "question": "From the words or groups of words lettered A to D, choose the words or group of words that best completes each of the following sentences.<br><br>Those properties are...sale",
+                                    "options": {
+                                      "A": "up for",
+                                      "B": "up on",
+                                      "C": "out for",
+                                      "D": "down for"
+                                    },
+                                    "answer": "A",
+                                    "image": null
+                                  },
+                                  {
+                                    "id": 52,
+                                    "question": "From the words or groups of words lettered A to D, choose the words or group of words that best completes each of the following sentences.<br><br>I have always preffered unripe plantain....yam",
+                                    "options": {
+                                      "A": "to",
+                                      "B": "than",
+                                      "C": "from",
+                                      "D": "for"
+                                    },
+                                    "answer": "A",
+                                    "image": null
+                                  },
+                                  {
+                                    "id": 53,
+                                    "question": "From the words or groups of words lettered A to D, choose the words or group of words that best completes each of the following sentences.<br><br>Give it to Aminata, it is.....",
+                                    "options": {
+                                      "A": "her",
+                                      "B": "their",
+                                      "C": "yours",
+                                      "D": "hers"
+                                    },
+                                    "answer": "D",
+                                    "image": null
+                                  },
+                                  {
+                                    "id": 54,
+                                    "question": "From the words or groups of words lettered A to D, choose the words or group of words that best completes each of the following sentences.<br><br>Please, dont speak evil...the dead",
+                                    "options": {
+                                      "A": "to",
+                                      "B": "of",
+                                      "C": "on",
+                                      "D": "for"
+                                    },
+                                    "answer": "B",
+                                    "image": null
+                                  },
+                                  {
+                                    "id": 55,
+                                    "question": "From the words or groups of words lettered A to D, choose the words or group of words that best completes each of the following sentences.<br><br>My brother was about...his house when i arrived",
+                                    "options": {
+                                      "A": "to leaving",
+                                      "B": "to have left",
+                                      "C": "to leave",
+                                      "D": "to be leaving"
+                                    },
+                                    "answer": "C",
+                                    "image": null
+                                  },
+                                  {
+                                    "id": 56,
+                                    "question": "From the words or groups of words lettered A to D, choose the words or group of words that best completes each of the following sentences.<br><br>Neither Jack nor Jill....there yesterday",
+                                    "options": {
+                                      "A": "are",
+                                      "B": "were",
+                                      "C": "is",
+                                      "D": "was"
+                                    },
+                                    "answer": "D",
+                                    "image": null
+                                  },
+                                  {
+                                    "id": 57,
+                                    "question": "From the words or groups of words lettered A to D, choose the words or group of words that best completes each of the following sentences.<br><br>I have ....completed the task.",
+                                    "options": {
+                                      "A": "more and less",
+                                      "B": "more or less",
+                                      "C": "more than less",
+                                      "D": "more but less"
+                                    },
+                                    "answer": "B",
+                                    "image": null
+                                  },
+                                  {
+                                    "id": 58,
+                                    "question": "From the words or groups of words lettered A to D, choose the words or group of words that best completes each of the following sentences.<br><br>After two hours of continuous work, the group broke.....lunch.",
+                                    "options": {
+                                      "A": "with",
+                                      "B": "from",
+                                      "C": "for",
+                                      "D": "to"
+                                    },
+                                    "answer": "C",
+                                    "image": null
+                                  },
+                                  {
+                                    "id": 59,
+                                    "question": "From the words or groups of words lettered A to D, choose the words or group of words that best completes each of the following sentences.<br><br>He finally hit.......the idea of travelling abroad",
+                                    "options": {
+                                      "A": "out",
+                                      "B": "at",
+                                      "C": "on",
+                                      "D": "up"
+                                    },
+                                    "answer": "C",
+                                    "image": null
+                                  },
+                                  {
+                                    "id": 60,
+                                    "question": "From the words or groups of words lettered A to D, choose the words or group of words that best completes each of the following sentences.<br><br>The standard of education has gone.....",
+                                    "options": {
+                                      "A": "out",
+                                      "B": "at",
+                                      "C": "on",
+                                      "D": "up"
+                                    },
+                                    "answer": "D",
+                                    "image": null
+                                  },
+                                  {
+                                    "id": 61,
+                                    "question": "From the words or groups of words lettered A to D, choose the words or group of words that best completes each of the following sentences.<br><br>The council appointed a.....committee to look into the matter.",
+                                    "options": {
+                                      "A": "five-men",
+                                      "B": "five-men's",
+                                      "C": "five man",
+                                      "D": "five-man's"
+                                    },
+                                    "answer": "A",
+                                    "image": null
+                                  },
+                                  {
+                                    "id": 62,
+                                    "question": "From the words or groups of words lettered A to D, choose the words or group of words that best completes each of the following sentences.<br><br>After the quarrel. he made it.....to his friend.",
+                                    "options": {
+                                      "A": "in",
+                                      "B": "out",
+                                      "C": "on",
+                                      "D": "up"
+                                    },
+                                    "answer": "D",
+                                    "image": null
+                                  },
+                                  {
+                                    "id": 63,
+                                    "question": "From the words or groups of words lettered A to D, choose the words or group of words that best completes each of the following sentences.<br><br>The task is ..... for us to undertake.",
+                                    "options": {
+                                      "A": "much too difficult",
+                                      "B": "too much difficult",
+                                      "C": "more too difficult",
+                                      "D": "quit to difficult"
+                                    },
+                                    "answer": "A",
+                                    "image": null
+                                  },
+                                  {
+                                    "id": 64,
+                                    "question": "From the words or groups of words lettered A to D, choose the words or group of words that best completes each of the following sentences.<br><br>I will always stand ......him",
+                                    "options": {
+                                      "A": "by",
+                                      "B": "with",
+                                      "C": "to",
+                                      "D": "for"
+                                    },
+                                    "answer": "A",
+                                    "image": null
+                                  },
+                                  {
+                                    "id": 65,
+                                    "question": "From the words or groups of words lettered A to D, choose the words or group of words that best completes each of the following sentences.<br><br>We arrived just....time for the grand opening.",
+                                    "options": {
+                                      "A": "by",
+                                      "B": "about",
+                                      "C": "before",
+                                      "D": "in"
+                                    },
+                                    "answer": "D",
+                                    "image": null
+                                  },
+                                  {
+                                    "id": 66,
+                                    "question": "From the words or groups of words lettered A to D, choose the words or group of words that best completes each of the following sentences.<br><br>Bakary can lift this heavy log,....?",
+                                    "options": {
+                                      "A": "isn't it",
+                                      "B": "can't he",
+                                      "C": "does he",
+                                      "D": "doesn't he"
+                                    },
+                                    "answer": "B",
+                                    "image": null
+                                  },
+                                  {
+                                    "id": 67,
+                                    "question": "From the words or groups of words lettered A to D, choose the words or group of words that best completes each of the following sentences.<br><br>The president's speech......yesterday at 8.00 p.m.",
+                                    "options": {
+                                      "A": "is broadcast",
+                                      "B": "is being broadcast",
+                                      "C": "has been broadcast",
+                                      "D": "was broadcast"
+                                    },
+                                    "answer": "D",
+                                    "image": null
+                                  },
+                                  {
+                                    "id": 68,
+                                    "question": "From the words or groups of words lettered A to D, choose the words or group of words that best completes each of the following sentences.<br><br>It is such a bad place ..... i will never dream of going there again",
+                                    "options": {
+                                      "A": "thus",
+                                      "B": "therefore",
+                                      "C": "that",
+                                      "D": "then"
+                                    },
+                                    "answer": "C",
+                                    "image": null
+                                  },
+                                  {
+                                    "id": 69,
+                                    "question": "From the words or groups of words lettered A to D, choose the words or group of words that best completes each of the following sentences.<br><br>We will leave... you are ready",
+                                    "options": {
+                                      "A": "as when",
+                                      "B": "whenever",
+                                      "C": "as ever",
+                                      "D": "soon as"
+                                    },
+                                    "answer": "B",
+                                    "image": null
+                                  },
+
+                                                                  
+                              {
+                                "id": 70,
+                                "question": "In the passage above the number 70 indicates a missing word. Four options are given in a column lettered A to D, choose the word that is the most suitable to fill the gap.<br><br>The life of a professional sportsman is hectic. Consider his typical day. As soon as he wakes up in the morning, he jumps out of bed hurriedly and wears his..70..promptly, he goes out to ..71..for an hour or so, covering a few miles. However, on some other days, he might choose to practice with skipping...72..at home. Having completed whichever one it is, he goes in for a shower and dresses for the day's training..73..this phase varies according to his specialty. If he is a boxer, he goes into the...74..to deal with the punching bag and later with a sparring partner, usually under the watchful...75..of his coach. If he is a sprinter, he engages in continuous practice..76.. his performance with a stopwatch. If he is in football, netball, volley ball, or lawn tennis, he can best practice with others while the coach watches, calling attention to specific skills and...77..not mastered. In most cases, training lasts virtually the better part of a day, and often in discussion where certain technicalities are ironed out.\nNow, when medals are ..78.., most people who just watch actions on television hardly realize what it takes to become a star. When all the..79..are considered and the high risk taken into account, one would realize that a star is worth the millions he earns.",
+                                "options": {
+                                  "A": "jump suit",
+                                  "B": "tracksuit",
+                                  "C": "swimsuit",
+                                  "D": "shell suit"
+                                },
+                                "answer": "B",
+                                "image": null
+                              },
+                              {
+                                "id": 71,
+                                "question": "In the passage above the number 71 indicates a missing word. Four options are given in a column lettered A to D, choose the word that is the most suitable to fill the gap.<br><br>The life of a professional sportsman is hectic. Consider his typical day. As soon as he wakes up in the morning, he jumps out of bed hurriedly and wears his tracksuit promptly, he goes out to ..71..for an hour or so, covering a few miles. However, on some other days, he might choose to practice with skipping...72..at home. Having completed whichever one it is, he goes in for a shower and dresses for the day's training..73..this phase varies according to his specialty. If he is a boxer, he goes into the...74..to deal with the punching bag and later with a sparring partner, usually under the watchful...75..of his coach. If he is a sprinter, he engages in continuous practice..76.. his performance with a stopwatch. If he is in football, netball, volley ball, or lawn tennis, he can best practice with others while the coach watches, calling attention to specific skills and...77..not mastered. In most cases, training lasts virtually the better part of a day, and often in discussion where certain technicalities are ironed out.\nNow, when medals are ..78.., most people who just watch actions on television hardly realize what it takes to become a star. When all the..79..are considered and the high risk taken into account, one would realize that a star is worth the millions he earns.",
+                                "options": {
+                                  "A": "trot",
+                                  "B": "skip",
+                                  "C": "jog",
+                                  "D": "jump"
+                                },
+                                "answer": "C",
+                                "image": null
+                              },
+                              {
+                                "id": 72,
+                                "question": "In the passage above the number 72 indicates a missing word. Four options are given in a column lettered A to D, choose the word that is the most suitable to fill the gap.<br><br>The life of a professional sportsman is hectic. Consider his typical day. As soon as he wakes up in the morning, he jumps out of bed hurriedly and wears his tracksuit promptly, he goes out to jog for an hour or so, covering a few miles. However, on some other days, he might choose to practice with skipping...72..at home. Having completed whichever one it is, he goes in for a shower and dresses for the day's training..73..this phase varies according to his specialty. If he is a boxer, he goes into the...74..to deal with the punching bag and later with a sparring partner, usually under the watchful...75..of his coach. If he is a sprinter, he engages in continuous practice..76.. his performance with a stopwatch. If he is in football, netball, volley ball, or lawn tennis, he can best practice with others while the coach watches, calling attention to specific skills and...77..not mastered. In most cases, training lasts virtually the better part of a day, and often in discussion where certain technicalities are ironed out.\nNow, when medals are ..78.., most people who just watch actions on television hardly realize what it takes to become a star. When all the..79..are considered and the high risk taken into account, one would realize that a star is worth the millions he earns.",
+                                "options": {
+                                  "A": "cord",
+                                  "B": "rope",
+                                  "C": "strings",
+                                  "D": "twine"
+                                },
+                                "answer": "B",
+                                "image": null
+                              },
+                              {
+                                "id": 73,
+                                "question": "In the passage above the number 73 indicates a missing word. Four options are given in a column lettered A to D, choose the word that is the most suitable to fill the gap.<br><br>The life of a professional sportsman is hectic. Consider his typical day. As soon as he wakes up in the morning, he jumps out of bed hurriedly and wears his tracksuit promptly, he goes out to jog for an hour or so, covering a few miles. However, on some other days, he might choose to practice with skipping rope at home. Having completed whichever one it is, he goes in for a shower and dresses for the day's training..73..this phase varies according to his specialty. If he is a boxer, he goes into the...74..to deal with the punching bag and later with a sparring partner, usually under the watchful...75..of his coach. If he is a sprinter, he engages in continuous practice..76.. his performance with a stopwatch. If he is in football, netball, volley ball, or lawn tennis, he can best practice with others while the coach watches, calling attention to specific skills and...77..not mastered. In most cases, training lasts virtually the better part of a day, and often in discussion where certain technicalities are ironed out.\nNow, when medals are ..78.., most people who just watch actions on television hardly realize what it takes to become a star. When all the..79..are considered and the high risk taken into account, one would realize that a star is worth the millions he earns.",
+                                "options": {
+                                  "A": "practice",
+                                  "B": "sessions",
+                                  "C": "regime",
+                                  "D": "rehearsals"
+                                },
+                                "answer": "C",
+                                "image": null
+                              },
+                              {
+                                "id": 74,
+                                "question": "In the passage above the number 74 indicates a missing word. Four options are given in a column lettered A to D, choose the word that is the most suitable to fill the gap.<br><br>The life of a professional sportsman is hectic. Consider his typical day. As soon as he wakes up in the morning, he jumps out of bed hurriedly and wears his tracksuit promptly, he goes out to jog for an hour or so, covering a few miles. However, on some other days, he might choose to practice with skipping rope at home. Having completed whichever one it is, he goes in for a shower and dresses for the day's training regime. This phase varies according to his specialty. If he is a boxer, he goes into the...74..to deal with the punching bag and later with a sparring partner, usually under the watchful...75..of his coach. If he is a sprinter, he engages in continuous practice..76.. his performance with a stopwatch. If he is in football, netball, volley ball, or lawn tennis, he can best practice with others while the coach watches, calling attention to specific skills and...77..not mastered. In most cases, training lasts virtually the better part of a day, and often in discussion where certain technicalities are ironed out.\nNow, when medals are ..78.., most people who just watch actions on television hardly realize what it takes to become a star. When all the..79..are considered and the high risk taken into account, one would realize that a star is worth the millions he earns.",
+                                "options": {
+                                  "A": "stadium",
+                                  "B": "sports club",
+                                  "C": "sports centre",
+                                  "D": "gymnasium"
+                                },
+                                "answer": "D",
+                                "image": null
+                              },
+                              {
+                                "id": 75,
+                                "question": "In the passage above the number 75 indicates a missing word. Four options are given in a column lettered A to D, choose the word that is the most suitable to fill the gap.<br><br>The life of a professional sportsman is hectic. Consider his typical day. As soon as he wakes up in the morning, he jumps out of bed hurriedly and wears his tracksuit promptly, he goes out to jog for an hour or so, covering a few miles. However, on some other days, he might choose to practice with skipping rope at home. Having completed whichever one it is, he goes in for a shower and dresses for the day's training regime. This phase varies according to his specialty. If he is a boxer, he goes into the gymnasium to deal with the punching bag and later with a sparring partner, usually under the watchful...75..of his coach. If he is a sprinter, he engages in continuous practice..76.. his performance with a stopwatch. If he is in football, netball, volley ball, or lawn tennis, he can best practice with others while the coach watches, calling attention to specific skills and...77..not mastered. In most cases, training lasts virtually the better part of a day, and often in discussion where certain technicalities are ironed out.\nNow, when medals are ..78.., most people who just watch actions on television hardly realize what it takes to become a star. When all the..79..are considered and the high risk taken into account, one would realize that a star is worth the millions he earns.",
+                                "options": {
+                                  "A": "supervision",
+                                  "B": "custody",
+                                  "C": "command",
+                                  "D": "charge"
+                                },
+                                "answer": "A",
+                                "image": null
+                              },
+                              {
+                                "id": 76,
+                                "question": "In the passage above the number 76 indicates a missing word. Four options are given in a column lettered A to D, choose the word that is the most suitable to fill the gap.<br><br>The life of a professional sportsman is hectic. Consider his typical day. As soon as he wakes up in the morning, he jumps out of bed hurriedly and wears his tracksuit promptly, he goes out to jog for an hour or so, covering a few miles. However, on some other days, he might choose to practice with skipping rope at home. Having completed whichever one it is, he goes in for a shower and dresses for the day's training regime. This phase varies according to his specialty. If he is a boxer, he goes into the gymnasium to deal with the punching bag and later with a sparring partner, usually under the watchful supervision of his coach. If he is a sprinter, he engages in continuous practice..76.. his performance with a stopwatch. If he is in football, netball, volley ball, or lawn tennis, he can best practice with others while the coach watches, calling attention to specific skills and...77..not mastered. In most cases, training lasts virtually the better part of a day, and often in discussion where certain technicalities are ironed out.\nNow, when medals are ..78.., most people who just watch actions on television hardly realize what it takes to become a star. When all the..79..are considered and the high risk taken into account, one would realize that a star is worth the millions he earns.",
+                                "options": {
+                                  "A": "calculating",
+                                  "B": "gauging",
+                                  "C": "timing",
+                                  "D": "assessing"
+                                },
+                                "answer": "C",
+                                "image": null
+                              }
+
+
+                                      
+
+
+];
+
+
+        const staticTheoryQuestions = [
+      {
+        id: 1,
+        question: "Write a letter to your friend in another school giving him/her three reasons why your school has been excelling in academic work.", 
+      
+        marks: 10,
+        image: null
+      },
+      {
+        id: 2,
+        question: "Write an article suitable for publication in a national newspaper on the topic: The importance of national sports festivals.",
+        marks: 10,
+        image: null
+      },
+      {
+        id: 3,
+        question: "The School Hero is an award meant for the student considered to have exhibited exemplary leadership qualities. As the Senior Prefect, write a letter to the Head of your school, giving three reasons why your nominee should be given the award.",  
+        marks: 10,
+        image: null
+      },
+      {
+        id: 4,
+        question: "You are the main speaker in a debate on the topic: Students in rural schools have more advantages than those in the urban centres. Write your arguments for or against the motion.", 
+        marks: 10,
+        image: null
+      },
+      {
+        id: 5,
+        question: "Write e a story ending with the statement: We apologised to each other and reconciled.",    
+        marks: 10,
+        image: null
+      },
+        {
+        id: 6,
+        question: "Read the following passage carefully and answer the questions on it. \n\nThe mansion by the roadside in my village reminds me of a similar sight in the state capital, three decades ago. Standing conspicuously by the highway in the heart of the city, the mansion posed a bold challenge to road users. It belonged to Chief Koko who was regarded as untouchable in his community. Nobody dared step on his toes. Motorists had learnt to steer clear of it. It was generally assumed that .moving close to it could cost one one's life,\n\nThen came a governor who decided to widen all the major roads in the capital city. He stressed that this would involve the demolition of buildings that fell within twenty metres from the centre of the road. However, although the governor also stressed that compensations would be paid, Chief Koko was not impressed. He made it clear that nothing should tamper with his mansion, warning that whoever defied him risked dire consequences.\n\nNot long after the governor's official proclamation, newspaper reporters had a field day speculating on the unprecedented confrontation with Chief. With time, news filtered out that he asserted that whoever dared him would certainly end up where others like them had gone. The message was clear - defiance meant death! So, reporters were pleading for a new route to circumvent the mansion. However, the governor made it clear that there would be no retreat.\n\n \n\n Before long, work started on the project. One of the first casualties was a post office that was just some metres within the specified distance. It was cut into two Soon, the frontage of a school nearby also followed. But, it was assumed that things would be different with the mansion whose owner tolerated no effrontery. Day by day, the project moved closer to the mansion, with the heavy machine levelling one structure after another. Then, when it was clear that the mansion was next in line, the driver of the bulldozer requested to go on leave This got to the governor who ordered the driver to first do his duty. He sent emissaries to the governor to spare his life since his children were still very young.\n\nThe following morning, people got a shocker! The governor himself showed up at the site and asked for the key to the bulldozer, ready to assume the role of the driver. The driver, surveying the possible consequence, tearfully climbed up and pleaded that the governor should please care for his children after his demise. The governor announced that if anything was to happen he, not the driver, would be the target.\n\nSo, the driver got to work and the mansion collapsed like a pack of cards. Press photographers went to town with their cameras, hoping to capture Chief Koko in action But nothing unusual happened, and soon the whole structure became a rubble.The aftermath? Everybody thought either or both men would soon belong to the great beyond. But this much I know: that governor is still around; and so is the driver.\n\n(a) What opinion did people have of Chief Koko?\n\n(b) What does the expression, unprecedented confrontation tell us about the governor?\n\n(c) Why was it necessary to demolish buildings?\n\n(d) When the driver said that his children were still very young what did he imply?\n\n(e) ...people got a shocker. Why was the governor's action a shocker?\n\n(f) What did people expect Chief Koko to do after the demolition of his mansion?\n\n(g) Not long after the governor 's official proclamation\n\n(i) What grammatical name is given to this expression as it is used in the passage?\n\n(ii) What is its function?\n\n(h) Quote a simile used in the sixth paragraph of the passage\n\n(i) For each of the following words, find another word or phrase which means the same and which can replace it as it is used in the passage: \n\n(i) assumed, \n\n(ii) retreat; \n\n(iii) specified, \n\n(iv) showed up; \n\n(v) collapsed.",    
+        marks: 10,
+        image: null
+      },
+      {
+        id: 7,
+        question: "Read the following passage carefully and answer the questions on it.\n\n Every normal human being would want to put his or her feet up once in a while and relax, but, obviously. one cannot relax all the time. A little work does not kill. Rather. it keeps one active and mentally alert. Some people think that the invention of robots is the best thing that ever happened to man. They are convinced that the invention has saved the day because robots are ideal workers who work without complaining or getting tired. Robots never reveal company secrets for any reason - corruption. fame or blackmail. The admirers of robots think that once a robot is programmed, it can do any piece of work with precision over a long period without slowing down, getting bored or even going on break or vacation. Robots can be made to perform any task. They do not grumble, protest or ask for 'inducement allowance', overtime, bonus or any of the motivations that human beings usually demand. They also work under conditions which human beings would not accept due to either incapability or attitude. \n\nOne good thing about the robot is that any of its damaged parts can be replaced for work to go on effectively. On the other hand, if a human being loses a vital part of the body, that part may not be replaced for work to go on as effectively as before. \n\nThere is no doubt at all that the robot is useful but I strongly believe that the human being is more efficient than the robot in many ways. Human beings are sensitive, thinking beings who are flexible and can therefore control their actions. Thus, they can perform more functions than robots. Since human beings can think, discriminate and make value judgements, they can solve problems on the spur of the moment. The robot, on the other hand, cannot do this because what it has been programmed for is all that it is capable of doing. If a robot is wrongly programmed, it will continue to produce the wrong result until its programme is corrected.\n\nThe human being can take the initiative in many things. He can communicate or even call for assistance when need be, which the robot cannot do. The human being can be appealed to, to make some crucial changes; he can also learn from observing what goes on and modify what he is doing.\n\nIt is clear that even though robots are useful, they are deficient in many ways, and therefore cannot have an advantage over human beings. In crisis, the robot cannot face the challenge. It neither reacts nor reflects.\n\nThe robot is designed and programmed by human beings. How then can the created be superior to the creator? Robots are created to assist human beings and relieve them of some of their burdens, not to take over completely from them.\n\n(a) In three sentences, one for each, state why the admirers of robotics think that robots are more efficient than human beings.\n\n(b) In three sentences, one for each, state three advantages which the human being has over the robot.",    
+        marks: 10,
+        image: null
+      }
+];
+       
+
+
+        // ================== APPLICATION VARIABLES ==================
+        let questions = [];
+        let currentQuestion = 0;
+        let userAnswers = [];
+        let theoryQuestions = [];
+        let currentTheory = 0;
+        let theoryAnswers = [];
+        let currentSection = 'objectives';
+       
+        // ================== INITIALIZATION ==================
+        window.onload = function () {
+            // Extract exam info from the page
+            const examInfoElement = document.getElementById('examInfo');
+            if (examInfoElement) {
+                const examInfoText = examInfoElement.textContent;
+                // Parse the text to extract subject and class
+                // This is a simple example - adjust based on your actual text format
+                localStorage.setItem('examSubject', 'EXAM');
+                localStorage.setItem('examClass', 'RESULT');
+            }
+            localStorage.setItem('examTerm', 'FIRST TERM 2026/2027');
+      
+             const username = sessionStorage.getItem('username');
+                const image = sessionStorage.getItem('image');
+
+                if (!username) {
+                  window.location.href = 'index.html';
+                } else {
+                  document.getElementById('username').innerText = username;
+                  
+              
+                /*document.getElementById('userImage').src =
+              'img/' + (sessionStorage.getItem('image') || 'default_user.jpg');*/
+                }
+            document.getElementById('userImage').src = sessionStorage.getItem('image') || 'img/default_user.jpg';
+           
+            // Load static questions
+            questions = staticObjectivesQuestions;
+            theoryQuestions = staticTheoryQuestions;
+           
+            userAnswers = new Array(questions.length);
+            theoryAnswers = new Array(theoryQuestions.length).fill('');
+           
+            updateDateTime();
+            setInterval(updateDateTime, 1000);
+           
+            displayQuestion();
+            renderQuestionButtons();
+            countUserSelections();
+            updateTheoryStatus();
+        };
+       
+                    // ================== TIMER ==================
+                let timeLeft = 60 * 90; // 90 minutes in seconds
+                const timerEl = document.getElementById('timer');
+                const timerInterval = setInterval(() => {
+                    const hours = Math.floor(timeLeft / 3600);
+                    const minutes = Math.floor((timeLeft % 3600) / 60);
+                    const seconds = timeLeft % 60;
+                    
+                    // Build display string
+                    let display = '';
+                    if (hours > 0) {
+                        display += `${hours} Hr:`;
+                    }
+                    if (minutes > 0 || hours > 0) { // show minutes if any hour or minute >0
+                        display += `${minutes} Min: `;
+                    }
+                    display += `${seconds} Sec`;
+                    
+                    timerEl.textContent = `Time Remaining: ${display}`;
+                    timeLeft--;
+                   
+                    // Change color when time is running out (less than 5 minutes)
+                    if (timeLeft < 300) { // 5 minutes = 300 seconds
+                        timerEl.style.color = 'red';
+                        timerEl.style.animation = 'pulse 1s infinite';
+                    }
+                   
+                    if (timeLeft < 0) {
+                        clearInterval(timerInterval);
+                        alert("Time is up! Your exam will be submitted automatically.");
+                        submitExam();
+                    }
+                }, 1000);
+       
+        // ================== SECTION TOGGLE ==================
+        function showSection(section) {
+            currentSection = section;
+            // Update button states
+            document.getElementById('objectivesBtn').classList.toggle('active', section === 'objectives');
+            document.getElementById('theoryBtn').classList.toggle('active', section === 'theory');
+           
+            // Show/hide sections
+            document.getElementById('objectivesSection').style.display = section === 'objectives' ? 'block' : 'none';
+            document.getElementById('theorySection').style.display = section === 'theory' ? 'block' : 'none';
+           
+            // Update navigation
+            if (section === 'theory') {
+                displayTheoryQuestion();
+            }
+        }
+       
+        // ================== MATH SYMBOL MAPPING ==================
+        function mapMathSymbol(text) {
+            if (!text) return '';
+           
+            return text
+                .replace(/&theta;/g, 'θ')
+                .replace(/&Theta;/g, 'Θ')
+                .replace(/&pi;/g, 'π')
+                .replace(/&Pi;/g, 'Π')
+                .replace(/&alpha;/g, 'α')
+                .replace(/&beta;/g, 'β')
+                .replace(/&gamma;/g, 'γ')
+                .replace(/&delta;/g, 'δ')
+                .replace(/&epsilon;/g, 'ε')
+                .replace(/&phi;/g, 'φ')
+                .replace(/&omega;/g, 'ω')
+                .replace(/&mu;/g, 'μ')
+                .replace(/&sigma;/g, 'σ')
+                .replace(/&lambda;/g, 'λ')
+                .replace(/&radic;/g, '√')
+                .replace(/&infin;/g, '∞')
+                .replace(/&int;/g, '∫')
+                .replace(/&sum;/g, '∑')
+                .replace(/&prod;/g, '∏')
+                .replace(/&part;/g, '∂')
+                .replace(/&deg;/g, '°')
+                .replace(/&times;/g, '×')
+                .replace(/&divide;/g, '÷')
+                .replace(/&plusmn;/g, '±')
+                .replace(/&le;/g, '≤')
+                .replace(/&ge;/g, '≥')
+                .replace(/&ne;/g, '≠')
+                .replace(/&frac12;/g, '½')
+                .replace(/&frac14;/g, '¼')
+                .replace(/&frac34;/g, '¾')
+                .replace(/\^(\d+)/g, '<sup>$1</sup>')
+                .replace(/\^\(([^)]+)\)/g, '<sup>$1</sup>')
+                .replace(/_(\d+)/g, '<sub>$1</sub>')
+                .replace(/_\(([^)]+)\)/g, '<sub>$1</sub>');
+        }
+       
+        // ================== OBJECTIVES FUNCTIONS ==================
+        function saveAnswer() {
+            const selected = document.querySelector('input[name="option"]:checked');
+            if (selected) {
+                userAnswers[currentQuestion] = selected.value;
+                countUserSelections();
+            }
+        }
+       
+        function displayQuestion() {
+            if (currentQuestion >= questions.length) return;
+           
+            const q = questions[currentQuestion];
+           
+            // Apply math symbol mapping
+            const questionText = mapMathSymbol(q.question);
+            const optA = mapMathSymbol(q.options.A);
+            const optB = mapMathSymbol(q.options.B);
+            const optC = mapMathSymbol(q.options.C);
+            const optD = mapMathSymbol(q.options.D);
+           
+            // Display question and options
+            document.getElementById('questionText').innerHTML = `${currentQuestion + 1}. ${questionText}`;
+            document.getElementById('optA').innerHTML = optA;
+            document.getElementById('optB').innerHTML = optB;
+            document.getElementById('optC').innerHTML = optC;
+            document.getElementById('optD').innerHTML = optD;
+           
+            // Handle question image
+            const imageContainer = document.getElementById('questionImageContainer');
+            if (q.image) {
+                imageContainer.innerHTML = `
+                    <div class="theory-image-wrapper">
+                        <img src="${q.image}" alt="Question Diagram" class="question-image">
+                    </div>
+                `;
+            } else {
+                imageContainer.innerHTML = '';
+            }
+           
+            // Clear and set radio buttons
+            const radios = document.getElementsByName('option');
+            radios.forEach(r => r.checked = false);
+           
+            if (userAnswers[currentQuestion]) {
+                document.querySelector(`input[name="option"][value="${userAnswers[currentQuestion]}"]`).checked = true;
+            }
+           
+            highlightCurrentButton();
+        }
+       
+        function nextQuestion() {
+            saveAnswer();
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                displayQuestion();
+            }
+        }
+       
+        function prevQuestion() {
+            saveAnswer();
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                displayQuestion();
+            }
+        }
+       
+        function renderQuestionButtons() {
+            const container = document.getElementById('questionButtons');
+            container.innerHTML = '';
+           
+            for (let i = 0; i < questions.length; i++) {
+                const btn = document.createElement('button');
+                btn.textContent = i + 1;
+                btn.className = 'question-btn';
+                btn.onclick = () => {
+                    saveAnswer();
+                    currentQuestion = i;
+                    displayQuestion();
+                };
+                container.appendChild(btn);
+            }
+            highlightCurrentButton();
+        }
+       
+        function highlightCurrentButton() {
+            document.querySelectorAll('.question-btn').forEach((btn, index) => {
+                const answered = userAnswers[index] !== undefined;
+                const current = index === currentQuestion;
+               
+                btn.style.backgroundColor = current ? '#5cb85c' : (answered ? '#337ab7' : '#eee');
+                btn.style.color = current || answered ? 'white' : 'black';
+                btn.style.border = current ? '2px solid #2e7d32' : '1px solid #444';
+            });
+        }
+       
+        function countUserSelections() {
+            let totalQuestions = questions.length;
+            let answeredCount = userAnswers.filter(answer => answer !== undefined).length;
+            let unansweredCount = totalQuestions - answeredCount;
+           
+            document.getElementById("answeredLabel").innerText = `Answered: ${answeredCount}/${totalQuestions}`;
+            document.getElementById("unansweredLabel").innerText = `Unanswered: ${unansweredCount}`;
+        }
+       
+
+   
+         function submitExam() {
+            saveAnswer();
+            showResult();
+        }
+       
+
+
+                    function showResult() {
+                        clearInterval(timerInterval);
+                        let score = 0;
+                        questions.forEach((q, i) => {
+                            if (userAnswers[i] === q.answer) score++;
+                        });
+                        
+                        const username = sessionStorage.getItem('username') || "Guest";
+                        const cls = sessionStorage.getItem('class');
+                        const sub = sessionStorage.getItem('subject');
+                        
+                        localStorage.setItem("examUser", username);
+                        localStorage.setItem("examScore", score);
+                        localStorage.setItem("totalQuestions", questions.length);
+                        localStorage.setItem("pendingClass", cls);
+                        localStorage.setItem("pendingSubject", sub);
+                        localStorage.setItem("pendingUsername", username);
+                        
+                        const examInfo = sessionStorage.getItem('examInfo') || 'TEST - RESULT (SECOND TERM)';
+                        localStorage.setItem("examInfo", examInfo);
+                        
+                        // Build the record
+                        const record = {
+                            username: username,
+                            class: cls,
+                            subject: sub,
+                            score: score,
+                            totalQuestions: questions.length,
+                            percentage: ((score / questions.length) * 100).toFixed(2) + '%',
+                            examInfo: examInfo,
+                            timestamp: new Date().toISOString()
+                        };
+                        
+                        // ------------------ 🌐 SEND TO GOOGLE SHEETS ------------------
+                        const API_URL = 'https://script.google.com/macros/s/AKfycbzW4zlbuW16fAFRcwg4ow8b6IAQEp4e2zIqLjL7zhdkkHvEDrDwwxT0PX46dwBIiXgm/exec'; // ← paste your web app URL here
+                        
+                        fetch(API_URL, {
+                            method: 'POST',
+                            mode: 'no-cors',        // required because Apps Script doesn't send CORS headers
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(record)
+                        }).catch(err => console.error('Failed to send to cloud:', err));
+                        // ---------------------------------------------------------------
+                        
+                        // (Optional) Keep local backup
+                        let records = JSON.parse(localStorage.getItem('examRecords') || '[]');
+                        records.push(record);
+                        localStorage.setItem('examRecords', JSON.stringify(records));
+                        
+                        // Download JSON (your existing code)
+                        const scoreDetails = {
+                            ...record,
+                            userAnswers: userAnswers,
+                            correctAnswers: questions.map(q => q.answer)
+                        };
+                        
+                        const blob = new Blob([JSON.stringify(scoreDetails, null, 2)], { type: 'application/json' });
+                        const url = URL.createObjectURL(blob);
+                        const a = document.createElement('a');
+                        a.href = url;
+                        a.download = `exam_results_${username}_${new Date().getTime()}.json`;
+                        a.style.display = 'none';
+                        document.body.appendChild(a);
+                        a.click();
+                        document.body.removeChild(a);
+                        URL.revokeObjectURL(url);
+                        
+                        console.log(`Exam completed. Waiting for confirmation.`);
+                        alert(`Objective Exam Completed!\nYour Score: ${score} out of ${questions.length}\n\nClick OK to view your results.`);
+                        window.location.href = "results.html";
+                    }
+
+
+
+            // Add these helper functions to your exam page
+            function getExamAttempts(cls) {
+                const key = `${cls}_exam_attempts`;
+                const stored = localStorage.getItem(key);
+                return stored ? JSON.parse(stored) : {};
+            }
+
+            function saveExamAttempts(cls, data) {
+                const key = `${cls}_exam_attempts`;
+                localStorage.setItem(key, JSON.stringify(data));
+            }
+                   
+        // ================== THEORY QUESTIONS ==================
+        function displayTheoryQuestion() {
+            if (theoryQuestions.length === 0) {
+                document.getElementById('theoryQuestionText').innerText = "No theory questions available.";
+                return;
+            }
+           
+            const tq = theoryQuestions[currentTheory];
+           
+            // Display question text (without math symbol mapping for theory)
+            document.getElementById('theoryQuestionText').innerText = mapMathSymbol(`${currentTheory + 1}. ${tq.question} ${tq.marks ? `[${tq.marks} marks]` : ''}`);
+                
+            document.getElementById('theoryAnswer').value = theoryAnswers[currentTheory] || "";
+           
+            // Handle theory question image
+            const theoryImageContainer = document.getElementById('theoryImageContainer');
+            if (tq.image) {
+                theoryImageContainer.innerHTML = `
+                    <div class="theory-image-wrapper">
+                        <img src="${tq.image}" alt="Theory Question Diagram" class="theory-question-image">
+                        <div class="image-caption">${tq.imageCaption || 'Diagram for question'}</div>
+                    </div>
+                `;
+            } else {
+                theoryImageContainer.innerHTML = '';
+            }
+           
+            updateTheoryStatus();
+        }
+       
+        function updateTheoryStatus() {
+            const savedCount = theoryAnswers.filter(answer => answer.trim() !== "").length;
+            document.getElementById("theoryStatus").innerText =
+                `Question ${currentTheory + 1} of ${theoryQuestions.length} | Saved: ${savedCount}/${theoryQuestions.length}`;
+        }
+       
+        function saveTheoryAnswer() {
+            const answer = document.getElementById('theoryAnswer').value.trim();
+            theoryAnswers[currentTheory] = answer;
+            localStorage.setItem(`theoryAnswer_${currentTheory}`, answer);
+            updateTheoryStatus();
+            alert("Theory answer saved successfully!");
+        }
+       
+        function nextTheoryQuestion() {
+            if (currentTheory < theoryQuestions.length - 1) {
+                currentTheory++;
+                displayTheoryQuestion();
+            } else {
+                alert("You've reached the last theory question.");
+            }
+        }
+       
+        function prevTheoryQuestion() {
+            if (currentTheory > 0) {
+                currentTheory--;
+                displayTheoryQuestion();
+            }
+        }
+       
+        function submitTheoryExam() {
+            const savedCount = theoryAnswers.filter(answer => answer.trim() !== "").length;
+            const confirmSubmit = confirm(
+                `Theory section completed!\n\n` +
+                `You have answered ${savedCount} out of ${theoryQuestions.length} theory questions.\n\n` +
+                `Are you sure you want to submit?`
+            );
+           
+            if (confirmSubmit) {
+                alert("Theory answers submitted successfully!");
+            }
+        }
+       
+        // ================== DATE & TIME ==================
+        function updateDateTime() {
+            let now = new Date();
+            let day = now.getDate();
+            let month = now.toLocaleString('default', { month: 'long' });
+            let year = now.getFullYear();
+            let suffix = "th";
+           
+            if (day === 1 || day === 21 || day === 31) suffix = "st";
+            else if (day === 2 || day === 22) suffix = "nd";
+            else if (day === 3 || day === 23) suffix = "rd";
+           
+            let hours = now.getHours();
+            let minutes = now.getMinutes();
+            let seconds = now.getSeconds();
+            let ampm = hours >= 12 ? "PM" : "AM";
+            hours = hours % 12 || 12;
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+           
+            let formattedDateTime = `${month} ${day}${suffix} ${year}, ${hours}:${minutes}:${seconds} ${ampm}`;
+            document.getElementById("datetime").innerText = formattedDateTime;
+        }
+       
+        // ================== KEYBOARD SHORTCUTS ==================
+        document.addEventListener('keydown', function (event) {
+            if (currentSection === 'objectives') {
+                const key = event.key.toUpperCase();
+               
+                // Answer selection for objectives
+                if (['A', 'B', 'C', 'D'].includes(key)) {
+                    const radio = document.querySelector(`input[name="option"][value="${key}"]`);
+                    if (radio) {
+                        radio.checked = true;
+                        saveAnswer();
+                    }
+                }
+               
+                // Navigation with arrows
+                if (event.key === 'ArrowRight') {
+                    nextQuestion();
+                } else if (event.key === 'ArrowLeft') {
+                    prevQuestion();
+                }
+            } else if (currentSection === 'theory') {
+                // Navigation for theory
+                if (event.key === 'ArrowRight') {
+                    nextTheoryQuestion();
+                } else if (event.key === 'ArrowLeft') {
+                    prevTheoryQuestion();
+                }
+               
+                // Save with Ctrl+S
+                if (event.ctrlKey && event.key === 's') {
+                    event.preventDefault();
+                    saveTheoryAnswer();
+                }
+            }
+        });
+       
+        // ================== ANTI-CHEAT & LOGOUT ==================
+        document.addEventListener('keydown', function (event) {
+            const key = event.key.toLowerCase();
+            if ((event.ctrlKey && (key === 'p' || key === 's')) && currentSection === 'objectives') {
+                event.preventDefault();
+                alert("Right-click and view source are disabled during examination.");
+                return false;
+            }
+        });
+       
+        document.addEventListener('contextmenu', (event) => {
+            event.preventDefault();
+            alert("Right-click is disabled during examination.");
+        });
+       
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I') ||
+                (e.ctrlKey && e.shiftKey && e.key === 'J') || (e.ctrlKey && e.key === 'u')) {
+                e.preventDefault();
+                alert("Developer tools are disabled during examination.");
+            }
+        });
+       
+        function logout() {
+            const confirmLogout = confirm("Are you sure you want to logout? Your progress may be lost.");
+            if (confirmLogout) {
+                window.location.href = "index.html";
+            }
+        }
+    </script>
+</body>
+</html>

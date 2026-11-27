@@ -1,0 +1,2260 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="fav_icon2.ico">
+    <title>cbt.wisdom foundationschools.org - SS3 ENGLISH LANGUAGE Exam</title>
+    <script>
+         // Disable back navigation
+    history.pushState(null, null, location.href);
+    window.onpopstate = function () {
+        history.go(1);
+    };
+
+     let backClickCount = 0;
+            let allowBack = false;
+
+            history.pushState(null, null, location.href);
+
+            window.onpopstate = function () {
+                if (!allowBack) {
+                    backClickCount++;
+
+                    if (backClickCount >= 50) {
+                        allowBack = true;
+                        alert("You have tried 50 times. Going back now...");
+                        history.back();
+                        return;
+                    }
+
+                    showBackModal();
+                }
+            };
+
+            function showBackModal() {
+                document.getElementById("backModalOverlay").style.display = "flex";
+                document.getElementById("passwordContainer").style.display = "none";
+                document.getElementById("backPassword").value = "";
+               
+                document.getElementById("modalButtons").innerHTML = `
+                    <button onclick="handleYes()" style="padding: 10px 20px; margin: 5px; border: none; border-radius: 5px; background: limegreen; color: white; font-size: 16px; cursor: pointer;">Yes</button>
+                    <button onclick="closeBackModal()" style="padding: 10px 20px; margin: 5px; border: none; border-radius: 5px; background: crimson; color: white; font-size: 16px; cursor: pointer;">No</button>
+                `;
+            }
+
+            function closeBackModal() {
+                document.getElementById("backModalOverlay").style.display = "none";
+                history.pushState(null, null, location.href);
+            }
+
+            function handleYes() {
+                document.getElementById("passwordContainer").style.display = "block";
+                document.getElementById("modalButtons").innerHTML = `
+                    <button onclick="checkPassword()" style="padding: 10px 20px; margin: 5px; border: none; border-radius: 5px; background: limegreen; color: white; font-size: 16px; cursor: pointer;">Submit</button>
+                    <button onclick="closeBackModal()" style="padding: 10px 20px; margin: 5px; border: none; border-radius: 5px; background: crimson; color: white; font-size: 16px; cursor: pointer;">Cancel</button>
+                `;
+            }
+
+            function checkPassword() {
+                const correctPassword = "admin123";
+                const enteredPassword = document.getElementById("backPassword").value;
+
+                if (enteredPassword === correctPassword) {
+                    allowBack = true;
+                    document.getElementById("backModalOverlay").style.display = "none";
+                    history.back();
+                } else {
+                    alert("Incorrect password. Staying on this page.");
+                    closeBackModal();
+                }
+            }
+    </script>
+</head>
+         <div id="backModalOverlay" style="display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.8); color: #fff; font-family: Arial, sans-serif; justify-content: center; align-items: center; flex-direction: column;">
+                <div id="backModal" style="background: #222; padding: 30px; border-radius: 10px; text-align: center; width: 90%; max-width: 400px;">
+                    <p style="font-size: 18px; margin: 0 0 10px;">Do you really want to go back?</p>
+
+                    <div id="passwordContainer" style="display: none;">
+                        <p style="margin-top: 10px;">Enter password to go back:</p>
+                        <input type="password" id="backPassword" placeholder="Enter password"
+                            style="padding: 10px; width: 80%; margin-top: 10px; border-radius: 5px; border: none; font-size: 16px;">
+                    </div>
+
+                    <div id="modalButtons" style="margin-top: 20px;">
+                        <button onclick="handleYes()" style="padding: 10px 20px; margin: 5px; border: none; border-radius: 5px; background: limegreen; color: white; font-size: 16px; cursor: pointer;">Yes</button>
+                        <button onclick="closeBackModal()" style="padding: 10px 20px; margin: 5px; border: none; border-radius: 5px; background: crimson; color: white; font-size: 16px; cursor: pointer;">No</button>
+                    </div>
+                </div>
+            </div>
+                      
+
+    <style>
+        body {
+            position: relative;
+            z-index: 1;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f8f0;
+        }
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('img/wisdom_logo1.png') no-repeat center center;
+            background-size: 300px 300px;
+            opacity: 0.1;
+            z-index: 0;
+            pointer-events: none;
+        }
+        #logout-container {
+            text-align: right;
+            padding: 10px;
+            background: #2c3e50;
+        }
+        #datetime {
+            color:gold;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            margin: 10px 0;
+        }
+        #logout {
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            cursor: pointer;
+            font-size: 14px;
+            border-radius: 5px;
+        }
+        #header {
+            padding: 20px;
+            background: linear-gradient(to right, orange, purple);
+            color: white;
+            border-bottom: 5px solid #ff9800;
+        }
+        #logo img {
+            max-width: 200px;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+        #student-info {
+            margin-top: 20px;
+            text-align: center;
+        }
+        #student-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            display: block;
+            margin: 0 auto 10px;
+            border: 3px solid white;
+            background: #ddd;
+        }
+        #welcome-message {
+            color: #ffeb3b;
+            font-size: 24px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        #userAnswerCount {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 15px;
+            border-radius: 8px;
+            color: white;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            width: 200px;
+            z-index: 100;
+        }
+        #answeredLabel {
+            color: lime;
+            font-size: 18px;
+            font-weight: bold;
+            margin: 5px 0;
+        }
+        #unansweredLabel {
+            color: red;
+            font-size: 18px;
+            font-weight: bold;
+            margin: 5px 0;
+        }
+        .container {
+            margin: 20px auto;
+            width: 80%;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        #questionText {
+            width: 98%;
+            min-height: 100px;
+            resize: none;
+            padding: 15px;
+            font-size: 18px;
+            color: red; /*#333;*/
+            background-color: lime;/* #f9f9f9;*/
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            margin-bottom: 15px;
+            font-family: Arial, "Segoe UI Symbol", "Apple Symbols", sans-serif;
+        }
+        .option-group {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            padding: 12px;
+            background-color: #f5f5f5;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .option-group:hover {
+            background-color: #e8f5e8;
+        }
+        .option-group input {
+            margin-right: 15px;
+            transform: scale(1.3);
+        }
+        .option-group label {
+            font-weight: bold;
+            font-size: 16px;
+            color: #333;
+            font-family: Arial, "Segoe UI Symbol", "Apple Symbols", sans-serif;
+        }
+        .nav-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .btn-cool {
+            padding: 12px 25px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            background: #2e7d32;
+            color: white;
+            cursor: pointer;
+            transition: background 0.3s;
+            font-weight: bold;
+        }
+        .btn-cool:hover {
+            background: #1b5e20;
+        }
+        .questionButtons {
+            margin: 15px 0;
+            text-align: center;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 5px;
+        }
+        .question-btn {
+            margin: 3px;
+            padding: 8px 12px;
+            border-radius: 6px;
+            border: 1px solid #444;
+            cursor: pointer;
+            font-weight: bold;
+            background-color: #eee;
+            min-width: 40px;
+            transition: all 0.3s;
+        }
+        .question-btn:hover {
+            background-color: #d0f0d0;
+        }
+        #timer {
+            font-size: 24px;
+            font-weight: bold;
+            color: #e74c3c;
+            text-align: center;
+            margin: 10px 0;
+            background-color: #f9f9f9;
+            padding: 10px;
+            border-radius: 5px;
+            border: 2px solid #e74c3c;
+        }
+        .section-toggle {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        .section-btn {
+            padding: 12px 24px;
+            margin: 0 10px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .section-btn.active {
+            background-color: #2e7d32;
+            color: white;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        .section-btn:not(.active) {
+            background-color: #e0e0e0;
+            color: #333;
+        }
+        #theorySection {
+            display: none;
+            background: #fff9e6;
+            color: #333;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px auto;
+            width: 80%;
+            border: 2px solid #ff9800;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        #theoryQuestionText {
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 15px;
+            line-height: 1.6;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 5px;
+            border-left: 5px solid #ff9800;
+            font-family: Arial, sans-serif;
+        }
+        #theoryAnswer {
+            width: 100%;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+            resize: vertical;
+            min-height: 200px;
+            font-family: Arial, sans-serif;
+            margin-bottom: 15px;
+        }
+        .theory-nav-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        .theory-btn {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .theory-save-btn {
+            background-color: #28a745;
+            color: white;
+        }
+        .theory-save-btn:hover {
+            background-color: #218838;
+        }
+        .theory-prev-btn, .theory-next-btn {
+            background-color: #007bff;
+            color: white;
+        }
+        .theory-prev-btn:hover, .theory-next-btn:hover {
+            background-color: #0069d9;
+        }
+        .theory-submit-btn {
+            background-color: #dc3545;
+            color: white;
+        }
+        .theory-submit-btn:hover {
+            background-color: #c82333;
+        }
+        .theory-status {
+            text-align: center;
+            margin: 10px 0;
+            font-weight: bold;
+            color: #333;
+            padding: 10px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+        }
+        .windows-activate {
+            text-align: center;
+            margin-top: 30px;
+            color: #333;
+            font-size: 14px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin: 20px;
+        }
+        .exam-info {
+            text-align: center;
+            font-weight: bold;
+            margin: 10px 0;
+            color: #2c3e50;
+            font-size: 18px;
+        }
+        /* Math symbols styling */
+        sup, sub {
+            font-size: 0.75em;
+            line-height: 1;
+        }
+        sup {
+            vertical-align: super;
+        }
+        sub {
+            vertical-align: sub;
+        }
+        /* Theory Question Images */
+        .theory-image-container {
+            margin: 15px 0;
+            text-align: center;
+        }
+        .theory-image-wrapper {
+            display: inline-block;
+            max-width: 100%;
+            padding: 10px;
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .theory-question-image {
+            max-width: 100%;
+            max-height: 300px;
+            height: auto;
+            border-radius: 5px;
+            display: block;
+            margin: 0 auto;
+            background: #f0f0f0;
+            padding: 10px;
+        }
+        .image-caption {
+            font-style: italic;
+            color: #666;
+            margin-top: 8px;
+            font-size: 14px;
+            text-align: center;
+        }
+        /* Objective question images */
+        #questionImageContainer {
+            text-align: center;
+            margin: 15px 0;
+        }
+        .question-image {
+            max-width: 100%;
+            max-height: 250px;
+            height: auto;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            padding: 5px;
+            background: white;
+        }
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+         .marquee-container {
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+            background: rgb(150,125,150);
+            padding: 10px 0;
+        }
+    
+        /* Moving text animation */
+        .marquee-text {
+            display: inline-block;
+            color: gold;
+            font-size: 24px;
+            font-weight: bold;
+            animation: marquee 10s linear infinite;
+        }
+
+        /* Keyframes for moving text */
+        @keyframes marquee {
+            from {
+                transform: translateX(100%);
+            }
+            to {
+                transform: translateX(-100%);
+            }
+        }
+
+
+        /* Logo container - makes it a flex container for horizontal layout */
+#logo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    position: relative;
+    padding: 20px 0;
+}
+
+/* Style for the center/main logo */
+#logo img:not(.logo-left img):not(.logo-right img) {
+    max-width: 200px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+}
+
+/* Left logo container */
+.logo-left {
+    flex: 0 0 auto;
+    z-index: 1;
+    margin-left: 20px;
+}
+
+/* Right logo container */
+.logo-right {
+    flex: 0 0 auto;
+    z-index: 1;
+    margin-right: 20px;
+}
+
+/* Logo images inside left and right containers */
+.logo-left img,
+.logo-right img {
+    max-width: 100px;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+/* Hover effect for left and right logos */
+.logo-left img:hover,
+.logo-right img:hover {
+    transform: scale(1.1);
+}
+
+/* Responsive design for mobile */
+@media (max-width: 768px) {
+    #logo {
+        flex-direction: column;
+        gap: 15px;
+        padding: 10px 0;
+    }
+    
+    #logo img:not(.logo-left img):not(.logo-right img) {
+        position: static;
+        transform: none;
+        margin: 10px auto;
+    }
+    
+    .logo-left, .logo-right {
+        margin: 5px 0;
+    }
+    
+    .logo-left img,
+    .logo-right img {
+        max-width: 80px;
+    }
+}
+
+
+
+    </style>
+</head>
+<body oncontextmenu="return false">
+    <div id="header">
+        <div id="logout-container">
+            <button id="logout" onclick="logout()">Logout</button>
+                 <div class="marquee-container">
+        <span class="marquee-text">WISDOM FOUNDATION SCHOOLS  :  GATEWAY TO THE UNIVERSITY</span>
+    </div>
+        </div>
+        <div id="logo">
+            <img src="img/wisdom_logo1.png" alt="image">
+
+          
+        </div>
+
+           
+            
+
+        <div id="student-info">
+            <center><strong>ATTENTION! CLICK ON SUBMIT BUTTON BEFORE YOUR TIME IS UP TO SAVE YOUR SCORE</strong></center>
+            <center><p id="datetime"></p></center>
+              <div id="welcome-message">
+            <label id="usernameDisplay"></label>
+        </div>
+         <div class="student-info">
+          <img id="userImage" src="img/default_user.jpg" alt="Student Image" style="width:120px; height:120px; border-radius:50%; border:3px solid #008000; display:block; margin:0 auto;">
+      
+          <h2 id="username">Student Name</h2>
+           </div>
+
+     
+
+    
+        <center><h3>WISDOM FOUNDATION SCHOOLS EGBEWA  ADO EKITI </h3></center> 
+        <center><h3>FIRST TERM EXAMINATION 2026/2027 ACADEMIC SESSION</h3></center>
+       
+        <!-- SECTION TOGGLE BUTTONS -->
+        <div class="section-toggle">
+            <button id="objectivesBtn" class="section-btn active" onclick="showSection('objectives')">OBJECTIVE QUESTIONS</button>
+            <button id="theoryBtn" class="section-btn" onclick="showSection('theory')">THEORY QUESTIONS</button>
+        </div>
+       
+        <div class="exam-info">
+            Exam: <span id="examInfo" style="color: lime;">  SS3 ENGLISH LANGUAGE (FIRST TERM)</span>
+        </div>
+       
+        <div id="timer"></div>
+    </div>
+   
+    <!-- OBJECTIVES SECTION -->
+    <div id="objectivesSection">
+        <div class="container">
+            <h5 style="color: #d35400; text-align: center;">INSTRUCTIONS: READ THE QUESTIONS CAREFULLY BEFORE YOU CHOOSE YOUR ANSWER</h5>
+            <div class="scroll-container">
+                <div id="questionText"></div>
+            </div>
+           
+            <div id="questionImageContainer"></div>
+           
+            <div class="option-group">
+                <label class="option"><strong>A.</strong><input type="radio" name="option" value="A"> <span id="optA"></span></label>
+            </div>
+            <div class="option-group">
+                <label class="option"><strong>B.</strong><input type="radio" name="option" value="B"> <span id="optB"></span></label>
+            </div>
+            <div class="option-group">
+                <label class="option"><strong>C.</strong><input type="radio" name="option" value="C"> <span id="optC"></span></label>
+            </div>
+            <div class="option-group">
+                <label class="option"><strong>D.</strong><input type="radio" name="option" value="D"> <span id="optD"></span></label>
+            </div>
+        </div>
+       
+        <div class="nav-buttons">
+            <button onclick="prevQuestion()" class="btn-cool">Previous</button>
+            <button onclick="nextQuestion()" class="btn-cool">Next</button>
+            <button onclick="submitExam()" class="btn-cool">Submit Objectives</button>
+        </div>
+       
+        <!-- Question navigation buttons -->
+        <div class="container">
+            <div id="questionButtons" class="questionButtons"></div>
+        </div>
+    </div>
+   
+    <!-- THEORY SECTION -->
+    <div id="theorySection">
+        <h3 style="text-align: center; color: #d35400; margin-bottom: 20px;">THEORY QUESTIONS SECTION</h3>
+        <div class="theory-status" id="theoryStatus">
+            Question 1 of 5 | Saved: 0/5
+        </div>
+        <div id="theoryQuestionContainer">
+            <p id="theoryQuestionText">Loading theory questions...</p>
+            <div id="theoryImageContainer"></div>
+            <textarea id="theoryAnswer" rows="8" placeholder="Write your detailed answer here..."></textarea>
+            <div class="theory-nav-buttons">
+                <button onclick="prevTheoryQuestion()" class="theory-btn theory-prev-btn">Previous</button>
+                <button onclick="saveTheoryAnswer()" class="theory-btn theory-save-btn">Save Answer</button>
+                <button onclick="nextTheoryQuestion()" class="theory-btn theory-next-btn">Next</button>
+                <button onclick="submitTheoryExam()" class="theory-btn theory-submit-btn">Submit Theory</button>
+            </div>
+        </div>
+    </div>
+   
+    <div id="userAnswerCount">
+        <p id="answeredLabel">Answered: 0/5</p>
+        <p id="unansweredLabel">Unanswered: 5/5</p>
+    </div>
+             <div class="marquee-container">
+        <span class="marquee-text"> SS3 ENGLISH LANGUAGE  FOR FIRST TERM EXAMINATIONS 2026/2027 ACADEMIC SESSION </span>
+    </div>
+   
+    <div class="windows-activate">
+        <p> &copy; cbt.<span style="color: red;">wisdom foundation</span><span style="color: green;">schools</span>.org</p>
+    </div>
+
+
+    <script>
+        
+       
+            
+    
+        // ================== STATIC QUESTIONS DATA ==================
+   const staticObjectivesQuestions = [
+                                
+                                     
+                   
+                      {
+                        "id": 1,
+                        "question": "From the list of words lettered A to D, choose the one that is most nearly opposite in meaning to the underlined word and that will, at the same time, correctly fill the gap in the sentence. <br><br> Though my mother was <u>convinced</u> about the success of the business, her manager remained ___________",
+                        "options": {
+                          "A": "Sceptical",
+                          "B": "serious",
+                          "C": "confused",
+                          "D": "concerned"
+                        },
+                        "answer": "A",
+                        "image": null
+                      },
+                      {
+                        "id": 2,
+                        "question": "From the list of words lettered A to D, choose the one that is most nearly opposite in meaning to the underlined word and that will, at the same time, correctly fill the gap in the sentence. <br><br> Judgement should always be in favour of the <u>innocent</u> and not the _________",
+                        "options": {
+                          "A": "guilty",
+                          "B": "accused",
+                          "C": "weak",
+                          "D": "elderly"
+                        },
+                        "answer": "A",
+                        "image": null
+                      },
+                      {
+                        "id": 3,
+                        "question": "From the list of words lettered A to D, choose the one that is most nearly opposite in meaning to the underlined word and that will, at the same time, correctly fill the gap in the sentence. <br><br> Layi is quite <u>reliable</u> but his sister is _________",
+                        "options": {
+                          "A": "unswerving",
+                          "B": "untrustworthy",
+                          "C": "deceptive",
+                          "D": "pretentious"
+                        },
+                        "answer": "B",
+                        "image": null
+                      },
+                      {
+                        "id": 4,
+                        "question": "From the list of words lettered A to D, choose the one that is most nearly opposite in meaning to the underlined word and that will, at the same time, correctly fill the gap in the sentence. <br><br> The <u>gullible</u> and not the _______ usually fall prey to tricksters.",
+                        "options": {
+                          "A": "unfriendly",
+                          "B": "carefree",
+                          "C": "brave",
+                          "D": "discerning"
+                        },
+                        "answer": "D",
+                        "image": null
+                      },
+                      {
+                        "id": 5,
+                        "question": "From the list of words lettered A to D, choose the one that is most nearly opposite in meaning to the underlined word and that will, at the same time, correctly fill the gap in the sentence. <br><br> Tom's <u>humility</u> contrasts with his brother's __________",
+                        "options": {
+                          "A": "haughtiness",
+                          "B": "stubbornness",
+                          "C": "gentleness",
+                          "D": "quietness"
+                        },
+                        "answer": "A",
+                        "image": null
+                      },
+                      {
+                        "id": 6,
+                        "question": "From the list of words lettered A to D, choose the one that is most nearly opposite in meaning to the underlined word and that will, at the same time, correctly fill the gap in the sentence. <br><br> The life of man appears <u>long</u> but, in reality, it is _________",
+                        "options": {
+                          "A": "brief",
+                          "B": "quick",
+                          "C": "shortened",
+                          "D": "stunted"
+                        },
+                        "answer": "A",
+                        "image": null
+                      },
+                      {
+                        "id": 7,
+                        "question": "From the list of words lettered A to D, choose the one that is most nearly opposite in meaning to the underlined word and that will, at the same time, correctly fill the gap in the sentence. <br><br> In the interest of peace, it is better to <u>dialogue</u> than to be _________",
+                        "options": {
+                          "A": "controversial",
+                          "B": "rational",
+                          "C": "confrontational",
+                          "D": "forceful"
+                        },
+                        "answer": "C",
+                        "image": null
+                      },
+                      {
+                        "id": 8,
+                        "question": "From the list of words lettered A to D, choose the one that is most nearly opposite in meaning to the underlined word and that will, at the same time, correctly fill the gap in the sentence. <br><br> All the wealth <u>amassed</u> by a greedy father is often _________ by undisciplined children.",
+                        "options": {
+                          "A": "destroyed",
+                          "B": "scattered",
+                          "C": "squandered",
+                          "D": "ruined"
+                        },
+                        "answer": "C",
+                        "image": null
+                      },
+                      {
+                        "id": 9,
+                        "question": "From the list of words lettered A to D, choose the one that is most nearly opposite in meaning to the underlined word and that will, at the same time, correctly fill the gap in the sentence. <br><br> Many people find cod liver oil <u>disgusting</u> but soldiers find it _________",
+                        "options": {
+                          "A": "refreshing",
+                          "B": "medicinal",
+                          "C": "pleasant",
+                          "D": "bitter"
+                        },
+                        "answer": "C",
+                        "image": null
+                      },
+                      {
+                        "id": 10,
+                        "question": "From the list of words lettered A to D, choose the one that is most nearly opposite in meaning to the underlined word and that will, at the same time, correctly fill the gap in the sentence. <br><br> The arrival of the riot police at our campus _______ the tension rather than <u>mitigate</u> it.",
+                        "options": {
+                          "A": "lengthened",
+                          "B": "heightened",
+                          "C": "prolonged",
+                          "D": "created"
+                        },
+                        "answer": "B",
+                        "image": null
+                      },
+                      {
+                        "id": 11,
+                        "question": "From the words lettered A to D, choose the word that best completes each of the following sentences. <br><br> Investigations revealed that the senior students __________ the juniors to throw stones at the Principal's car.",
+                        "options": {
+                          "A": "infuriated",
+                          "B": "integrated",
+                          "C": "instigated",
+                          "D": "instituted"
+                        },
+                        "answer": "C",
+                        "image": null
+                      },
+                      {
+                        "id": 12,
+                        "question": "From the words lettered A to D, choose the word that best completes each of the following sentences. <br><br> Supreme court ________ the ruling of the lower court.",
+                        "options": {
+                          "A": "nullified",
+                          "B": "abused",
+                          "C": "proclaimed",
+                          "D": "cancelled"
+                        },
+                        "answer": "A",
+                        "image": null
+                      },
+                      {
+                        "id": 13,
+                        "question": "From the words lettered A to D, choose the word that best completes each of the following sentences. <br><br> The board has ______ the film because it contains some nude scenes.",
+                        "options": {
+                          "A": "edited",
+                          "B": "censored",
+                          "C": "examined",
+                          "D": "isolated"
+                        },
+                        "answer": "B",
+                        "image": null
+                      },
+
+                              {
+                                "id": 14,
+                                "question": "From the words lettered A to D, choose the word that best completes each of the following sentences. <br><br> Many young graduates have _________ to the West in search of greener pastures.",
+                                "options": {
+                                  "A": "hurried",
+                                  "B": "emigrated",
+                                  "C": "absconded",
+                                  "D": "flown"
+                                },
+                                "answer": "B",
+                                "image": null
+                              },
+                              {
+                                "id": 15,
+                                "question": "From the words lettered A to D, choose the word that best completes each of the following sentences. <br><br> The Committee let her go because they considered her explanation __________",
+                                "options": {
+                                  "A": "permissible",
+                                  "B": "clear",
+                                  "C": "plausible",
+                                  "D": "necessary"
+                                },
+                                "answer": "C",
+                                "image": null
+                              },
+                              {
+                                "id": 16,
+                                "question": "From the words lettered A to D, choose the word that best completes each of the following sentences. <br><br> The company has paid dividends to its ________",
+                                "options": {
+                                  "A": "buyers",
+                                  "B": "wholesalers",
+                                  "C": "shareholders",
+                                  "D": "consumers"
+                                },
+                                "answer": "C",
+                                "image": null
+                              },
+                              {
+                                "id": 17,
+                                "question": "From the words lettered A to D, choose the word that best completes each of the following sentences. <br><br> Within one year, that country has _________ its currency five times.",
+                                "options": {
+                                  "A": "reduced",
+                                  "B": "devalued",
+                                  "C": "revamped",
+                                  "D": "defaced"
+                                },
+                                "answer": "B",
+                                "image": null
+                              },
+                              {
+                                "id": 18,
+                                "question": "From the words lettered A to D, choose the word that best completes each of the following sentences. <br><br> The man was arrested because he __________ in the repayment of the loan.",
+                                "options": {
+                                  "A": "paused",
+                                  "B": "delayed",
+                                  "C": "deferred",
+                                  "D": "defaulted"
+                                },
+                                "answer": "D",
+                                "image": null
+                              },
+                              {
+                                "id": 19,
+                                "question": "From the words lettered A to D, choose the word that best completes each of the following sentences. <br><br> Many members of political parties __________ to opposing parties just before elections.",
+                                "options": {
+                                  "A": "depart",
+                                  "B": "change",
+                                  "C": "defect",
+                                  "D": "go"
+                                },
+                                "answer": "C",
+                                "image": null
+                              },
+                              {
+                                "id": 20,
+                                "question": "From the words lettered A to D, choose the word that best completes each of the following sentences. <br><br> The boy must have _________ the disease from the school.",
+                                "options": {
+                                  "A": "received",
+                                  "B": "taken",
+                                  "C": "contracted",
+                                  "D": "carried"
+                                },
+                                "answer": "C",
+                                "image": null
+                              },
+                              {
+                                "id": 21,
+                                "question": "Choose the interpretation that is most appropriate for each sentence. <br><br> The Class captain got cold feet when he was asked to lead the protest. This means that the class captain became",
+                                "options": {
+                                  "A": "nervous",
+                                  "B": "afraid",
+                                  "C": "concerned",
+                                  "D": "calm"
+                                },
+                                "answer": "B",
+                                "image": null
+                              },
+                              {
+                                "id": 22,
+                                "question": "Choose the interpretation that is most appropriate for each sentence. <br><br> Street traders often try to palm their customers off with faulty goods. This means that street traders",
+                                "options": {
+                                  "A": "trick customers into buying faulty goods",
+                                  "B": "assist customers in choosing perfect items",
+                                  "C": "ask for a lot of money for faulty goods",
+                                  "D": "are ready to swap faulty items for good ones"
+                                },
+                                "answer": "A",
+                                "image": null
+                              },
+                              {
+                                "id": 23,
+                                "question": "Choose the interpretation that is most appropriate for each sentence. <br><br> He has broken new ground in cancer treatment with his drug. This means that he has",
+                                "options": {
+                                  "A": "been highly acclaimed",
+                                  "B": "introduced a new method in cancer treatment",
+                                  "C": "solved all cancer problems",
+                                  "D": "thought of a new drug for cancer treatment"
+                                },
+                                "answer": "B",
+                                "image": null
+                              },
+                              {
+                                "id": 24,
+                                "question": "Choose the interpretation that is most appropriate for each sentence. <br><br> The Principal <u>stood her ground</u> even when the students revolted. This means that the Principal",
+                                "options": {
+                                  "A": "maintained her position",
+                                  "B": "remained standing",
+                                  "C": "refused to listen",
+                                  "D": "condemned the protest"
+                                },
+                                "answer": "A",
+                                "image": null
+                              },
+                              {
+                                "id": 25,
+                                "question": "Choose the interpretation that is most appropriate for each sentence. <br><br> Looking after young children can tax one's patience. This means that looking after children",
+                                "options": {
+                                  "A": "is pleasant",
+                                  "B": "requires endurance",
+                                  "C": "is a lot of fun",
+                                  "D": "takes time"
+                                },
+                                "answer": "B",
+                                "image": null
+                              },
+                              {
+                                "id": 26,
+                                "question": "Choose the interpretation that is most appropriate for each sentence. <br><br> When the show was about to begin, we were still at sixes and sevens. This means that we were",
+                                "options": {
+                                  "A": "confused",
+                                  "B": "in groups",
+                                  "C": "excited",
+                                  "D": "faraway"
+                                },
+                                "answer": "A",
+                                "image": null
+                              },
+                              {
+                                "id": 27,
+                                "question": "Choose the interpretation that is most appropriate for each sentence. <br><br> My aunt's rough driving could make one tear one's hair out. This means that her driving could make one",
+                                "options": {
+                                  "A": "lose the hair on one's head",
+                                  "B": "feel very sad",
+                                  "C": "get very worried",
+                                  "D": "feel like crying"
+                                },
+                                "answer": "C",
+                                "image": null
+                              },
+                              {
+                                "id": 28,
+                                "question": "Choose the interpretation that is most appropriate for each sentence. <br><br> We never expected that Father would read us the riot act. This means that our father",
+                                "options": {
+                                  "A": "taught us the riot act",
+                                  "B": "cautioned us not to be involved in riots",
+                                  "C": "warned us to stop making trouble",
+                                  "D": "encouraged us to make trouble"
+                                },
+                                "answer": "C",
+                                "image": null
+                              },
+                              {
+                                "id": 29,
+                                "question": "Choose the interpretation that is most appropriate for each sentence. <br><br> You will certainly break his heart if you tell him that. This means that telling him that would",
+                                "options": {
+                                  "A": "make him very sad",
+                                  "B": "meet his expectations",
+                                  "C": "greatly disappoint him",
+                                  "D": "make him confirm his suspicion"
+                                },
+                                "answer": "C",
+                                "image": null
+                              },
+                              {
+                                "id": 30,
+                                "question": "Choose the interpretation that is most appropriate for each sentence. <br><br> He is at the crossroads of his life. This means that it is time for him to",
+                                "options": {
+                                  "A": "make a very important decision",
+                                  "B": "retrace his steps",
+                                  "C": "make peace with everyone",
+                                  "D": "take matters seriously"
+                                },
+                                "answer": "A",
+                                "image": null
+                              },
+                              {
+                                "id": 31,
+                                "question": "Choose the word or group of words that is nearest in meaning to the underlined word as it is used in the sentence. <br><br> Amina is fond of making <u>derogatory</u> remarks about her brother.",
+                                "options": {
+                                  "A": "inconsiderate",
+                                  "B": "discreet",
+                                  "C": "unnecessary",
+                                  "D": "belittling"
+                                },
+                                "answer": "D",
+                                "image": null
+                              },
+                              {
+                                "id": 32,
+                                "question": "Choose the word or group of words that is nearest in meaning to the underlined word as it is used in the sentence. <br><br> His jail terms are to run <u>concurrently</u>.",
+                                "options": {
+                                  "A": "consistently",
+                                  "B": "alternately",
+                                  "C": "simultaneously",
+                                  "D": "consecutively"
+                                },
+                                "answer": "C",
+                                "image": null
+                              },
+                              {
+                                "id": 33,
+                                "question": "Choose the word or group of words that is nearest in meaning to the underlined word as it is used in the sentence. <br><br> Here's a man who comes from a <u>background</u> of entertainment.",
+                                "options": {
+                                  "A": "an experience",
+                                  "B": "a place",
+                                  "C": "a culture",
+                                  "D": "a mood"
+                                },
+                                "answer": "A",
+                                "image": null
+                              },
+                              {
+                                "id": 34,
+                                "question": "Choose the word or group of words that is nearest in meaning to the underlined word as it is used in the sentence. <br><br> She has always been <u>grateful</u> that you saved her from kidnappers.",
+                                "options": {
+                                  "A": "content",
+                                  "B": "comforted",
+                                  "C": "happy",
+                                  "D": "thankful"
+                                },
+                                "answer": "D",
+                                "image": null
+                              },
+                              {
+                                "id": 35,
+                                "question": "Choose the word or group of words that is nearest in meaning to the underlined word as it is used in the sentence. <br><br> The whole place was in <u>turmoil</u> when we got there.",
+                                "options": {
+                                  "A": "confusion",
+                                  "B": "disturbance",
+                                  "C": "mourning",
+                                  "D": "agitation"
+                                },
+                                "answer": "A",
+                                "image": null
+                              },
+                              {
+                                "id": 36,
+                                "question": "Choose the word or group of words that is nearest in meaning to the underlined word as it is used in the sentence. <br><br> Charles' concern for Anna is <u>affected</u>.",
+                                "options": {
+                                  "A": "insincere",
+                                  "B": "incorrect",
+                                  "C": "weak",
+                                  "D": "unfair"
+                                },
+                                "answer": "A",
+                                "image": null
+                              },
+                              {
+                                "id": 37,
+                                "question": "Choose the word or group of words that is nearest in meaning to the underlined word as it is used in the sentence. <br><br> Corporal punishment is meant to be a <u>deterrent</u> to indiscipline.",
+                                "options": {
+                                  "A": "remedy",
+                                  "B": "measure",
+                                  "C": "discouragement",
+                                  "D": "prevention"
+                                },
+                                "answer": "C",
+                                "image": null
+                              },
+                              {
+                                "id": 38,
+                                "question": "Choose the word or group of words that is nearest in meaning to the underlined word as it is used in the sentence. <br><br> The new bank is fast becoming <u>insolvent</u>.",
+                                "options": {
+                                  "A": "inactive",
+                                  "B": "ineffective",
+                                  "C": "bankrupt",
+                                  "D": "lax"
+                                },
+                                "answer": "C",
+                                "image": null
+                              },
+                              {
+                                "id": 39,
+                                "question": "Choose the word or group of words that is nearest in meaning to the underlined word as it is used in the sentence. <br><br> He did all he could to <u>defend</u> his master.",
+                                "options": {
+                                  "A": "fortify",
+                                  "B": "secure",
+                                  "C": "protect",
+                                  "D": "cover"
+                                },
+                                "answer": "C",
+                                "image": null
+                              },
+                              {
+                                "id": 40,
+                                "question": "Choose the word or group of words that is nearest in meaning to the underlined word as it is used in the sentence. <br><br> I hope the Principal would be <u>gracious</u> enough to forgive us.",
+                                "options": {
+                                  "A": "cordial",
+                                  "B": "polite",
+                                  "C": "merciful",
+                                  "D": "gentle"
+                                },
+                                "answer": "C",
+                                "image": null
+                              },
+                              {
+                                "id": 41,
+                                "question": "Choose the word or group of words that best completes each of the following sentences: <br><br> You have no excuse ________ late.",
+                                "options": {
+                                  "A": "in being",
+                                  "B": "to being",
+                                  "C": "been",
+                                  "D": "for being"
+                                },
+                                "answer": "D",
+                                "image": null
+                              },
+                              {
+                                "id": 42,
+                                "question": "Choose the word or group of words that best completes each of the following sentences: <br><br> My phone is superior ________ yours.",
+                                "options": {
+                                  "A": "to",
+                                  "B": "than",
+                                  "C": "from",
+                                  "D": "over"
+                                },
+                                "answer": "A",
+                                "image": null
+                              },
+                              {
+                                "id": 43,
+                                "question": "Choose the word or group of words that best completes each of the following sentences: <br><br> You will surely help me with my work, _________?",
+                                "options": {
+                                  "A": "can you",
+                                  "B": "won't you",
+                                  "C": "would you",
+                                  "D": "you won't"
+                                },
+                                "answer": "B",
+                                "image": null
+                              },
+                              {
+                                "id": 44,
+                                "question": "Choose the word or group of words that best completes each of the following sentences: <br><br> The trader tried to cash in ________ the customer's ignorance.",
+                                "options": {
+                                  "A": "by",
+                                  "B": "at",
+                                  "C": "on",
+                                  "D": "with"
+                                },
+                                "answer": "C",
+                                "image": null
+                              },
+                              {
+                                "id": 45,
+                                "question": "Choose the word or group of words that best completes each of the following sentences: <br><br> She hates ________ waiting.",
+                                "options": {
+                                  "A": "to have been kept",
+                                  "B": "having been kept",
+                                  "C": "being kept",
+                                  "D": "to be keeping"
+                                },
+                                "answer": "C",
+                                "image": null
+                              },
+                              {
+                                "id": 46,
+                                "question": "Choose the word or group of words that best completes each of the following sentences: <br><br> He took his share and gave them ______",
+                                "options": {
+                                  "A": "their",
+                                  "B": "there's",
+                                  "C": "there",
+                                  "D": "theirs"
+                                },
+                                "answer": "D",
+                                "image": null
+                              },
+                              {
+                                "id": 47,
+                                "question": "Choose the word or group of words that best completes each of the following sentences: <br><br> It is advisable to mind your own business and not _________",
+                                "options": {
+                                  "A": "somebody's else",
+                                  "B": "somebody else's",
+                                  "C": "somebody's else's",
+                                  "D": "somebody else"
+                                },
+                                "answer": "B",
+                                "image": null
+                              },
+                              {
+                                "id": 48,
+                                "question": "Choose the word or group of words that best completes each of the following sentences: <br><br> Mike was very glad _________ that he had won the lottery.",
+                                "options": {
+                                  "A": "to hear",
+                                  "B": "for hearing",
+                                  "C": "at hearing",
+                                  "D": "on hearing"
+                                },
+                                "answer": "A",
+                                "image": null
+                              },
+                              {
+                                "id": 49,
+                                "question": "Choose the word or group of words that best completes each of the following sentences: <br><br> Mr Kwesi bought _______",
+                                "options": {
+                                  "A": "a cupboard attractive new",
+                                  "B": "attractive a new cupboard",
+                                  "C": "a new attractive cupboard",
+                                  "D": "an attractive new cupboard"
+                                },
+                                "answer": "D",
+                                "image": null
+                              },
+                              {
+                                "id": 50,
+                                "question": "Choose the word or group of words that best completes each of the following sentences: <br><br> Don't let Jack bully you: stand up ________ him.",
+                                "options": {
+                                  "A": "for",
+                                  "B": "against",
+                                  "C": "above",
+                                  "D": "to"
+                                },
+                                "answer": "D",
+                                "image": null
+                              },
+                              {
+                                "id": 51,
+                                "question": "Choose the word or group of words that best completes each of the following sentences: <br><br> The culprits _______ when we entered the courtroom.",
+                                "options": {
+                                  "A": "were being interrogated",
+                                  "B": "are being interrogated",
+                                  "C": "will be interrogated",
+                                  "D": "would be interrogated"
+                                },
+                                "answer": "A",
+                                "image": null
+                              },
+                              {
+                                "id": 52,
+                                "question": "Choose the word or group of words that best completes each of the following sentences: <br><br> The students had no choice _______ to do as they had been commanded.",
+                                "options": {
+                                  "A": "except",
+                                  "B": "but",
+                                  "C": "rather",
+                                  "D": "even"
+                                },
+                                "answer": "B",
+                                "image": null
+                              },
+                              {
+                                "id": 53,
+                                "question": "Choose the word or group of words that best completes each of the following sentences: <br><br> My submission ________ by the Council at the moment.",
+                                "options": {
+                                  "A": "considering",
+                                  "B": "is being considered",
+                                  "C": "considers",
+                                  "D": "is considered"
+                                },
+                                "answer": "B",
+                                "image": null
+                              },
+                              {
+                                "id": 54,
+                                "question": "Choose the word or group of words that best completes each of the following sentences: <br><br> If she had known, she wouldn't have come, ________?",
+                                "options": {
+                                  "A": "could she",
+                                  "B": "couldn't she",
+                                  "C": "wouldn't she",
+                                  "D": "would she"
+                                },
+                                "answer": "D",
+                                "image": null
+                              },
+                              {
+                                "id": 55,
+                                "question": "Choose the word or group of words that best completes each of the following sentences: <br><br> Last week's assignment was _________ for me.",
+                                "options": {
+                                  "A": "much too difficult",
+                                  "B": "too much difficult",
+                                  "C": "difficult too much",
+                                  "D": "much difficult too"
+                                },
+                                "answer": "A",
+                                "image": null
+                              },
+                              {
+                                "id": 56,
+                                "question": "Choose the word or group of words that best completes each of the following sentences: <br><br> Could you please _________ a receipt for my purchase?",
+                                "options": {
+                                  "A": "make in",
+                                  "B": "make out",
+                                  "C": "make up",
+                                  "D": "make for"
+                                },
+                                "answer": "B",
+                                "image": null
+                              },
+
+                              {
+                                "id": 57,
+                                "question": "Choose the word or group of words that best completes each of the following sentences: <br><br> This is an improvement ________ the last report.",
+                                "options": {
+                                  "A": "over",
+                                  "B": "on",
+                                  "C": "in",
+                                  "D": "of"
+                                },
+                                "answer": "B",
+                                "image": null
+                              },
+                              {
+                                "id": 58,
+                                "question": "Choose the word or group of words that best completes each of the following sentences: <br><br> You can apply if you agree _______ their terms.",
+                                "options": {
+                                  "A": "upon",
+                                  "B": "to",
+                                  "C": "about",
+                                  "D": "in"
+                                },
+                                "answer": "B",
+                                "image": null
+                              },
+                              {
+                                "id": 59,
+                                "question": "Choose the word or group of words that best completes each of the following sentences: <br><br> When we were in boarding school, my parents usually came to check _________ us every week.",
+                                "options": {
+                                  "A": "with",
+                                  "B": "on",
+                                  "C": "over",
+                                  "D": "for"
+                                },
+                                "answer": "B",
+                                "image": null
+                              },
+                              {
+                                "id": 60,
+                                "question": "Choose the word or group of words that best completes each of the following sentences: <br><br> It is I who ________ to blame for the lapses.",
+                                "options": {
+                                  "A": "was",
+                                  "B": "am",
+                                  "C": "is",
+                                  "D": "are"
+                                },
+                                "answer": "B",
+                                "image": null
+                              },
+                              {
+                                "id": 61,
+                                "question": "Choose the word or group of words that best completes each of the following sentences: <br><br> The holiday came to an end all _________ soon.",
+                                "options": {
+                                  "A": "too",
+                                  "B": "rather",
+                                  "C": "much",
+                                  "D": "more"
+                                },
+                                "answer": "A",
+                                "image": null
+                              },
+                              {
+                                "id": 62,
+                                "question": "Choose the word or group of words that best completes each of the following sentences: <br><br> The research was carried out _________ a sample population.",
+                                "options": {
+                                  "A": "over",
+                                  "B": "in",
+                                  "C": "with",
+                                  "D": "on"
+                                },
+                                "answer": "D",
+                                "image": null
+                              },
+                              {
+                                "id": 63,
+                                "question": "Choose the word or group of words that best completes each of the following sentences: <br><br> Though ________ by opposition from his own supporters, the Chairman pressed ahead with his plans.",
+                                "options": {
+                                  "A": "shaking",
+                                  "B": "shook",
+                                  "C": "shaken",
+                                  "D": "was shaken"
+                                },
+                                "answer": "C",
+                                "image": null
+                              },
+                              {
+                                "id": 64,
+                                "question": "Choose the word or group of words that best completes each of the following sentences: <br><br> To avoid trouble, it is best to say very _________ on the case.",
+                                "options": {
+                                  "A": "less",
+                                  "B": "little",
+                                  "C": "few",
+                                  "D": "small"
+                                },
+                                "answer": "B",
+                                "image": null
+                              },
+                              {
+                                "id": 65,
+                                "question": "Choose the word or group of words that best completes each of the following sentences: <br><br> He offered no explanation, ________ apology.",
+                                "options": {
+                                  "A": "still less an",
+                                  "B": "and even less an",
+                                  "C": "not less the",
+                                  "D": "still less the"
+                                },
+                                "answer": "A",
+                                "image": null
+                              },
+                              {
+                                "id": 66,
+                                "question": "Choose the word or group of words that best completes each of the following sentences: <br><br> Our school will ________ one hundred and twenty students this year.",
+                                "options": {
+                                  "A": "turn in",
+                                  "B": "turn on",
+                                  "C": "turn out",
+                                  "D": "turn over"
+                                },
+                                "answer": "C",
+                                "image": null
+                              },
+                              {
+                                "id": 67,
+                                "question": "Choose the word or group of words that best completes each of the following sentences: <br><br> At the last minute, Amidu _______ of the plan.",
+                                "options": {
+                                  "A": "backed up",
+                                  "B": "backed for",
+                                  "C": "backed out",
+                                  "D": "backed in"
+                                },
+                                "answer": "C",
+                                "image": null
+                              },
+                              {
+                                "id": 68,
+                                "question": "Choose the word or group of words that best completes each of the following sentences: <br><br> We need to _______ for lost ground.",
+                                "options": {
+                                  "A": "make in",
+                                  "B": "make by",
+                                  "C": "make up",
+                                  "D": "make through"
+                                },
+                                "answer": "C",
+                                "image": null
+                              },
+                              {
+                                "id": 69,
+                                "question": "Choose the word or group of words that best completes each of the following sentences: <br><br> Blood is usually screened _________ transfusion.",
+                                "options": {
+                                  "A": "before",
+                                  "B": "in",
+                                  "C": "by",
+                                  "D": "upon"
+                                },
+                                "answer": "A",
+                                "image": null
+                              },
+                              {
+                                "id": 70,
+                                "question": "Choose the word or group of words that best completes each of the following sentences: <br><br> I believe he'll be arrested _________",
+                                "options": {
+                                  "A": "some days",
+                                  "B": "many days",
+                                  "C": "many a day",
+                                  "D": "some day"
+                                },
+                                "answer": "D",
+                                "image": null
+                              },
+
+                            {
+                              "id": 71,
+                              "question": "In the passage above, the numbered gaps indicate missing words. Against each number, four options are given. Choose the word that is the most suitable to fill the numbered gap 71 in the passage. <br><br> The day of the great tournament arrived and -71- trooped into the stadium in their thousands.",
+                              "options": {
+                                "A": "audience",
+                                "B": "spectators",
+                                "C": "crowd",
+                                "D": "congregation"
+                              },
+                              "answer": "B",
+                              "image": null
+                            },
+                            {
+                              "id": 72,
+                              "question": "Choose the word that is the most suitable to fill the numbered gaps in the passage.<br><br>The day of the great tournament arrived and -71- trooped into the stadium in their thousands. Meanwhile, the home team had arrived and was in the -72-. The visiting team was late. With both teams now around, the referee - 73 - his whistle and the two teams emerged from the tunnel and walked onto the pitch. The referee, his assistants and the players stood still while the national anthems of both countries were being played. After this, the captains of both teams came forward for the -74-. The home team won, they then exchanged -75 - and shook hands. At exactly 4.30 pm, the referee signalled for the start of the match. The supporters were singing and dancing in the- 76-. Both teams played very well but -77-a lot of chances. After playing for forty-five minutes. the referee stopped the match for the hall time break. During this brief break. the -78 - of both teams came out to warm themselves up. When the match resumed, the home team now played better. A -79- from the half-back at the opponent's goal was - 80- into the net. There was a thunderous shout from the crowd. The match continued till the ninetieth minute. The result at the end of the match was 1-0. The home team had won. <br><br>In the passage above, the numbered gaps indicate missing words. Against each number, four options are given. Choose the word that is the most suitable to fill the numbered gap 72 in the passage. <br><br> Meanwhile, the home team had arrived and was in the -72-.",
+                              "options": {
+                                "A": "pitch",
+                                "B": "court",
+                                "C": "dressing room",
+                                "D": "rest room"
+                              },
+                              "answer": "C",
+                              "image": null
+                            },
+                            {
+                              "id": 73,
+                              "question": "Choose the word that is the most suitable to fill the numbered gaps in the passage.<br><br>The day of the great tournament arrived and -71- trooped into the stadium in their thousands. Meanwhile, the home team had arrived and was in the -72-. The visiting team was late. With both teams now around, the referee - 73 - his whistle and the two teams emerged from the tunnel and walked onto the pitch. The referee, his assistants and the players stood still while the national anthems of both countries were being played. After this, the captains of both teams came forward for the -74-. The home team won, they then exchanged -75 - and shook hands. At exactly 4.30 pm, the referee signalled for the start of the match. The supporters were singing and dancing in the- 76-. Both teams played very well but -77-a lot of chances. After playing for forty-five minutes. the referee stopped the match for the hall time break. During this brief break. the -78 - of both teams came out to warm themselves up. When the match resumed, the home team now played better. A -79- from the half-back at the opponent's goal was - 80- into the net. There was a thunderous shout from the crowd. The match continued till the ninetieth minute. The result at the end of the match was 1-0. The home team had won. <br><br>In the passage above, the numbered gaps indicate missing words. Against each number, four options are given. Choose the word that is the most suitable to fill the numbered gap 73 in the passage. <br><br> With both teams now around, the referee -73- his whistle and the two teams emerged from the tunnel and walked onto the pitch.",
+                              "options": {
+                                "A": "signalled",
+                                "B": "blew",
+                                "C": "sounded",
+                                "D": "played"
+                              },
+                              "answer": "B",
+                              "image": null
+                            },
+                            {
+                              "id": 74,
+                              "question": "Choose the word that is the most suitable to fill the numbered gaps in the passage.<br><br>The day of the great tournament arrived and -71- trooped into the stadium in their thousands. Meanwhile, the home team had arrived and was in the -72-. The visiting team was late. With both teams now around, the referee - 73 - his whistle and the two teams emerged from the tunnel and walked onto the pitch. The referee, his assistants and the players stood still while the national anthems of both countries were being played. After this, the captains of both teams came forward for the -74-. The home team won, they then exchanged -75 - and shook hands. At exactly 4.30 pm, the referee signalled for the start of the match. The supporters were singing and dancing in the- 76-. Both teams played very well but -77-a lot of chances. After playing for forty-five minutes. the referee stopped the match for the hall time break. During this brief break. the -78 - of both teams came out to warm themselves up. When the match resumed, the home team now played better. A -79- from the half-back at the opponent's goal was - 80- into the net. There was a thunderous shout from the crowd. The match continued till the ninetieth minute. The result at the end of the match was 1-0. The home team had won. <br><br>In the passage above, the numbered gaps indicate missing words. Against each number, four options are given. Choose the word that is the most suitable to fill the numbered gap 74 in the passage. <br><br> After this, the captains of both teams came forward for the -74-.",
+                              "options": {
+                                "A": "toss",
+                                "B": "kick-off",
+                                "C": "offside",
+                                "D": "throw-in"
+                              },
+                              "answer": "A",
+                              "image": null
+                            },
+                            {
+                              "id": 75,
+                              "question": "Choose the word that is the most suitable to fill the numbered gaps in the passage.<br><br>The day of the great tournament arrived and -71- trooped into the stadium in their thousands. Meanwhile, the home team had arrived and was in the -72-. The visiting team was late. With both teams now around, the referee - 73 - his whistle and the two teams emerged from the tunnel and walked onto the pitch. The referee, his assistants and the players stood still while the national anthems of both countries were being played. After this, the captains of both teams came forward for the -74-. The home team won, they then exchanged -75 - and shook hands. At exactly 4.30 pm, the referee signalled for the start of the match. The supporters were singing and dancing in the- 76-. Both teams played very well but -77-a lot of chances. After playing for forty-five minutes. the referee stopped the match for the hall time break. During this brief break. the -78 - of both teams came out to warm themselves up. When the match resumed, the home team now played better. A -79- from the half-back at the opponent's goal was - 80- into the net. There was a thunderous shout from the crowd. The match continued till the ninetieth minute. The result at the end of the match was 1-0. The home team had won. <br><br>In the passage above, the numbered gaps indicate missing words. Against each number, four options are given. Choose the word that is the most suitable to fill the numbered gap 75 in the passage. <br><br> The home team won, they then exchanged -75- and shook hands.",
+                              "options": {
+                                "A": "gloves",
+                                "B": "pennants",
+                                "C": "jerseys",
+                                "D": "memoirs"
+                              },
+                              "answer": "B",
+                              "image": null
+                            },
+                            {
+                              "id": 76,
+                              "question": "Choose the word that is the most suitable to fill the numbered gaps in the passage.<br><br>The day of the great tournament arrived and -71- trooped into the stadium in their thousands. Meanwhile, the home team had arrived and was in the -72-. The visiting team was late. With both teams now around, the referee - 73 - his whistle and the two teams emerged from the tunnel and walked onto the pitch. The referee, his assistants and the players stood still while the national anthems of both countries were being played. After this, the captains of both teams came forward for the -74-. The home team won, they then exchanged -75 - and shook hands. At exactly 4.30 pm, the referee signalled for the start of the match. The supporters were singing and dancing in the- 76-. Both teams played very well but -77-a lot of chances. After playing for forty-five minutes. the referee stopped the match for the hall time break. During this brief break. the -78 - of both teams came out to warm themselves up. When the match resumed, the home team now played better. A -79- from the half-back at the opponent's goal was - 80- into the net. There was a thunderous shout from the crowd. The match continued till the ninetieth minute. The result at the end of the match was 1-0. The home team had won. <br><br>In the passage above, the numbered gaps indicate missing words. Against each number, four options are given. Choose the word that is the most suitable to fill the numbered gap 76 in the passage. <br><br> At exactly 4.30 pm, the referee signalled for the start of the match. The supporters were singing and dancing in the -76-.",
+                              "options": {
+                                "A": "stands",
+                                "B": "arena",
+                                "C": "tracks",
+                                "D": "steps"
+                              },
+                              "answer": "A",
+                              "image": null
+                            },
+                            {
+                              "id": 77,
+                              "question": "Choose the word that is the most suitable to fill the numbered gaps in the passage.<br><br>The day of the great tournament arrived and -71- trooped into the stadium in their thousands. Meanwhile, the home team had arrived and was in the -72-. The visiting team was late. With both teams now around, the referee - 73 - his whistle and the two teams emerged from the tunnel and walked onto the pitch. The referee, his assistants and the players stood still while the national anthems of both countries were being played. After this, the captains of both teams came forward for the -74-. The home team won, they then exchanged -75 - and shook hands. At exactly 4.30 pm, the referee signalled for the start of the match. The supporters were singing and dancing in the- 76-. Both teams played very well but -77-a lot of chances. After playing for forty-five minutes. the referee stopped the match for the hall time break. During this brief break. the -78 - of both teams came out to warm themselves up. When the match resumed, the home team now played better. A -79- from the half-back at the opponent's goal was - 80- into the net. There was a thunderous shout from the crowd. The match continued till the ninetieth minute. The result at the end of the match was 1-0. The home team had won. <br><br>In the passage above, the numbered gaps indicate missing words. Against each number, four options are given. Choose the word that is the most suitable to fill the numbered gap 77 in the passage. <br><br> Both teams played very well but -77- a lot of chances.",
+                              "options": {
+                                "A": "squandered",
+                                "B": "lost",
+                                "C": "diverted",
+                                "D": "dropped"
+                              },
+                              "answer": "A",
+                              "image": null
+                            },
+                            {
+                              "id": 78,
+                              "question": "Choose the word that is the most suitable to fill the numbered gaps in the passage.<br><br>The day of the great tournament arrived and -71- trooped into the stadium in their thousands. Meanwhile, the home team had arrived and was in the -72-. The visiting team was late. With both teams now around, the referee - 73 - his whistle and the two teams emerged from the tunnel and walked onto the pitch. The referee, his assistants and the players stood still while the national anthems of both countries were being played. After this, the captains of both teams came forward for the -74-. The home team won, they then exchanged -75 - and shook hands. At exactly 4.30 pm, the referee signalled for the start of the match. The supporters were singing and dancing in the- 76-. Both teams played very well but -77-a lot of chances. After playing for forty-five minutes. the referee stopped the match for the hall time break. During this brief break. the -78 - of both teams came out to warm themselves up. When the match resumed, the home team now played better. A -79- from the half-back at the opponent's goal was - 80- into the net. There was a thunderous shout from the crowd. The match continued till the ninetieth minute. The result at the end of the match was 1-0. The home team had won. <br><br>In the passage above, the numbered gaps indicate missing words. Against each number, four options are given. Choose the word that is the most suitable to fill the numbered gap 78 in the passage. <br><br> During this brief break, the -78- of both teams came out to warm themselves up.",
+                              "options": {
+                                "A": "coaches",
+                                "B": "supporters",
+                                "C": "managers",
+                                "D": "substitutes"
+                              },
+                              "answer": "D",
+                              "image": null
+                            },
+                            {
+                              "id": 79,
+                              "question": "Choose the word that is the most suitable to fill the numbered gaps in the passage.<br><br>The day of the great tournament arrived and -71- trooped into the stadium in their thousands. Meanwhile, the home team had arrived and was in the -72-. The visiting team was late. With both teams now around, the referee - 73 - his whistle and the two teams emerged from the tunnel and walked onto the pitch. The referee, his assistants and the players stood still while the national anthems of both countries were being played. After this, the captains of both teams came forward for the -74-. The home team won, they then exchanged -75 - and shook hands. At exactly 4.30 pm, the referee signalled for the start of the match. The supporters were singing and dancing in the- 76-. Both teams played very well but -77-a lot of chances. After playing for forty-five minutes. the referee stopped the match for the hall time break. During this brief break. the -78 - of both teams came out to warm themselves up. When the match resumed, the home team now played better. A -79- from the half-back at the opponent's goal was - 80- into the net. There was a thunderous shout from the crowd. The match continued till the ninetieth minute. The result at the end of the match was 1-0. The home team had won. <br><br>In the passage above, the numbered gaps indicate missing words. Against each number, four options are given. Choose the word that is the most suitable to fill the numbered gap 79 in the passage. <br><br> When the match resumed, the home team now played better. A -79- from the half-back at the opponent's goal was -80- into the net.",
+                              "options": {
+                                "A": "shot",
+                                "B": "kick",
+                                "C": "play",
+                                "D": "dribble"
+                              },
+                              "answer": "A",
+                              "image": null
+                            },
+                            {
+                              "id": 80,
+                              "question": "Choose the word that is the most suitable to fill the numbered gaps in the passage.<br><br>The day of the great tournament arrived and -71- trooped into the stadium in their thousands. Meanwhile, the home team had arrived and was in the -72-. The visiting team was late. With both teams now around, the referee - 73 - his whistle and the two teams emerged from the tunnel and walked onto the pitch. The referee, his assistants and the players stood still while the national anthems of both countries were being played. After this, the captains of both teams came forward for the -74-. The home team won, they then exchanged -75 - and shook hands. At exactly 4.30 pm, the referee signalled for the start of the match. The supporters were singing and dancing in the- 76-. Both teams played very well but -77-a lot of chances. After playing for forty-five minutes. the referee stopped the match for the hall time break. During this brief break. the -78 - of both teams came out to warm themselves up. When the match resumed, the home team now played better. A -79- from the half-back at the opponent's goal was - 80- into the net. There was a thunderous shout from the crowd. The match continued till the ninetieth minute. The result at the end of the match was 1-0. The home team had won. <br><br>In the passage above, the numbered gaps indicate missing words. Against each number, four options are given. Choose the word that is the most suitable to fill the numbered gap 80 in the passage. <br><br> A shot from the half-back at the opponent's goal was -80- into the net.",
+                              "options": {
+                                "A": "pushed",
+                                "B": "headed",
+                                "C": "moved",
+                                "D": "swayed"
+                              },
+                              "answer": "B",
+                              "image": null
+                            }
+
+
+
+
+
+
+
+
+
+                                      
+
+
+];
+
+
+         const staticTheoryQuestions = [
+                          {
+                            id: 1,
+                            question: "You have a business idea you want to experiment with and you need some money. Write a letter to your uncle telling him about the business idea and asking for financial assistance to make it a reality.", 
+                          
+                            marks: 10,
+                            image: null
+                          },
+                          {
+                            id: 2,
+                            question: "Write an article suitable for publication in a national newspaper on the menace of secret cults in our schools and colleges",
+                            marks: 10,
+                            image: null
+                          },
+                          {
+                            id: 3,
+                            question: "Write a letter to the Editor of a national newspaper discussing the positive impact of the computer on education",  
+                            marks: 10,
+                            image: null
+                          },
+                          {
+                            id: 4,
+                            question: "You are about to graduate from secondary school and you held the position of Library Prefect. Write a letter to your friend telling him/her your experiences and how they have contributed to your life in a positive way", 
+                            marks: 10,
+                            image: null
+                          },
+                          {
+                            id: 5,
+                            question: "Write an article suitable for publication in a national newspaper on the growing incidence of drug abuse among the youth, stating the causes and suggesting ways it can be curbed.",    
+                            marks: 10,
+                            image: null
+                          },
+                            {
+                            id: 6,
+                            question: "A friend of yours was involved in a fight that took place in school and has been expelled by the school authorities. In a letter to your Principal, give an account of the fight. and why you think your friend should not have been expelled",    
+                            marks: 10,
+                            image: null
+                          },
+
+                          {
+                            id: 7,
+                            question: "As one of the outgoing prefects In your school, Write a speech you would deliver at the send-off ceremony for prefects, on the topic: The Challenges of Prefectship.",    
+                            marks: 10,
+                            image: null
+                          },
+                          {
+                            id: 8,
+                            question: "Write a story that ends With the statement: I wish I had listened to my parents.",    
+                            marks: 10,
+                            image: null
+                          },
+                            {
+                            id: 9,
+                            question: "COMPREHENSION PASSAGE<br><br>Read the following passage carefully and answer the questions on it <br><br> I had always thought that he was under<u> a spell</u> to be such a workaholic. Daily, after returning from school, he would promptly head for the bush. There, he would engage in fashioning out something that could fetch him some money. He would emerge sometimes with baskets and brooms made from palm fronds and at other times, two or three pestles beautifully <u>crafted </u>to please any housewife. Occasionally, he would work till late evening as a labourer on someone's farmland. Returning, he would bring home pepper, vegetables and firewood. Interestingly, he had a father, who spend more time working from cockcrow till dusk on large commercial farmlands. Interestingly, he had a father who had his own farm, but was too poor to finance his education. Once in a while, he would go to his father's farm to help the old man out.<br> However, towards the end of his first year in senior secondary school. he obtained a piece of farm land  from his father. He worked on the land as if his life depended on it! Tat year. he planted maize and all sorts of vegetables. The harvest gave him enough money to pay his <br>fees. <u>procure</u> some planks and several carpenter's tools. With his knowledge of woodwork. he started making simple kitchen stools, tables and chairs which <u>attracted</u> a lot of customers. Yet, his education did not suffer, indeed, he was always in the top position in class.<br> Once when I remarked in class that Adamu was <u>like a person pursued by a demon </u>pushing him to work so hard, every body laughed. Including him. when the laughter subsided. he looked at me intently and said, ``Kola, you can't understand. I pray you'll never have that demon after you. I guess if you were in my shoes, without a mother since age three, you would have such a demon after you too. I only <u>vaguely</u> remember my mother because I was too young when she passed on. When my father remarried, the Woman excluded me from her care: I had to find a solution. I got myself enrolled in school at age eight. I had to take care of my feeding, pay my way through school, and buy uniforms and books. At first, an uncle introduced me to working on other people's farms. but when I discovered<u> that I could take care of myself</u>. I worked even harder. When there was no work anywhere. I took to the bush to make objects like brooms. baskets. pestles and hoe handles. Today, I have as many pairs of shoes. clothes and books as any of you. Now, i have graduated from making <u>Simple</u> home items to making doors. Nobody taught me these, nobody, except. perhaps the demon you referred to. Complete silence followed. Since then. I have had the utmost respect for him.<br>(a) Why did the writer think Adamu was under a spell?<br> (b) Give two reasons why Adamu had to take care of himself. <br> (C) State two major types of jobs Adamu engaged in to support himself. <br> (d) What does the reference to Adamu's academic performance tell us about him? <br> (e) What is the writer's attitude towards Adamu? <br>  (f) What tells us that Adamu was determined to be educated? <br>  (g)... like a person pursued by a demon.. What figure of speech is used in this expression? <br> (h).. that I could take care of myself: <br> (i) What is the grammatical name given to this expression as it is used in the passage? <br>  (ii) What is its function? <br> (i) For each of the following words, find another word or phrase which means the same and which can replace it as it is used in the passage: <br> (i)a spell<br> (ii) crafted <br> (iii) procure <br> (iv) attracted <br> (V) vaguely<br> (vi) simple.",    
+                            marks: 10,
+                            image: null
+                          },
+                          {
+                            id: 10,
+                            question: "SUMMARY <br><br> Read the following passage carefully and answer the questions on it: <br><br> The issue of youth delinquency has become a major concern to everyone. Hardly a day passes by without reports of some youth  being involved in one act of lawlessness or the other. In view' of the fact that the youth of today will take over the mantle of leadership in future, the multimillion dollar question is: Are we guaranteed a safe future? We often wonder what has changed; what has happened to the respectful, obedient and studious youth of the not too distant past? <br><br> At the ceremony held recently, a renowned religious leader was very worried about the youth. He asked parents to be careful of ``the new armed robbers and carriers of immorality`` they had introduced into their homes. In his opinion, to protect their children, parents have done well by building high walls around their houses and fencing them with electric barbed wire. But the new ``robbers`` they should look out for are the television and the Internet they leave their children with all the time without Supervision. These modern technologies offer sites where children pick up some unsavoury habits and behavior. <br><br> Gradually, consciously or unconsciously, the television and the Internet have assumed a central role in the lives of many children. They hardly miss their parents whether they are at home or not because they are engrossed in watching television or browsing the Internet. There is rarely any interaction between parents and their children. Some children forgo their meals in order to watch particular programmers on television or browse the Internet. Continuous struggle among siblings for the possession ot the remote control is a constant sight in most homes. Parents who can afford it solve this problem by acquiring additional television sets. <br><br>Some children sit in front of the television with textbooks and notebooks before them, pretending to study. They know every programme at any given time on almost all the channels. Ask them to do any academic work and their countenance immediately shows a complete lack of interest. As they watch one programme after the other on the various channels, children may absorb materials that are unsuitable for their formative years. <br><br>Thanks to the television and the Internet, their active way of life has been reduced to the minimum. Some children sit for hours watching television or browsing the Internet while they stuff themselves with popcorn, cookies and sweets. This sedentary lifestyle affects their health. No wonder we now have obese teenagers. <br><br> However, the television and the Internet have their positive sides. They are great sources of information, learning and entertainment. They help in the development of our social roles and behaviour and kill boredom. If only parents could find time to participate in what their children do and watch and guide them, the future may not seem so bleak. When children are encouraged and guided to watch child-friendly programmes, a healthy balance can be created between watching the television., browsing the Internet and engaging in other household and community activities. Above all, parents should be more assertive and wrench their parental responsibilities from the mass media. <br><br>(a) In four sentences, one for each, summarize the effects of the excessive use of the television and the Internet on children. <br><br>(b) In two sentences, one for each, summarize how the dangers posed by the television and the Internet can be overcome. <br><br>",    
+                            marks: 10,
+                            image: null
+                          }
+];
+    
+
+
+
+  
+        // ================== APPLICATION VARIABLES ==================
+        let questions = [];
+        let currentQuestion = 0;
+        let userAnswers = [];
+        let theoryQuestions = [];
+        let currentTheory = 0;
+        let theoryAnswers = [];
+        let currentSection = 'objectives';
+       
+        // ================== INITIALIZATION ==================
+        window.onload = function () {
+            // Extract exam info from the page
+            const examInfoElement = document.getElementById('examInfo');
+            if (examInfoElement) {
+                const examInfoText = examInfoElement.textContent;
+                // Parse the text to extract subject and class
+                // This is a simple example - adjust based on your actual text format
+                localStorage.setItem('examSubject', 'EXAM');
+                localStorage.setItem('examClass', 'RESULT');
+            }
+            localStorage.setItem('examTerm', 'FIRST TERM 2026/2027');
+      
+             const username = sessionStorage.getItem('username');
+                const image = sessionStorage.getItem('image');
+
+                if (!username) {
+                  window.location.href = 'index.html';
+                } else {
+                  document.getElementById('username').innerText = username;
+                  
+              
+                /*document.getElementById('userImage').src =
+              'img/' + (sessionStorage.getItem('image') || 'default_user.jpg');*/
+                }
+            document.getElementById('userImage').src = sessionStorage.getItem('image') || 'img/default_user.jpg';
+           
+            // Load static questions
+            questions = staticObjectivesQuestions;
+            theoryQuestions = staticTheoryQuestions;
+           
+            userAnswers = new Array(questions.length);
+            theoryAnswers = new Array(theoryQuestions.length).fill('');
+           
+            updateDateTime();
+            setInterval(updateDateTime, 1000);
+           
+            displayQuestion();
+            renderQuestionButtons();
+            countUserSelections();
+            updateTheoryStatus();
+        };
+       
+                    // ================== TIMER ==================
+                let timeLeft = 60 * 90; // 90 minutes in seconds
+                const timerEl = document.getElementById('timer');
+                const timerInterval = setInterval(() => {
+                    const hours = Math.floor(timeLeft / 3600);
+                    const minutes = Math.floor((timeLeft % 3600) / 60);
+                    const seconds = timeLeft % 60;
+                    
+                    // Build display string
+                    let display = '';
+                    if (hours > 0) {
+                        display += `${hours} Hr:`;
+                    }
+                    if (minutes > 0 || hours > 0) { // show minutes if any hour or minute >0
+                        display += `${minutes} Min: `;
+                    }
+                    display += `${seconds} Sec`;
+                    
+                    timerEl.textContent = `Time Remaining: ${display}`;
+                    timeLeft--;
+                   
+                    // Change color when time is running out (less than 5 minutes)
+                    if (timeLeft < 300) { // 5 minutes = 300 seconds
+                        timerEl.style.color = 'red';
+                        timerEl.style.animation = 'pulse 1s infinite';
+                    }
+                   
+                    if (timeLeft < 0) {
+                        clearInterval(timerInterval);
+                        alert("Time is up! Your exam will be submitted automatically.");
+                        submitExam();
+                    }
+                }, 1000);
+       
+        // ================== SECTION TOGGLE ==================
+        function showSection(section) {
+            currentSection = section;
+            // Update button states
+            document.getElementById('objectivesBtn').classList.toggle('active', section === 'objectives');
+            document.getElementById('theoryBtn').classList.toggle('active', section === 'theory');
+           
+            // Show/hide sections
+            document.getElementById('objectivesSection').style.display = section === 'objectives' ? 'block' : 'none';
+            document.getElementById('theorySection').style.display = section === 'theory' ? 'block' : 'none';
+           
+            // Update navigation
+            if (section === 'theory') {
+                displayTheoryQuestion();
+            }
+        }
+       
+        // ================== MATH SYMBOL MAPPING ==================
+        function mapMathSymbol(text) {
+            if (!text) return '';
+           
+            return text
+                .replace(/&theta;/g, 'θ')
+                .replace(/&Theta;/g, 'Θ')
+                .replace(/&pi;/g, 'π')
+                .replace(/&Pi;/g, 'Π')
+                .replace(/&alpha;/g, 'α')
+                .replace(/&beta;/g, 'β')
+                .replace(/&gamma;/g, 'γ')
+                .replace(/&delta;/g, 'δ')
+                .replace(/&epsilon;/g, 'ε')
+                .replace(/&phi;/g, 'φ')
+                .replace(/&omega;/g, 'ω')
+                .replace(/&mu;/g, 'μ')
+                .replace(/&sigma;/g, 'σ')
+                .replace(/&lambda;/g, 'λ')
+                .replace(/&radic;/g, '√')
+                .replace(/&infin;/g, '∞')
+                .replace(/&int;/g, '∫')
+                .replace(/&sum;/g, '∑')
+                .replace(/&prod;/g, '∏')
+                .replace(/&part;/g, '∂')
+                .replace(/&deg;/g, '°')
+                .replace(/&times;/g, '×')
+                .replace(/&divide;/g, '÷')
+                .replace(/&plusmn;/g, '±')
+                .replace(/&le;/g, '≤')
+                .replace(/&ge;/g, '≥')
+                .replace(/&ne;/g, '≠')
+                .replace(/&frac12;/g, '½')
+                .replace(/&frac14;/g, '¼')
+                .replace(/&frac34;/g, '¾')
+                .replace(/\^(\d+)/g, '<sup>$1</sup>')
+                .replace(/\^\(([^)]+)\)/g, '<sup>$1</sup>')
+                .replace(/_(\d+)/g, '<sub>$1</sub>')
+                .replace(/_\(([^)]+)\)/g, '<sub>$1</sub>');
+        }
+       
+        // ================== OBJECTIVES FUNCTIONS ==================
+        function saveAnswer() {
+            const selected = document.querySelector('input[name="option"]:checked');
+            if (selected) {
+                userAnswers[currentQuestion] = selected.value;
+                countUserSelections();
+            }
+        }
+       
+        function displayQuestion() {
+            if (currentQuestion >= questions.length) return;
+           
+            const q = questions[currentQuestion];
+           
+            // Apply math symbol mapping
+            const questionText = mapMathSymbol(q.question);
+            const optA = mapMathSymbol(q.options.A);
+            const optB = mapMathSymbol(q.options.B);
+            const optC = mapMathSymbol(q.options.C);
+            const optD = mapMathSymbol(q.options.D);
+           
+            // Display question and options
+            document.getElementById('questionText').innerHTML = `${currentQuestion + 1}. ${questionText}`;
+            document.getElementById('optA').innerHTML = optA;
+            document.getElementById('optB').innerHTML = optB;
+            document.getElementById('optC').innerHTML = optC;
+            document.getElementById('optD').innerHTML = optD;
+           
+            // Handle question image
+            const imageContainer = document.getElementById('questionImageContainer');
+            if (q.image) {
+                imageContainer.innerHTML = `
+                    <div class="theory-image-wrapper">
+                        <img src="${q.image}" alt="Question Diagram" class="question-image">
+                    </div>
+                `;
+            } else {
+                imageContainer.innerHTML = '';
+            }
+           
+            // Clear and set radio buttons
+            const radios = document.getElementsByName('option');
+            radios.forEach(r => r.checked = false);
+           
+            if (userAnswers[currentQuestion]) {
+                document.querySelector(`input[name="option"][value="${userAnswers[currentQuestion]}"]`).checked = true;
+            }
+           
+            highlightCurrentButton();
+        }
+       
+        function nextQuestion() {
+            saveAnswer();
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                displayQuestion();
+            }
+        }
+       
+        function prevQuestion() {
+            saveAnswer();
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                displayQuestion();
+            }
+        }
+       
+        function renderQuestionButtons() {
+            const container = document.getElementById('questionButtons');
+            container.innerHTML = '';
+           
+            for (let i = 0; i < questions.length; i++) {
+                const btn = document.createElement('button');
+                btn.textContent = i + 1;
+                btn.className = 'question-btn';
+                btn.onclick = () => {
+                    saveAnswer();
+                    currentQuestion = i;
+                    displayQuestion();
+                };
+                container.appendChild(btn);
+            }
+            highlightCurrentButton();
+        }
+       
+        function highlightCurrentButton() {
+            document.querySelectorAll('.question-btn').forEach((btn, index) => {
+                const answered = userAnswers[index] !== undefined;
+                const current = index === currentQuestion;
+               
+                btn.style.backgroundColor = current ? '#5cb85c' : (answered ? '#337ab7' : '#eee');
+                btn.style.color = current || answered ? 'white' : 'black';
+                btn.style.border = current ? '2px solid #2e7d32' : '1px solid #444';
+            });
+        }
+       
+        function countUserSelections() {
+            let totalQuestions = questions.length;
+            let answeredCount = userAnswers.filter(answer => answer !== undefined).length;
+            let unansweredCount = totalQuestions - answeredCount;
+           
+            document.getElementById("answeredLabel").innerText = `Answered: ${answeredCount}/${totalQuestions}`;
+            document.getElementById("unansweredLabel").innerText = `Unanswered: ${unansweredCount}`;
+        }
+       
+
+   
+         function submitExam() {
+            saveAnswer();
+            showResult();
+        }
+       
+
+
+                    function showResult() {
+                        clearInterval(timerInterval);
+                        let score = 0;
+                        questions.forEach((q, i) => {
+                            if (userAnswers[i] === q.answer) score++;
+                        });
+                        
+                        const username = sessionStorage.getItem('username') || "Guest";
+                        const cls = sessionStorage.getItem('class');
+                        const sub = sessionStorage.getItem('subject');
+                        
+                        localStorage.setItem("examUser", username);
+                        localStorage.setItem("examScore", score);
+                        localStorage.setItem("totalQuestions", questions.length);
+                        localStorage.setItem("pendingClass", cls);
+                        localStorage.setItem("pendingSubject", sub);
+                        localStorage.setItem("pendingUsername", username);
+                        
+                        const examInfo = sessionStorage.getItem('examInfo') || 'TEST - RESULT (SECOND TERM)';
+                        localStorage.setItem("examInfo", examInfo);
+                        
+                        // Build the record
+                        const record = {
+                            username: username,
+                            class: cls,
+                            subject: sub,
+                            score: score,
+                            totalQuestions: questions.length,
+                            percentage: ((score / questions.length) * 100).toFixed(2) + '%',
+                            examInfo: examInfo,
+                            timestamp: new Date().toISOString()
+                        };
+                        
+                        // ------------------ 🌐 SEND TO GOOGLE SHEETS ------------------
+                        const API_URL = 'https://script.google.com/macros/s/AKfycbzW4zlbuW16fAFRcwg4ow8b6IAQEp4e2zIqLjL7zhdkkHvEDrDwwxT0PX46dwBIiXgm/exec'; // ← paste your web app URL here
+                        
+                        fetch(API_URL, {
+                            method: 'POST',
+                            mode: 'no-cors',        // required because Apps Script doesn't send CORS headers
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(record)
+                        }).catch(err => console.error('Failed to send to cloud:', err));
+                        // ---------------------------------------------------------------
+                        
+                        // (Optional) Keep local backup
+                        let records = JSON.parse(localStorage.getItem('examRecords') || '[]');
+                        records.push(record);
+                        localStorage.setItem('examRecords', JSON.stringify(records));
+                        
+                        // Download JSON (your existing code)
+                        const scoreDetails = {
+                            ...record,
+                            userAnswers: userAnswers,
+                            correctAnswers: questions.map(q => q.answer)
+                        };
+                        
+                        const blob = new Blob([JSON.stringify(scoreDetails, null, 2)], { type: 'application/json' });
+                        const url = URL.createObjectURL(blob);
+                        const a = document.createElement('a');
+                        a.href = url;
+                        a.download = `exam_results_${username}_${new Date().getTime()}.json`;
+                        a.style.display = 'none';
+                        document.body.appendChild(a);
+                        a.click();
+                        document.body.removeChild(a);
+                        URL.revokeObjectURL(url);
+                        
+                        console.log(`Exam completed. Waiting for confirmation.`);
+                        alert(`Objective Exam Completed!\nYour Score: ${score} out of ${questions.length}\n\nClick OK to view your results.`);
+                        window.location.href = "results.html";
+                    }
+
+
+
+            // Add these helper functions to your exam page
+            function getExamAttempts(cls) {
+                const key = `${cls}_exam_attempts`;
+                const stored = localStorage.getItem(key);
+                return stored ? JSON.parse(stored) : {};
+            }
+
+            function saveExamAttempts(cls, data) {
+                const key = `${cls}_exam_attempts`;
+                localStorage.setItem(key, JSON.stringify(data));
+            }
+                   
+        // ================== THEORY QUESTIONS ==================
+        function displayTheoryQuestion() {
+            if (theoryQuestions.length === 0) {
+                document.getElementById('theoryQuestionText').innerText = "No theory questions available.";
+                return;
+            }
+           
+            const tq = theoryQuestions[currentTheory];
+           
+            // Display question text (without math symbol mapping for theory)
+            document.getElementById('theoryQuestionText').innerText = mapMathSymbol(`${currentTheory + 1}. ${tq.question} ${tq.marks ? `[${tq.marks} marks]` : ''}`);
+                
+            document.getElementById('theoryAnswer').value = theoryAnswers[currentTheory] || "";
+           
+            // Handle theory question image
+            const theoryImageContainer = document.getElementById('theoryImageContainer');
+            if (tq.image) {
+                theoryImageContainer.innerHTML = `
+                    <div class="theory-image-wrapper">
+                        <img src="${tq.image}" alt="Theory Question Diagram" class="theory-question-image">
+                        <div class="image-caption">${tq.imageCaption || 'Diagram for question'}</div>
+                    </div>
+                `;
+            } else {
+                theoryImageContainer.innerHTML = '';
+            }
+           
+            updateTheoryStatus();
+        }
+       
+        function updateTheoryStatus() {
+            const savedCount = theoryAnswers.filter(answer => answer.trim() !== "").length;
+            document.getElementById("theoryStatus").innerText =
+                `Question ${currentTheory + 1} of ${theoryQuestions.length} | Saved: ${savedCount}/${theoryQuestions.length}`;
+        }
+       
+        function saveTheoryAnswer() {
+            const answer = document.getElementById('theoryAnswer').value.trim();
+            theoryAnswers[currentTheory] = answer;
+            localStorage.setItem(`theoryAnswer_${currentTheory}`, answer);
+            updateTheoryStatus();
+            alert("Theory answer saved successfully!");
+        }
+       
+        function nextTheoryQuestion() {
+            if (currentTheory < theoryQuestions.length - 1) {
+                currentTheory++;
+                displayTheoryQuestion();
+            } else {
+                alert("You've reached the last theory question.");
+            }
+        }
+       
+        function prevTheoryQuestion() {
+            if (currentTheory > 0) {
+                currentTheory--;
+                displayTheoryQuestion();
+            }
+        }
+       
+        function submitTheoryExam() {
+            const savedCount = theoryAnswers.filter(answer => answer.trim() !== "").length;
+            const confirmSubmit = confirm(
+                `Theory section completed!\n\n` +
+                `You have answered ${savedCount} out of ${theoryQuestions.length} theory questions.\n\n` +
+                `Are you sure you want to submit?`
+            );
+           
+            if (confirmSubmit) {
+                alert("Theory answers submitted successfully!");
+            }
+        }
+       
+        // ================== DATE & TIME ==================
+        function updateDateTime() {
+            let now = new Date();
+            let day = now.getDate();
+            let month = now.toLocaleString('default', { month: 'long' });
+            let year = now.getFullYear();
+            let suffix = "th";
+           
+            if (day === 1 || day === 21 || day === 31) suffix = "st";
+            else if (day === 2 || day === 22) suffix = "nd";
+            else if (day === 3 || day === 23) suffix = "rd";
+           
+            let hours = now.getHours();
+            let minutes = now.getMinutes();
+            let seconds = now.getSeconds();
+            let ampm = hours >= 12 ? "PM" : "AM";
+            hours = hours % 12 || 12;
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+           
+            let formattedDateTime = `${month} ${day}${suffix} ${year}, ${hours}:${minutes}:${seconds} ${ampm}`;
+            document.getElementById("datetime").innerText = formattedDateTime;
+        }
+       
+        // ================== KEYBOARD SHORTCUTS ==================
+        document.addEventListener('keydown', function (event) {
+            if (currentSection === 'objectives') {
+                const key = event.key.toUpperCase();
+               
+                // Answer selection for objectives
+                if (['A', 'B', 'C', 'D'].includes(key)) {
+                    const radio = document.querySelector(`input[name="option"][value="${key}"]`);
+                    if (radio) {
+                        radio.checked = true;
+                        saveAnswer();
+                    }
+                }
+               
+                // Navigation with arrows
+                if (event.key === 'ArrowRight') {
+                    nextQuestion();
+                } else if (event.key === 'ArrowLeft') {
+                    prevQuestion();
+                }
+            } else if (currentSection === 'theory') {
+                // Navigation for theory
+                if (event.key === 'ArrowRight') {
+                    nextTheoryQuestion();
+                } else if (event.key === 'ArrowLeft') {
+                    prevTheoryQuestion();
+                }
+               
+                // Save with Ctrl+S
+                if (event.ctrlKey && event.key === 's') {
+                    event.preventDefault();
+                    saveTheoryAnswer();
+                }
+            }
+        });
+       
+        // ================== ANTI-CHEAT & LOGOUT ==================
+        document.addEventListener('keydown', function (event) {
+            const key = event.key.toLowerCase();
+            if ((event.ctrlKey && (key === 'p' || key === 's')) && currentSection === 'objectives') {
+                event.preventDefault();
+                alert("Right-click and view source are disabled during examination.");
+                return false;
+            }
+        });
+       
+        document.addEventListener('contextmenu', (event) => {
+            event.preventDefault();
+            alert("Right-click is disabled during examination.");
+        });
+       
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I') ||
+                (e.ctrlKey && e.shiftKey && e.key === 'J') || (e.ctrlKey && e.key === 'u')) {
+                e.preventDefault();
+                alert("Developer tools are disabled during examination.");
+            }
+        });
+       
+        function logout() {
+            const confirmLogout = confirm("Are you sure you want to logout? Your progress may be lost.");
+            if (confirmLogout) {
+                window.location.href = "index.html";
+            }
+        }
+    </script>
+</body>
+</html>

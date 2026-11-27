@@ -1,0 +1,2616 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="fav_icon2.ico">
+    <title>cbt.wisdomfoundationchools.org - ENGLISH LANGUAGE SS2 Exam</title>
+    <script>
+         // Disable back navigation
+    history.pushState(null, null, location.href);
+    window.onpopstate = function () {
+        history.go(1);
+    };
+
+     let backClickCount = 0;
+            let allowBack = false;
+
+            history.pushState(null, null, location.href);
+
+            window.onpopstate = function () {
+                if (!allowBack) {
+                    backClickCount++;
+
+                    if (backClickCount >= 50) {
+                        allowBack = true;
+                        alert("You have tried 50 times. Going back now...");
+                        history.back();
+                        return;
+                    }
+
+                    showBackModal();
+                }
+            };
+
+            function showBackModal() {
+                document.getElementById("backModalOverlay").style.display = "flex";
+                document.getElementById("passwordContainer").style.display = "none";
+                document.getElementById("backPassword").value = "";
+               
+                document.getElementById("modalButtons").innerHTML = `
+                    <button onclick="handleYes()" style="padding: 10px 20px; margin: 5px; border: none; border-radius: 5px; background: limegreen; color: white; font-size: 16px; cursor: pointer;">Yes</button>
+                    <button onclick="closeBackModal()" style="padding: 10px 20px; margin: 5px; border: none; border-radius: 5px; background: crimson; color: white; font-size: 16px; cursor: pointer;">No</button>
+                `;
+            }
+
+            function closeBackModal() {
+                document.getElementById("backModalOverlay").style.display = "none";
+                history.pushState(null, null, location.href);
+            }
+
+            function handleYes() {
+                document.getElementById("passwordContainer").style.display = "block";
+                document.getElementById("modalButtons").innerHTML = `
+                    <button onclick="checkPassword()" style="padding: 10px 20px; margin: 5px; border: none; border-radius: 5px; background: limegreen; color: white; font-size: 16px; cursor: pointer;">Submit</button>
+                    <button onclick="closeBackModal()" style="padding: 10px 20px; margin: 5px; border: none; border-radius: 5px; background: crimson; color: white; font-size: 16px; cursor: pointer;">Cancel</button>
+                `;
+            }
+
+            function checkPassword() {
+                const correctPassword = "admin123";
+                const enteredPassword = document.getElementById("backPassword").value;
+
+                if (enteredPassword === correctPassword) {
+                    allowBack = true;
+                    document.getElementById("backModalOverlay").style.display = "none";
+                    history.back();
+                } else {
+                    alert("Incorrect password. Staying on this page.");
+                    closeBackModal();
+                }
+            }
+    </script>
+</head>
+         <div id="backModalOverlay" style="display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.8); color: #fff; font-family: Arial, sans-serif; justify-content: center; align-items: center; flex-direction: column;">
+                <div id="backModal" style="background: #222; padding: 30px; border-radius: 10px; text-align: center; width: 90%; max-width: 400px;">
+                    <p style="font-size: 18px; margin: 0 0 10px;">Do you really want to go back?</p>
+
+                    <div id="passwordContainer" style="display: none;">
+                        <p style="margin-top: 10px;">Enter password to go back:</p>
+                        <input type="password" id="backPassword" placeholder="Enter password"
+                            style="padding: 10px; width: 80%; margin-top: 10px; border-radius: 5px; border: none; font-size: 16px;">
+                    </div>
+
+                    <div id="modalButtons" style="margin-top: 20px;">
+                        <button onclick="handleYes()" style="padding: 10px 20px; margin: 5px; border: none; border-radius: 5px; background: limegreen; color: white; font-size: 16px; cursor: pointer;">Yes</button>
+                        <button onclick="closeBackModal()" style="padding: 10px 20px; margin: 5px; border: none; border-radius: 5px; background: crimson; color: white; font-size: 16px; cursor: pointer;">No</button>
+                    </div>
+                </div>
+            </div>
+                      
+
+    <style>
+        body {
+            position: relative;
+            z-index: 1;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f8f0;
+        }
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('img/wisdom_logo1.png') no-repeat center center;
+            background-size: 300px 300px;
+            opacity: 0.1;
+            z-index: 0;
+            pointer-events: none;
+        }
+        #logout-container {
+            text-align: right;
+            padding: 10px;
+            background: #2c3e50;
+        }
+        #datetime {
+            color: rgb(120,200,150);
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            margin: 10px 0;
+        }
+        #logout {
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            cursor: pointer;
+            font-size: 14px;
+            border-radius: 5px;
+        }
+        #header {
+            padding: 20px;
+            background: linear-gradient(to right, rgb(120,200,150), orange);
+            color: white;
+            border-bottom: 5px solid #ff9800;
+        }
+        #logo img {
+            max-width: 200px;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+        #student-info {
+            margin-top: 20px;
+            text-align: center;
+        }
+        #student-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            display: block;
+            margin: 0 auto 10px;
+            border: 3px solid white;
+            background: #ddd;
+        }
+        #welcome-message {
+            color: #ffeb3b;
+            font-size: 24px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        #userAnswerCount {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 15px;
+            border-radius: 8px;
+            color: white;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            width: 200px;
+            z-index: 100;
+        }
+        #answeredLabel {
+            color: lime;
+            font-size: 18px;
+            font-weight: bold;
+            margin: 5px 0;
+        }
+        #unansweredLabel {
+            color: red;
+            font-size: 18px;
+            font-weight: bold;
+            margin: 5px 0;
+        }
+        .container {
+            margin: 20px auto;
+            width: 80%;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        #questionText {
+            width: 98%;
+            min-height: 100px;
+            resize: none;
+            padding: 15px;
+            font-size: 18px;
+            color: red; /*#333;*/
+            background-color: lime;/* #f9f9f9;*/
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            margin-bottom: 15px;
+            font-family: Arial, "Segoe UI Symbol", "Apple Symbols", sans-serif;
+        }
+        .option-group {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            padding: 12px;
+            background-color: #f5f5f5;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .option-group:hover {
+            background-color: #e8f5e8;
+        }
+        .option-group input {
+            margin-right: 15px;
+            transform: scale(1.3);
+        }
+        .option-group label {
+            font-weight: bold;
+            font-size: 16px;
+            color: #333;
+            font-family: Arial, "Segoe UI Symbol", "Apple Symbols", sans-serif;
+        }
+        .nav-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .btn-cool {
+            padding: 12px 25px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            background: #2e7d32;
+            color: white;
+            cursor: pointer;
+            transition: background 0.3s;
+            font-weight: bold;
+        }
+        .btn-cool:hover {
+            background: #1b5e20;
+        }
+        .questionButtons {
+            margin: 15px 0;
+            text-align: center;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 5px;
+        }
+        .question-btn {
+            margin: 3px;
+            padding: 8px 12px;
+            border-radius: 6px;
+            border: 1px solid #444;
+            cursor: pointer;
+            font-weight: bold;
+            background-color: #eee;
+            min-width: 40px;
+            transition: all 0.3s;
+        }
+        .question-btn:hover {
+            background-color: #d0f0d0;
+        }
+        #timer {
+            font-size: 24px;
+            font-weight: bold;
+            color: #e74c3c;
+            text-align: center;
+            margin: 10px 0;
+            background-color: #f9f9f9;
+            padding: 10px;
+            border-radius: 5px;
+            border: 2px solid #e74c3c;
+        }
+        .section-toggle {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        .section-btn {
+            padding: 12px 24px;
+            margin: 0 10px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .section-btn.active {
+            background-color: #2e7d32;
+            color: white;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        .section-btn:not(.active) {
+            background-color: #e0e0e0;
+            color: #333;
+        }
+        #theorySection {
+            display: none;
+            background: #fff9e6;
+            color: #333;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px auto;
+            width: 80%;
+            border: 2px solid #ff9800;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        #theoryQuestionText {
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 15px;
+            line-height: 1.6;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 5px;
+            border-left: 5px solid #ff9800;
+            font-family: Arial, sans-serif;
+        }
+        #theoryAnswer {
+            width: 100%;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+            resize: vertical;
+            min-height: 200px;
+            font-family: Arial, sans-serif;
+            margin-bottom: 15px;
+        }
+        .theory-nav-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        .theory-btn {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .theory-save-btn {
+            background-color: #28a745;
+            color: white;
+        }
+        .theory-save-btn:hover {
+            background-color: #218838;
+        }
+        .theory-prev-btn, .theory-next-btn {
+            background-color: #007bff;
+            color: white;
+        }
+        .theory-prev-btn:hover, .theory-next-btn:hover {
+            background-color: #0069d9;
+        }
+        .theory-submit-btn {
+            background-color: #dc3545;
+            color: white;
+        }
+        .theory-submit-btn:hover {
+            background-color: #c82333;
+        }
+        .theory-status {
+            text-align: center;
+            margin: 10px 0;
+            font-weight: bold;
+            color: #333;
+            padding: 10px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+        }
+        .windows-activate {
+            text-align: center;
+            margin-top: 30px;
+            color: #333;
+            font-size: 14px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin: 20px;
+        }
+        .exam-info {
+            text-align: center;
+            font-weight: bold;
+            margin: 10px 0;
+            color: #2c3e50;
+            font-size: 18px;
+        }
+        /* Math symbols styling */
+        sup, sub {
+            font-size: 0.75em;
+            line-height: 1;
+        }
+        sup {
+            vertical-align: super;
+        }
+        sub {
+            vertical-align: sub;
+        }
+        /* Theory Question Images */
+        .theory-image-container {
+            margin: 15px 0;
+            text-align: center;
+        }
+        .theory-image-wrapper {
+            display: inline-block;
+            max-width: 100%;
+            padding: 10px;
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .theory-question-image {
+            max-width: 100%;
+            max-height: 300px;
+            height: auto;
+            border-radius: 5px;
+            display: block;
+            margin: 0 auto;
+            background: #f0f0f0;
+            padding: 10px;
+        }
+        .image-caption {
+            font-style: italic;
+            color: #666;
+            margin-top: 8px;
+            font-size: 14px;
+            text-align: center;
+        }
+        /* Objective question images */
+        #questionImageContainer {
+            text-align: center;
+            margin: 15px 0;
+        }
+        .question-image {
+            max-width: 100%;
+            max-height: 250px;
+            height: auto;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            padding: 5px;
+            background: white;
+        }
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+
+
+
+
+         .marquee-container {
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+            background: gold;
+            padding: 10px 0;
+        }
+    
+        /* Moving text animation */
+        .marquee-text {
+            display: inline-block;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            animation: marquee 10s linear infinite;
+        }
+
+        /* Keyframes for moving text */
+        @keyframes marquee {
+            from {
+                transform: translateX(100%);
+            }
+            to {
+                transform: translateX(-100%);
+            }
+        }
+        
+
+        /* Theory question text styling for proper HTML tag display */
+.theory-question-text {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-left: 4px solid #d35400;
+    border-radius: 0 8px 8px 0;
+    min-height: 100px;
+    overflow-x: auto;
+}
+
+/* Style for underlined text */
+.theory-question-text u {
+    text-decoration: underline;
+    text-decoration-color: #d35400;
+}
+
+/* Style for bold text */
+.theory-question-text strong, 
+.theory-question-text b {
+    color: #2c3e50;
+    font-weight: 700;
+}
+
+/* Style for italic text */
+.theory-question-text em,
+.theory-question-text i {
+    font-style: italic;
+    color: #7f8c8d;
+}
+
+/* Style for paragraphs inside theory questions */
+.theory-question-text p {
+    margin-bottom: 10px;
+}
+
+/* Style for lists */
+.theory-question-text ul,
+.theory-question-text ol {
+    margin-left: 20px;
+    margin-bottom: 10px;
+}
+
+.theory-question-text li {
+    margin-bottom: 5px;
+}
+
+/* Style for tables if needed */
+.theory-question-text table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 10px 0;
+}
+
+.theory-question-text th,
+.theory-question-text td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.theory-question-text th {
+    background-color: #d35400;
+    color: white;
+}
+
+/* Style for code blocks */
+.theory-question-text pre,
+.theory-question-text code {
+    background-color: #2c3e50;
+    color: #ecf0f1;
+    padding: 10px;
+    border-radius: 5px;
+    overflow-x: auto;
+    font-family: 'Courier New', monospace;
+}
+
+/* Style for blockquotes */
+.theory-question-text blockquote {
+    border-left: 3px solid #d35400;
+    padding-left: 15px;
+    margin-left: 0;
+    color: #555;
+    font-style: italic;
+}
+
+    </style>
+</head>
+<body oncontextmenu="return false">
+    <div id="header">
+        <div id="logout-container">
+            <button id="logout" onclick="logout()">Logout</button>
+                 <div class="marquee-container">
+        <span class="marquee-text">WISDOM FOUDATION SCHOOLS : IS THE GATEWAY TO THE UNIVERSITY FOR YOUR CHILD</span>
+    </div>
+        </div>
+        <div id="logo">
+            <img src="img/wisdom_logo1.png" alt="COLLEGE CBT PORTAL">
+        </div>
+        <div id="student-info">
+            <center><strong>ATTENTION! CLICK ON SUBMIT BUTTON BEFORE YOUR TIME IS UP TO SAVE YOUR SCORE</strong></center>
+            <center><p id="datetime"></p></center>
+              <div id="welcome-message">
+            <label id="usernameDisplay"></label>
+        </div>
+         <div class="student-info">
+          <img id="userImage" src="img/default_user.jpg" alt="Student Image" style="width:120px; height:120px; border-radius:50%; border:3px solid #008000; display:block; margin:0 auto;">
+      
+          <h2 id="username">Student Name</h2>
+           </div>
+
+        <!--<img id="userImage" src="img/default_user.jpg" alt="Student Image" style="width:120px; height:120px; border-radius:50%; border:3px solid #008000; display:block; margin:0 auto;">
+      
+            <center><img id="userImage">\n\n</center>
+             <img id="userImage" src="img/default_user.jpg" alt="Student Image">
+            <center>Hello: <span id="userName"></span></center>
+        </div>-->
+
+    
+        <center><h3>WISDOM FOUNDATION SCHOOLS EGBEWA  ADO EKITI </h3></center> 
+        <center><h3>FIRST TERM EXAMINATION 2026/2027 ACADEMIC SESSION</h3></center>
+       
+        <!-- SECTION TOGGLE BUTTONS -->
+        <div class="section-toggle">
+            <button id="objectivesBtn" class="section-btn active" onclick="showSection('objectives')">OBJECTIVE QUESTIONS</button>
+            <button id="theoryBtn" class="section-btn" onclick="showSection('theory')">THEORY QUESTIONS</button>
+        </div>
+       
+        <div class="exam-info">
+            Exam: <span id="examInfo" style="color: white;">  ENGLISH LANGUAGE - SS2 (FIRST TERM)</span>
+        </div>
+       
+        <div id="timer"></div>
+    </div>
+   
+    <!-- OBJECTIVES SECTION -->
+    <div id="objectivesSection">
+        <div class="container">
+            <h5 style="color: #d35400; text-align: center;">INSTRUCTIONS: READ THE QUESTIONS CAREFULLY BEFORE YOU CHOOSE YOUR ANSWER</h5>
+            <div class="scroll-container">
+                <div id="questionText"></div>
+            </div>
+           
+            <div id="questionImageContainer"></div>
+           
+            <div class="option-group">
+                <label class="option"><strong>A.</strong><input type="radio" name="option" value="A"> <span id="optA"></span></label>
+            </div>
+            <div class="option-group">
+                <label class="option"><strong>B.</strong><input type="radio" name="option" value="B"> <span id="optB"></span></label>
+            </div>
+            <div class="option-group">
+                <label class="option"><strong>C.</strong><input type="radio" name="option" value="C"> <span id="optC"></span></label>
+            </div>
+            <div class="option-group">
+                <label class="option"><strong>D.</strong><input type="radio" name="option" value="D"> <span id="optD"></span></label>
+            </div>
+        </div>
+       
+        <div class="nav-buttons">
+            <button onclick="prevQuestion()" class="btn-cool">Previous</button>
+            <button onclick="nextQuestion()" class="btn-cool">Next</button>
+            <button onclick="submitExam()" class="btn-cool">Submit Objectives</button>
+        </div>
+       
+        <!-- Question navigation buttons -->
+        <div class="container">
+            <div id="questionButtons" class="questionButtons"></div>
+        </div>
+    </div>
+   
+    <!-- THEORY SECTION -->
+    <!--<div id="theorySection">
+        <h3 style="text-align: center; color: #d35400; margin-bottom: 20px;">THEORY QUESTIONS SECTION</h3>
+        <div class="theory-status" id="theoryStatus">
+            Question 1 of 5 | Saved: 0/5
+        </div>
+        <div id="theoryQuestionContainer">
+            <p id="theoryQuestionText">Loading theory questions...</p>
+            <div id="theoryImageContainer"></div>
+            <textarea id="theoryAnswer" rows="8" placeholder="Write your detailed answer here..."></textarea>
+            <div class="theory-nav-buttons">
+                <button onclick="prevTheoryQuestion()" class="theory-btn theory-prev-btn">Previous</button>
+                <button onclick="saveTheoryAnswer()" class="theory-btn theory-save-btn">Save Answer</button>
+                <button onclick="nextTheoryQuestion()" class="theory-btn theory-next-btn">Next</button>
+                <button onclick="submitTheoryExam()" class="theory-btn theory-submit-btn">Submit Theory</button>
+            </div>
+        </div>
+    </div>-->
+
+
+
+<!-- THEORY SECTION -->
+<div id="theorySection" style="display: none;">
+    <h3 style="text-align: center; color: #d35400; margin-bottom: 20px;">THEORY QUESTIONS SECTION</h3>
+    <div class="theory-status" id="theoryStatus">
+        Question 1 of 5 | Saved: 0/5
+    </div>
+    <div id="theoryQuestionContainer">
+        <div id="theoryQuestionText">Loading theory questions...</div> <!-- Changed from <p> to <div> for better HTML support -->
+        <div id="theoryImageContainer"></div>
+        <textarea id="theoryAnswer" rows="8" placeholder="Write your detailed answer here..."></textarea>
+        <div class="theory-nav-buttons">
+            <button onclick="prevTheoryQuestion()" class="theory-btn theory-prev-btn">Previous</button>
+            <button onclick="saveTheoryAnswer()" class="theory-btn theory-save-btn">Save Answer</button>
+            <button onclick="nextTheoryQuestion()" class="theory-btn theory-next-btn">Next</button>
+            <button onclick="submitTheoryExam()" class="theory-btn theory-submit-btn">Submit Theory</button>
+        </div>
+    </div>
+</div>
+
+
+   
+    <div id="userAnswerCount">
+        <p id="answeredLabel">Answered: 0/5</p>
+        <p id="unansweredLabel">Unanswered: 5/5</p>
+    </div>
+             <div class="marquee-container">
+        <span class="marquee-text">FIRST TERM EXAMINATIONS 2026/2027 ACADEMIC SESSION</span>
+    </div>
+   
+    <div class="windows-activate">
+        <p> &copy; cbt.<span style="color: red;">wisdom</span><span style="color: green;">foundation schools</span>.org</p>
+    </div>
+
+
+    <script>
+           // Get stored username and image from sessionStorage
+       
+            
+    
+        // ================== STATIC QUESTIONS DATA ==================
+   const staticObjectivesQuestions = [
+                                
+                                     
+                                          {
+                                            "id": 1,
+                                            "question": "In the following sentence, there is an underlined word and one gap. From the list of words lettered A to D, choose the one that is most nearly opposite in meaning to the underlined word and that will at the same time, correctly fill the gap in the sentence. <br><br> Binetou's <u>inquisitiveness</u> is in sharp contrast with her sister's _________",
+                                            "options": {
+                                              "A": "indifference",
+                                              "B": "noisiness",
+                                              "C": "calmness",
+                                              "D": "dullness"
+                                            },
+                                            "answer": "A",
+                                            "image": null
+                                          },
+                                          {
+                                            "id": 2,
+                                            "question": "In the following sentence, there is an underlined word and one gap. From the list of words lettered A to D, choose the one that is most nearly opposite in meaning to the underlined word and that will at the same time, correctly fill the gap in the sentence. <br><br> Though at first it appeared an <u>insignificant</u> idea, it turned out to be quite _________",
+                                            "options": {
+                                              "A": "outstanding",
+                                              "B": "successful",
+                                              "C": "remarkable",
+                                              "D": "interesting"
+                                            },
+                                            "answer": "C",
+                                            "image": null
+                                          },
+                                          {
+                                            "id": 3,
+                                            "question": "In the following sentence, there is an underlined word and one gap. From the list of words lettered A to D, choose the one that is most nearly opposite in meaning to the underlined word and that will at the same time, correctly fill the gap in the sentence. <br><br> After grasping the <u>fundamental</u> aspects of his job, Kwesi had to cope with more _________ procedures.",
+                                            "options": {
+                                              "A": "advanced",
+                                              "B": "academic",
+                                              "C": "subsidiary",
+                                              "D": "secondary"
+                                            },
+                                            "answer": "A",
+                                            "image": null
+                                          },
+                                          {
+                                            "id": 4,
+                                            "question": "In the following sentence, there is an underlined word and one gap. From the list of words lettered A to D, choose the one that is most nearly opposite in meaning to the underlined word and that will at the same time, correctly fill the gap in the sentence. <br><br> The youth prefer discussing <u>contemporary</u> issues to _________ ones.",
+                                            "options": {
+                                              "A": "archaic",
+                                              "B": "uninteresting",
+                                              "C": "stale",
+                                              "D": "political"
+                                            },
+                                            "answer": "A",
+                                            "image": null
+                                          },
+                                          {
+                                            "id": 5,
+                                            "question": "In the following sentence, there is an underlined word and one gap. From the list of words lettered A to D, choose the one that is most nearly opposite in meaning to the underlined word and that will at the same time, correctly fill the gap in the sentence. <br><br> As <u>erroneous</u> as it might sound, the Headmaster's assumption was quite _________",
+                                            "options": {
+                                              "A": "wise",
+                                              "B": "correct",
+                                              "C": "precise",
+                                              "D": "faulty"
+                                            },
+                                            "answer": "B",
+                                            "image": null
+                                          },
+                                          {
+                                            "id": 6,
+                                            "question": "In the following sentence, there is an underlined word and one gap. From the list of words lettered A to D, choose the one that is most nearly opposite in meaning to the underlined word and that will at the same time, correctly fill the gap in the sentence. <br><br> Halima likes to dwell on <u>trivial</u>, rather than _________ matters.",
+                                            "options": {
+                                              "A": "strong",
+                                              "B": "popular",
+                                              "C": "weighty",
+                                              "D": "heavy"
+                                            },
+                                            "answer": "C",
+                                            "image": null
+                                          },
+                                          {
+                                            "id": 7,
+                                            "question": "In the following sentence, there is an underlined word and one gap. From the list of words lettered A to D, choose the one that is most nearly opposite in meaning to the underlined word and that will at the same time, correctly fill the gap in the sentence. <br><br> We all know that Bola is <u>insolent</u> whereas Ade is _________",
+                                            "options": {
+                                              "A": "cowardly",
+                                              "B": "respectful",
+                                              "C": "humble",
+                                              "D": "modest"
+                                            },
+                                            "answer": "B",
+                                            "image": null
+                                          },
+                                          {
+                                            "id": 8,
+                                            "question": "In the following sentence, there is an underlined word and one gap. From the list of words lettered A to D, choose the one that is most nearly opposite in meaning to the underlined word and that will at the same time, correctly fill the gap in the sentence. <br><br> A few days after Musa's _________, his sister longed for his <u>departure</u>.",
+                                            "options": {
+                                              "A": "coming",
+                                              "B": "entrance",
+                                              "C": "arrival",
+                                              "D": "welcome"
+                                            },
+                                            "answer": "C",
+                                            "image": null
+                                          },
+                                          {
+                                            "id": 9,
+                                            "question": "In the following sentence, there is an underlined word and one gap. From the list of words lettered A to D, choose the one that is most nearly opposite in meaning to the underlined word and that will at the same time, correctly fill the gap in the sentence. <br><br> Algebra seems <u>complicated</u>, but with practice it becomes _________",
+                                            "options": {
+                                              "A": "solved",
+                                              "B": "simple",
+                                              "C": "accessible",
+                                              "D": "achievable"
+                                            },
+                                            "answer": "B",
+                                            "image": null
+                                          },
+                                          {
+                                            "id": 10,
+                                            "question": "In the following sentence, there is an underlined word and one gap. From the list of words lettered A to D, choose the one that is most nearly opposite in meaning to the underlined word and that will at the same time, correctly fill the gap in the sentence. <br><br> Mrs. Agide is <u>unassuming</u> whereas her twin sister is _________",
+                                            "options": {
+                                              "A": "cheerful",
+                                              "B": "boastful",
+                                              "C": "loud",
+                                              "D": "rude"
+                                            },
+                                            "answer": "B",
+                                            "image": null
+                                          },
+
+                                          {
+                                            "id": 11,
+                                            "question": "From the words lettered A to D, choose the word that best completes each of the following sentences. <br><br> At Christmas, employees of the Sugar Factory receive huge ________",
+                                            "options": {
+                                              "A": "benefits",
+                                              "B": "dividends",
+                                              "C": "bonuses",
+                                              "D": "salaries"
+                                            },
+                                            "answer": "C",
+                                            "image": null
+                                          },
+                                          {
+                                            "id": 12,
+                                            "question": "From the words lettered A to D, choose the word that best completes each of the following sentences. <br><br> The exposed milk in the container has turned _______",
+                                            "options": {
+                                              "A": "sour",
+                                              "B": "putrid",
+                                              "C": "mouldy",
+                                              "D": "stale"
+                                            },
+                                            "answer": "A",
+                                            "image": null
+                                          },
+                                          {
+                                            "id": 13,
+                                            "question": "From the words lettered A to D, choose the word that best completes each of the following sentences. <br><br> Not all activists champion ________ causes.",
+                                            "options": {
+                                              "A": "worthy",
+                                              "B": "real",
+                                              "C": "concrete",
+                                              "D": "favourable"
+                                            },
+                                            "answer": "A",
+                                            "image": null
+                                          },
+                                          {
+                                            "id": 14,
+                                            "question": "From the words lettered A to D, choose the word that best completes each of the following sentences. <br><br> The Mayor gave a glowing ________ at the funeral of the city's only curator.",
+                                            "options": {
+                                              "A": "citation",
+                                              "B": "statement",
+                                              "C": "tribute",
+                                              "D": "commendation"
+                                            },
+                                            "answer": "C",
+                                            "image": null
+                                          },
+                                          {
+                                            "id": 15,
+                                            "question": "From the words lettered A to D, choose the word that best completes each of the following sentences. <br><br> At the end of the _______, the National Anthem is played on our radio station.",
+                                            "options": {
+                                              "A": "programming",
+                                              "B": "production",
+                                              "C": "transition",
+                                              "D": "transmission"
+                                            },
+                                            "answer": "D",
+                                            "image": null
+                                          },
+                                          {
+                                            "id": 16,
+                                            "question": "From the words lettered A to D, choose the word that best completes each of the following sentences. <br><br> The defence counsel was unable to convince the ______ of John's innocence.",
+                                            "options": {
+                                              "A": "plaintiff",
+                                              "B": "witness",
+                                              "C": "panel",
+                                              "D": "jury"
+                                            },
+                                            "answer": "D",
+                                            "image": null
+                                          },
+                                          {
+                                            "id": 17,
+                                            "question": "From the words lettered A to D, choose the word that best completes each of the following sentences. <br><br> Unfortunately, corruption is the _______ of most African countries.",
+                                            "options": {
+                                              "A": "venom",
+                                              "B": "bane",
+                                              "C": "disaster",
+                                              "D": "backbone"
+                                            },
+                                            "answer": "B",
+                                            "image": null
+                                          },
+                                          {
+                                            "id": 18,
+                                            "question": "From the words lettered A to D, choose the word that best completes each of the following sentences. <br><br> The _______ results proved that the patient had hepatitis.",
+                                            "options": {
+                                              "A": "investigation",
+                                              "B": "diagnosis",
+                                              "C": "probe",
+                                              "D": "test"
+                                            },
+                                            "answer": "B",
+                                            "image": null
+                                          },
+                                          {
+                                            "id": 19,
+                                            "question": "From the words lettered A to D, choose the word that best completes each of the following sentences. <br><br> The new book has beautiful _______ which make it attractive.",
+                                            "options": {
+                                              "A": "illustrations",
+                                              "B": "demonstrations",
+                                              "C": "illuminations",
+                                              "D": "compositions"
+                                            },
+                                            "answer": "A",
+                                            "image": null
+                                          },
+                                          {
+                                            "id": 20,
+                                            "question": "From the words lettered A to D, choose the word that best completes each of the following sentences. <br><br> Their marriage was finally _____ after years of hostility.",
+                                            "options": {
+                                              "A": "cancelled",
+                                              "B": "annulled",
+                                              "C": "broken",
+                                              "D": "separated"
+                                            },
+                                            "answer": "B",
+                                            "image": null
+                                          },
+                                          {
+                                            "id": 21,
+                                            "question": "After the following sentence, a list of possible interpretations is given. Choose the interpretation that is most appropriate for the sentence. <br><br> Can you imagine Oka behaving as if he has all the knowledge in the world? This means that Oka.",
+                                            "options": {
+                                              "A": "does not really know anything",
+                                              "B": "knows so much more than we think",
+                                              "C": "is admired by everybody",
+                                              "D": "respects other people"
+                                            },
+                                            "answer": "A",
+                                            "image": null
+                                          },
+                                          {
+                                            "id": 22,
+                                            "question": "After the following sentence, a list of possible interpretations is given. Choose the interpretation that is most appropriate for the sentence. <br><br> Akin is too full of himself. This means that Akin",
+                                            "options": {
+                                              "A": "Talks too much",
+                                              "B": "eats too much",
+                                              "C": "is too proud",
+                                              "D": "is quite annoying"
+                                            },
+                                            "answer": "C",
+                                            "image": null
+                                          },
+                                          {
+                                            "id": 23,
+                                            "question": "After the following sentence, a list of possible interpretations is given. Choose the interpretation that is most appropriate for the sentence. <br><br> She slogged her guts out for the examinations. This means that she",
+                                            "options": {
+                                              "A": "failed the examination despite working hard for it",
+                                              "B": "passed the examination despite not working hard for it",
+                                              "C": "used unfair means to face the examination",
+                                              "D": "really worked very hard for the examination"
+                                            },
+                                            "answer": "D",
+                                            "image": null
+                                          },
+                                          {
+                                            "id": 24,
+                                            "question": "After the following sentence, a list of possible interpretations is given. Choose the interpretation that is most appropriate for the sentence. <br><br> I admire Modou: very few people can stomach all of Adaeze's insults. This means that Modou",
+                                            "options": {
+                                              "A": "tolerated Adaeze's insults",
+                                              "B": "was a weakling",
+                                              "C": "had no answer to Adaeze's insults",
+                                              "D": "did the right thing by remaining silent"
+                                            },
+                                            "answer": "A",
+                                            "image": null
+                                          },
+                                          {
+                                            "id": 25,
+                                            "question": "After the following sentence, a list of possible interpretations is given. Choose the interpretation that is most appropriate for the sentence. <br><br> After months of battling with stroke, he is now a shadow of his former self. This means that he",
+                                            "options": {
+                                              "A": "is now frail",
+                                              "B": "is vulnerable",
+                                              "C": "is hopeless",
+                                              "D": "has almost recovered"
+                                            },
+                                            "answer": "A",
+                                            "image": null
+                                          },
+                                          {
+                                            "id": 26,
+                                            "question": "After the following sentence, a list of possible interpretations is given. Choose the interpretation that is most appropriate for the sentence. <br><br> Kura, you can't be too careful when dealing with Wang. This means that Kura.",
+                                            "options": {
+                                              "A": "has no reason to be suspicious of Wang",
+                                              "B": "can fully rely on Wang",
+                                              "C": "has to be very careful in his relationship with Wang",
+                                              "D": "may feel free in the company of Wang"
+                                            },
+                                            "answer": "C",
+                                            "image": null
+                                          },
+                                          {
+                                            "id": 27,
+                                            "question": "After the following sentence, a list of possible interpretations is given. Choose the interpretation that is most appropriate for the sentence. <br><br> Don't tell me another cock and bull story. This means that the speaker does not want to.",
+                                            "options": {
+                                              "A": "be further baffled",
+                                              "B": "hear the same old story",
+                                              "C": "hear another drab story",
+                                              "D": "be further deceived"
+                                            },
+                                            "answer": "D",
+                                            "image": null
+                                          },
+                                          {
+                                            "id": 28,
+                                            "question": "After the following sentence, a list of possible interpretations is given. Choose the interpretation that is most appropriate for the sentence. <br><br> Had he confessed much earlier, she would have trusted him. This means that he",
+                                            "options": {
+                                              "A": "had confessed earlier on, but he wasn't trusted",
+                                              "B": "had confessed much earlier on and he was trusted",
+                                              "C": "hadn't confessed much earlier on and he was trusted",
+                                              "D": "hadn't confessed earlier on, and wasn't trusted"
+                                            },
+                                            "answer": "D",
+                                            "image": null
+                                          },
+                                          {
+                                            "id": 29,
+                                            "question": "After the following sentence, a list of possible interpretations is given. Choose the interpretation that is most appropriate for the sentence. <br><br> Kola: You really worked hard to win the case. <br> Didia: You don't know the half of it. This means that.",
+                                            "options": {
+                                              "A": "it wasn't as difficult as Kola had thought",
+                                              "B": "Kola's statement wasn't actually correct",
+                                              "C": "it was even more difficult than Kola could imagine",
+                                              "D": "Winning the case didn't mean much to Kola"
+                                            },
+                                            "answer": "C",
+                                            "image": null
+                                          },
+                                          {
+                                            "id": 30,
+                                            "question": "After the following sentence, a list of possible interpretations is given. Choose the interpretation that is most appropriate for the sentence. <br><br> Femi is too clever by half. This means that Femi",
+                                            "options": {
+                                              "A": "displays his cleverness in an annoying way",
+                                              "B": "is not as clever as he thinks",
+                                              "C": "pleases everyone he meets",
+                                              "D": "hides how clever he really is"
+                                            },
+                                            "answer": "A",
+                                            "image": null
+                                          },
+
+
+                                            {
+                                              "id": 31,
+                                              "question": "From the words lettered A to D below each of the following sentences, choose the word or group of words that is nearest in meaning to the underlined word as it is used in the sentence. <br><br> He was such <u>a brilliant footballer!</u>",
+                                              "options": {
+                                                "A": "an inspired",
+                                                "B": "an intelligent",
+                                                "C": "a dazzling",
+                                                "D": "skillful"
+                                              },
+                                              "answer": "D",
+                                              "image": null
+                                            },
+                                            {
+                                              "id": 32,
+                                              "question": "From the words lettered A to D below each of the following sentences, choose the word or group of words that is nearest in meaning to the underlined word as it is used in the sentence. <br><br> The Politician is <u>a fluent</u> speaker.",
+                                              "options": {
+                                                "A": "an eloquent",
+                                                "B": "a superficial",
+                                                "C": "an insightful",
+                                                "D": "a persuasive"
+                                              },
+                                              "answer": "A",
+                                              "image": null
+                                            },
+                                            {
+                                              "id": 33,
+                                              "question": "From the words lettered A to D below each of the following sentences, choose the word or group of words that is nearest in meaning to the underlined word as it is used in the sentence. <br><br> Everyone has the <u>urge</u> to succeed in life.",
+                                              "options": {
+                                                "A": "compulsion",
+                                                "B": "desire",
+                                                "C": "need",
+                                                "D": "courage"
+                                              },
+                                              "answer": "B",
+                                              "image": null
+                                            },
+                                            {
+                                              "id": 34,
+                                              "question": "From the words lettered A to D below each of the following sentences, choose the word or group of words that is nearest in meaning to the underlined word as it is used in the sentence. <br><br> When he heard the gunshot, he ran into a <u>thick</u> forest.",
+                                              "options": {
+                                                "A": "tight",
+                                                "B": "deep",
+                                                "C": "dense",
+                                                "D": "close"
+                                              },
+                                              "answer": "C",
+                                              "image": null
+                                            },
+                                            {
+                                              "id": 35,
+                                              "question": "From the words lettered A to D below each of the following sentences, choose the word or group of words that is nearest in meaning to the underlined word as it is used in the sentence. <br><br> That was a <u>timely</u> intervention.",
+                                              "options": {
+                                                "A": "suitable",
+                                                "B": "accurate",
+                                                "C": "prompt",
+                                                "D": "major"
+                                              },
+                                              "answer": "C",
+                                              "image": null
+                                            },
+                                            {
+                                              "id": 36,
+                                              "question": "From the words lettered A to D below each of the following sentences, choose the word or group of words that is nearest in meaning to the underlined word as it is used in the sentence. <br><br> David is not only hardworking but also <u>scrupulous</u>.",
+                                              "options": {
+                                                "A": "painstaking",
+                                                "B": "ambitious",
+                                                "C": "pleasant",
+                                                "D": "daring"
+                                              },
+                                              "answer": "A",
+                                              "image": null
+                                            },
+                                            {
+                                              "id": 37,
+                                              "question": "From the words lettered A to D below each of the following sentences, choose the word or group of words that is nearest in meaning to the underlined word as it is used in the sentence. <br><br> We really have to be careful because the situation is rather <u>tricky</u>.",
+                                              "options": {
+                                                "A": "deceitful",
+                                                "B": "trivial",
+                                                "C": "unexpected",
+                                                "D": "difficult"
+                                              },
+                                              "answer": "D",
+                                              "image": null
+                                            },
+                                            {
+                                              "id": 38,
+                                              "question": "From the words lettered A to D below each of the following sentences, choose the word or group of words that is nearest in meaning to the underlined word as it is used in the sentence. <br><br> I think that his essay is <u>impeccable</u>.",
+                                              "options": {
+                                                "A": "erroneous",
+                                                "B": "correct",
+                                                "C": "satisfactory",
+                                                "D": "faultless"
+                                              },
+                                              "answer": "D",
+                                              "image": null
+                                            },
+
+                                            {
+                                              "id": 39,
+                                              "question": "From the words lettered A to D below each of the following sentences, choose the word or group of words that is nearest in meaning to the underlined word as it is used in the sentence. <br><br> There has been a <u>marked</u> change in her study habit.",
+                                              "options": {
+                                                "A": "significant",
+                                                "B": "real",
+                                                "C": "full",
+                                                "D": "complete"
+                                              },
+                                              "answer": "A",
+                                              "image": null
+                                            },
+                                            {
+                                              "id": 40,
+                                              "question": "From the words lettered A to D below each of the following sentences, choose the word or group of words that is nearest in meaning to the underlined word as it is used in the sentence. <br><br> He was <u>directed</u> to write the letter.",
+                                              "options": {
+                                                "A": "advised",
+                                                "B": "instructed",
+                                                "C": "persuaded",
+                                                "D": "forced"
+                                              },
+                                              "answer": "B",
+                                              "image": null
+                                            },
+
+
+                              {
+                                "id": 41,
+                                "question": "From the words or group of words lettered A to D, choose the word or group of words that best completes each of the following sentences. <br><br> Every one of the students _______ to be excited about the excursion.",
+                                "options": {
+                                  "A": "was seeming",
+                                  "B": "is seeming",
+                                  "C": "seem",
+                                  "D": "seems"
+                                },
+                                "answer": "D",
+                                "image": null
+                              },
+                              {
+                                "id": 42,
+                                "question": "From the words or group of words lettered A to D, choose the word or group of words that best completes each of the following sentences. <br><br> We should assist the poor ________ ?",
+                                "options": {
+                                  "A": "shall we",
+                                  "B": "isn't it",
+                                  "C": "shouldn't we",
+                                  "D": "we shouldn't"
+                                },
+                                "answer": "C",
+                                "image": null
+                              },
+                              {
+                                "id": 43,
+                                "question": "From the words or group of words lettered A to D, choose the word or group of words that best completes each of the following sentences. <br><br> Either he or you ______ to clean up the mess.",
+                                "options": {
+                                  "A": "has",
+                                  "B": "have",
+                                  "C": "were",
+                                  "D": "was"
+                                },
+                                "answer": "B",
+                                "image": null
+                              },
+                              {
+                                "id": 44,
+                                "question": "From the words or group of words lettered A to D, choose the word or group of words that best completes each of the following sentences. <br><br> If Musa had woken up earlier, he ______ breakfast.",
+                                "options": {
+                                  "A": "would not have missed",
+                                  "B": "ought not to miss",
+                                  "C": "shall have missed",
+                                  "D": "may have missed"
+                                },
+                                "answer": "A",
+                                "image": null
+                              },
+                              {
+                                "id": 45,
+                                "question": "From the words or group of words lettered A to D, choose the word or group of words that best completes each of the following sentences. <br><br> He would rather appeal the decision _______ defeat.",
+                                "options": {
+                                  "A": "instead of accepting",
+                                  "B": "than accepting",
+                                  "C": "than accepts",
+                                  "D": "than accept"
+                                },
+                                "answer": "D",
+                                "image": null
+                              },
+                              {
+                                "id": 46,
+                                "question": "From the words or group of words lettered A to D, choose the word or group of words that best completes each of the following sentences. <br><br> The student complained that he ______ the teacher.",
+                                "options": {
+                                  "A": "was not hearing",
+                                  "B": "could not hear",
+                                  "C": "does not hear",
+                                  "D": "is not hearing"
+                                },
+                                "answer": "B",
+                                "image": null
+                              },
+                              {
+                                "id": 47,
+                                "question": "From the words or group of words lettered A to D, choose the word or group of words that best completes each of the following sentences. <br><br> My brother ______ in lagos for the past ten years.",
+                                "options": {
+                                  "A": "is living",
+                                  "B": "lived",
+                                  "C": "will lived",
+                                  "D": "has been living"
+                                },
+                                "answer": "D",
+                                "image": null
+                              },
+                              {
+                                "id": 48,
+                                "question": "From the words or group of words lettered A to D, choose the word or group of words that best completes each of the following sentences. <br><br> I am totally disappointed _______ such poor grades.",
+                                "options": {
+                                  "A": "from",
+                                  "B": "with",
+                                  "C": "for",
+                                  "D": "on"
+                                },
+                                "answer": "B",
+                                "image": null
+                              },
+                              {
+                                "id": 49,
+                                "question": "From the words or group of words lettered A to D, choose the word or group of words that best completes each of the following sentences. <br><br> He is a doctor but he dabbles _______ politics now and then.",
+                                "options": {
+                                  "A": "in",
+                                  "B": "through",
+                                  "C": "on",
+                                  "D": "into"
+                                },
+                                "answer": "A",
+                                "image": null
+                              },
+                              {
+                                "id": 50,
+                                "question": "From the words or group of words lettered A to D, choose the word or group of words that best completes each of the following sentences. <br><br> _______ arrived before the manager.",
+                                "options": {
+                                  "A": "Neither he nor I",
+                                  "B": "Neither me nor him",
+                                  "C": "Either I nor him",
+                                  "D": "Neither me nor him"
+                                },
+                                "answer": "A",
+                                "image": null
+                              },
+                              {
+                                "id": 51,
+                                "question": "From the words or group of words lettered A to D, choose the word or group of words that best completes each of the following sentences. <br><br> The evening was rounded _____ with a dance.",
+                                "options": {
+                                  "A": "off",
+                                  "B": "up",
+                                  "C": "out",
+                                  "D": "down"
+                                },
+                                "answer": "A",
+                                "image": null
+                              },
+                              {
+                                "id": 52,
+                                "question": "From the words or group of words lettered A to D, choose the word or group of words that best completes each of the following sentences. <br><br> I _______ have done the dishes but i haven't had the time.",
+                                "options": {
+                                  "A": "will",
+                                  "B": "should",
+                                  "C": "might",
+                                  "D": "shall"
+                                },
+                                "answer": "B",
+                                "image": null
+                              },
+                              {
+                                "id": 53,
+                                "question": "From the words or group of words lettered A to D, choose the word or group of words that best completes each of the following sentences. <br><br> I have heard all _______ you've said",
+                                "options": {
+                                  "A": "what",
+                                  "B": "which",
+                                  "C": "that",
+                                  "D": "whatever"
+                                },
+                                "answer": "C",
+                                "image": null
+                              },
+                              {
+                                "id": 54,
+                                "question": "From the words or group of words lettered A to D, choose the word or group of words that best completes each of the following sentences. <br><br> Life in the city is ________ challenging for the lazy.",
+                                "options": {
+                                  "A": "too much",
+                                  "B": "so much",
+                                  "C": "very much",
+                                  "D": "much too"
+                                },
+                                "answer": "D",
+                                "image": null
+                              },
+                              {
+                                "id": 55,
+                                "question": "From the words or group of words lettered A to D, choose the word or group of words that best completes each of the following sentences. <br><br> It is always ________ that gets the blame",
+                                "options": {
+                                  "A": "me",
+                                  "B": "I",
+                                  "C": "myself",
+                                  "D": ""
+                                },
+                                "answer": "B",
+                                "image": null
+                              },
+                              {
+                                "id": 56,
+                                "question": "From the words or group of words lettered A to D, choose the word or group of words that best completes each of the following sentences. <br><br> He spends a ______ deal of his time studying.",
+                                "options": {
+                                  "A": "large",
+                                  "B": "great",
+                                  "C": "big",
+                                  "D": "huge"
+                                },
+                                "answer": "B",
+                                "image": null
+                              },
+                              {
+                                "id": 57,
+                                "question": "From the words or group of words lettered A to D, choose the word or group of words that best completes each of the following sentences. <br><br> I guess he holds _______ sensitive position in the company.",
+                                "options": {
+                                  "A": "some kind",
+                                  "B": "many kind of",
+                                  "C": "some kind of",
+                                  "D": "many kind"
+                                },
+                                "answer": "C",
+                                "image": null
+                              },
+                              {
+                                "id": 58,
+                                "question": "From the words or group of words lettered A to D, choose the word or group of words that best completes each of the following sentences. <br><br> He always gives ______ for coming late to school.",
+                                "options": {
+                                  "A": "one excuse or another",
+                                  "B": "one excuse or the other",
+                                  "C": "some excuse or another",
+                                  "D": "some excuse or the other"
+                                },
+                                "answer": "A",
+                                "image": null
+                              },
+                              {
+                                "id": 59,
+                                "question": "From the words or group of words lettered A to D, choose the word or group of words that best completes each of the following sentences. <br><br> ___________ you turn down down the volume of the radio? I am trying to read!",
+                                "options": {
+                                  "A": "may",
+                                  "B": "will",
+                                  "C": "would",
+                                  "D": "should"
+                                },
+                                "answer": "B",
+                                "image": null
+                              },
+                              {
+                                "id": 60,
+                                "question": "From the words or group of words lettered A to D, choose the word or group of words that best completes each of the following sentences. <br><br> I know it's a secret, so I _____  tell anyone.",
+                                "options": {
+                                  "A": "couldn't",
+                                  "B": "shan't",
+                                  "C": "needn't",
+                                  "D": "mightn't"
+                                },
+                                "answer": "B",
+                                "image": null
+                              },
+                              {
+                                "id": 61,
+                                "question": "From the words or group of words lettered A to D, choose the word or group of words that best completes each of the following sentences. <br><br> At the last minute, Amidu backed _____ of the plan.",
+                                "options": {
+                                  "A": "up",
+                                  "B": "off",
+                                  "C": "out",
+                                  "D": "down"
+                                },
+                                "answer": "C",
+                                "image": null
+                              },
+                              {
+                                "id": 62,
+                                "question": "From the words or group of words lettered A to D, choose the word or group of words that best completes each of the following sentences. <br><br> He ______ be very handsome but i don't like him.",
+                                "options": {
+                                  "A": "shall",
+                                  "B": "will",
+                                  "C": "might",
+                                  "D": "can"
+                                },
+                                "answer": "C",
+                                "image": null
+                              },
+                              {
+                                "id": 63,
+                                "question": "From the words or group of words lettered A to D, choose the word or group of words that best completes each of the following sentences. <br><br> During her early day in school, she ______ study for hours.",
+                                "options": {
+                                  "A": "would",
+                                  "B": "may",
+                                  "C": "can",
+                                  "D": "shall"
+                                },
+                                "answer": "A",
+                                "image": null
+                              },
+                              {
+                                "id": 64,
+                                "question": "From the words or group of words lettered A to D, choose the word or group of words that best completes each of the following sentences. <br><br> He _______ this morning in a dazzling white shirt.",
+                                "options": {
+                                  "A": "turned off",
+                                  "B": "turned in",
+                                  "C": "turned by",
+                                  "D": "turned out"
+                                },
+                                "answer": "D",
+                                "image": null
+                              },
+                              {
+                                "id": 65,
+                                "question": "From the words or group of words lettered A to D, choose the word or group of words that best completes each of the following sentences. <br><br> The police have _________  a warning to all residents of the area.",
+                                "options": {
+                                  "A": "put on",
+                                  "B": "put in",
+                                  "C": "put off",
+                                  "D": "put out"
+                                },
+                                "answer": "D",
+                                "image": null
+                              },
+                              {
+                                "id": 66,
+                                "question": "From the words or group of words lettered A to D, choose the word or group of words that best completes each of the following sentences. <br><br> My parents taught me a lot of lessons, most of ______ are difficult to forget.",
+                                "options": {
+                                  "A": "which",
+                                  "B": "what",
+                                  "C": "who",
+                                  "D": "whom"
+                                },
+                                "answer": "A",
+                                "image": null
+                              },
+                              {
+                                "id": 67,
+                                "question": "From the words or group of words lettered A to D, choose the word or group of words that best completes each of the following sentences. <br><br> Sani ______ on a banana peel and fell down.",
+                                "options": {
+                                  "A": "slide",
+                                  "B": "slid",
+                                  "C": "had slid",
+                                  "D": "was sliding"
+                                },
+                                "answer": "B",
+                                "image": null
+                              },
+                              {
+                                "id": 68,
+                                "question": "From the words or group of words lettered A to D, choose the word or group of words that best completes each of the following sentences. <br><br> I look forward to _________ from you.",
+                                "options": {
+                                  "A": "hear",
+                                  "B": "hearing",
+                                  "C": "be hearing",
+                                  "D": "have heard"
+                                },
+                                "answer": "B",
+                                "image": null
+                              },
+                              {
+                                "id": 69,
+                                "question": "From the words or group of words lettered A to D, choose the word or group of words that best completes each of the following sentences. <br><br> I have made remarkable progress ______ learning French.",
+                                "options": {
+                                  "A": "by",
+                                  "B": "at",
+                                  "C": "in",
+                                  "D": "for"
+                                },
+                                "answer": "C",
+                                "image": null
+                              },
+                              {
+                                "id": 70,
+                                "question": "From the words or group of words lettered A to D, choose the word or group of words that best completes each of the following sentences. <br><br> The beans have not been properly ________",
+                                "options": {
+                                  "A": "grind",
+                                  "B": "ground",
+                                  "C": "grinding",
+                                  "D": "grounded"
+                                },
+                                "answer": "B",
+                                "image": null
+                              },
+
+
+                              {
+                                "id": 71,
+                                "question": "An entrepreneur is a person who organises and manages any business enterprise, or one who combines the other factors of ___71___ to start a business and make profit, He possesses considerable initiatuve and is willing to take ___72___. An entrpreneur can be a farme, a dressmaker, a factory owner, a wholesaler or a ___73___. More often than not, it is best for an entrpreneur to start a business from scratch rather than ___74___ in or buy an existing business. One advantage is that he would be independent and not become a ___75___ or get to inherit some bad debt. The ___76___ of a good entrepreneur must include hardwork, innovation and creativity. He must be well-informed and confident to make worthwhile decisions. As it takes a great deal of energy, time and money to operate one's own business, entrepreneurs must seek to possess goo managerial ___77___ in order to manage theor business successfully. But how useful is the entrepreneur to the society? He is an innovator who develops new ____78____ and services to make life easier and more comfortable. He plans, organises, directs and ___79___ his business activities effectively, thus minimizing wastage of limited ____80____ and enhancing productivity. Also, he creates employment and contributes to the generation of revenue for the government by paying taxes. <br><br>In the passage above, the numbered gaps indicate missing words. Against each number in the passage, four options are given. Choose the word that is the most suitable to fill number 71 in the passage. <br><br> An entrepreneur is a person who organises and manages any business enterprise, or one who combines the other factors of ___71___ to start a business and make profit.",
+                                "options": {
+                                  "A": "production",
+                                  "B": "creation",
+                                  "C": "manufacturing",
+                                  "D": "construction"
+                                },
+                                "answer": "A",
+                                "image": null
+                              },
+                              {
+                                "id": 72,
+                                "question": "An entrepreneur is a person who organises and manages any business enterprise, or one who combines the other factors of ___71___ to start a business and make profit, He possesses considerable initiatuve and is willing to take ___72___. An entrpreneur can be a farme, a dressmaker, a factory owner, a wholesaler or a ___73___. More often than not, it is best for an entrpreneur to start a business from scratch rather than ___74___ in or buy an existing business. One advantage is that he would be independent and not become a ___75___ or get to inherit some bad debt. The ___76___ of a good entrepreneur must include hardwork, innovation and creativity. He must be well-informed and confident to make worthwhile decisions. As it takes a great deal of energy, time and money to operate one's own business, entrepreneurs must seek to possess goo managerial ___77___ in order to manage theor business successfully. But how useful is the entrepreneur to the society? He is an innovator who develops new ____78____ and services to make life easier and more comfortable. He plans, organises, directs and ___79___ his business activities effectively, thus minimizing wastage of limited ____80____ and enhancing productivity. Also, he creates employment and contributes to the generation of revenue for the government by paying taxes.In the passage above, the numbered gaps indicate missing words. Against each number in the passage, four options are given. Choose the word that is the most suitable to fill number 72 in the passage. <br><br> He possesses considerable initiative and is willing to take ___72___.",
+                                "options": {
+                                  "A": "chances",
+                                  "B": "opportunities",
+                                  "C": "risks",
+                                  "D": "decisions"
+                                },
+                                "answer": "C",
+                                "image": null
+                              },
+                              {
+                                "id": 73,
+                                "question": "An entrepreneur is a person who organises and manages any business enterprise, or one who combines the other factors of ___71___ to start a business and make profit, He possesses considerable initiatuve and is willing to take ___72___. An entrpreneur can be a farme, a dressmaker, a factory owner, a wholesaler or a ___73___. More often than not, it is best for an entrpreneur to start a business from scratch rather than ___74___ in or buy an existing business. One advantage is that he would be independent and not become a ___75___ or get to inherit some bad debt. The ___76___ of a good entrepreneur must include hardwork, innovation and creativity. He must be well-informed and confident to make worthwhile decisions. As it takes a great deal of energy, time and money to operate one's own business, entrepreneurs must seek to possess goo managerial ___77___ in order to manage theor business successfully. But how useful is the entrepreneur to the society? He is an innovator who develops new ____78____ and services to make life easier and more comfortable. He plans, organises, directs and ___79___ his business activities effectively, thus minimizing wastage of limited ____80____ and enhancing productivity. Also, he creates employment and contributes to the generation of revenue for the government by paying taxes.In the passage above, the numbered gaps indicate missing words. Against each number in the passage, four options are given. Choose the word that is the most suitable to fill number 73 in the passage. <br><br> An entrepreneur can be a farmer, a dressmaker, a factory owner, a wholesaler or a ___73___.",
+                                "options": {
+                                  "A": "retailer",
+                                  "B": "customer",
+                                  "C": "manager",
+                                  "D": "worker"
+                                },
+                                "answer": "A",
+                                "image": null
+                              },
+                              {
+                                "id": 74,
+                                "question": "An entrepreneur is a person who organises and manages any business enterprise, or one who combines the other factors of ___71___ to start a business and make profit, He possesses considerable initiatuve and is willing to take ___72___. An entrpreneur can be a farme, a dressmaker, a factory owner, a wholesaler or a ___73___. More often than not, it is best for an entrpreneur to start a business from scratch rather than ___74___ in or buy an existing business. One advantage is that he would be independent and not become a ___75___ or get to inherit some bad debt. The ___76___ of a good entrepreneur must include hardwork, innovation and creativity. He must be well-informed and confident to make worthwhile decisions. As it takes a great deal of energy, time and money to operate one's own business, entrepreneurs must seek to possess goo managerial ___77___ in order to manage theor business successfully. But how useful is the entrepreneur to the society? He is an innovator who develops new ____78____ and services to make life easier and more comfortable. He plans, organises, directs and ___79___ his business activities effectively, thus minimizing wastage of limited ____80____ and enhancing productivity. Also, he creates employment and contributes to the generation of revenue for the government by paying taxes.In the passage above, the numbered gaps indicate missing words. Against each number in the passage, four options are given. Choose the word that is the most suitable to fill number 74 in the passage. <br><br> More often than not, it is best for an entrepreneur to start a business from scratch rather than ___74___ in or buy an existing business.",
+                                "options": {
+                                  "A": "join",
+                                  "B": "enter",
+                                  "C": "invest",
+                                  "D": "come"
+                                },
+                                "answer": "C",
+                                "image": null
+                              },
+                              {
+                                "id": 75,
+                                "question": "An entrepreneur is a person who organises and manages any business enterprise, or one who combines the other factors of ___71___ to start a business and make profit, He possesses considerable initiatuve and is willing to take ___72___. An entrpreneur can be a farme, a dressmaker, a factory owner, a wholesaler or a ___73___. More often than not, it is best for an entrpreneur to start a business from scratch rather than ___74___ in or buy an existing business. One advantage is that he would be independent and not become a ___75___ or get to inherit some bad debt. The ___76___ of a good entrepreneur must include hardwork, innovation and creativity. He must be well-informed and confident to make worthwhile decisions. As it takes a great deal of energy, time and money to operate one's own business, entrepreneurs must seek to possess goo managerial ___77___ in order to manage theor business successfully. But how useful is the entrepreneur to the society? He is an innovator who develops new ____78____ and services to make life easier and more comfortable. He plans, organises, directs and ___79___ his business activities effectively, thus minimizing wastage of limited ____80____ and enhancing productivity. Also, he creates employment and contributes to the generation of revenue for the government by paying taxes.In the passage above, the numbered gaps indicate missing words. Against each number in the passage, four options are given. Choose the word that is the most suitable to fill number 75 in the passage. <br><br> One advantage is that he would be independent and not become a ___75___ or get to inherit some bad debt.",
+                                "options": {
+                                  "A": "colleague",
+                                  "B": "comrade",
+                                  "C": "fellow",
+                                  "D": "partner"
+                                },
+                                "answer": "D",
+                                "image": null
+                              },
+                              {
+                                "id": 76,
+                                "question": "An entrepreneur is a person who organises and manages any business enterprise, or one who combines the other factors of ___71___ to start a business and make profit, He possesses considerable initiatuve and is willing to take ___72___. An entrpreneur can be a farme, a dressmaker, a factory owner, a wholesaler or a ___73___. More often than not, it is best for an entrpreneur to start a business from scratch rather than ___74___ in or buy an existing business. One advantage is that he would be independent and not become a ___75___ or get to inherit some bad debt. The ___76___ of a good entrepreneur must include hardwork, innovation and creativity. He must be well-informed and confident to make worthwhile decisions. As it takes a great deal of energy, time and money to operate one's own business, entrepreneurs must seek to possess goo managerial ___77___ in order to manage theor business successfully. But how useful is the entrepreneur to the society? He is an innovator who develops new ____78____ and services to make life easier and more comfortable. He plans, organises, directs and ___79___ his business activities effectively, thus minimizing wastage of limited ____80____ and enhancing productivity. Also, he creates employment and contributes to the generation of revenue for the government by paying taxes.In the passage above, the numbered gaps indicate missing words. Against each number in the passage, four options are given. Choose the word that is the most suitable to fill number 76 in the passage. <br><br> The ___76___ of a good entrepreneur must include hardwork, innovation and creativity.",
+                                "options": {
+                                  "A": "tendencies",
+                                  "B": "properties",
+                                  "C": "attributes",
+                                  "D": "features"
+                                },
+                                "answer": "C",
+                                "image": null
+                              },
+                              {
+                                "id": 77,
+                                "question": "An entrepreneur is a person who organises and manages any business enterprise, or one who combines the other factors of ___71___ to start a business and make profit, He possesses considerable initiatuve and is willing to take ___72___. An entrpreneur can be a farme, a dressmaker, a factory owner, a wholesaler or a ___73___. More often than not, it is best for an entrpreneur to start a business from scratch rather than ___74___ in or buy an existing business. One advantage is that he would be independent and not become a ___75___ or get to inherit some bad debt. The ___76___ of a good entrepreneur must include hardwork, innovation and creativity. He must be well-informed and confident to make worthwhile decisions. As it takes a great deal of energy, time and money to operate one's own business, entrepreneurs must seek to possess goo managerial ___77___ in order to manage theor business successfully. But how useful is the entrepreneur to the society? He is an innovator who develops new ____78____ and services to make life easier and more comfortable. He plans, organises, directs and ___79___ his business activities effectively, thus minimizing wastage of limited ____80____ and enhancing productivity. Also, he creates employment and contributes to the generation of revenue for the government by paying taxes.In the passage above, the numbered gaps indicate missing words. Against each number in the passage, four options are given. Choose the word that is the most suitable to fill number 77 in the passage. <br><br> As it takes a great deal of energy, time and money to operate one's own business, entrepreneurs must seek to possess good managerial ___77___ in order to manage their business successfully.",
+                                "options": {
+                                  "A": "skills",
+                                  "B": "talents",
+                                  "C": "knack",
+                                  "D": "foresight"
+                                },
+                                "answer": "A",
+                                "image": null
+                              },
+                              {
+                                "id": 78,
+                                "question": "An entrepreneur is a person who organises and manages any business enterprise, or one who combines the other factors of ___71___ to start a business and make profit, He possesses considerable initiatuve and is willing to take ___72___. An entrpreneur can be a farme, a dressmaker, a factory owner, a wholesaler or a ___73___. More often than not, it is best for an entrpreneur to start a business from scratch rather than ___74___ in or buy an existing business. One advantage is that he would be independent and not become a ___75___ or get to inherit some bad debt. The ___76___ of a good entrepreneur must include hardwork, innovation and creativity. He must be well-informed and confident to make worthwhile decisions. As it takes a great deal of energy, time and money to operate one's own business, entrepreneurs must seek to possess goo managerial ___77___ in order to manage theor business successfully. But how useful is the entrepreneur to the society? He is an innovator who develops new ____78____ and services to make life easier and more comfortable. He plans, organises, directs and ___79___ his business activities effectively, thus minimizing wastage of limited ____80____ and enhancing productivity. Also, he creates employment and contributes to the generation of revenue for the government by paying taxes.In the passage above, the numbered gaps indicate missing words. Against each number in the passage, four options are given. Choose the word that is the most suitable to fill number 78 in the passage. <br><br> He is an innovator who develops new ___78___ and services to make life easier and more comfortable.",
+                                "options": {
+                                  "A": "outputs",
+                                  "B": "yields",
+                                  "C": "products",
+                                  "D": "materials"
+                                },
+                                "answer": "C",
+                                "image": null
+                              },
+                              {
+                                "id": 79,
+                                "question": "An entrepreneur is a person who organises and manages any business enterprise, or one who combines the other factors of ___71___ to start a business and make profit, He possesses considerable initiatuve and is willing to take ___72___. An entrpreneur can be a farme, a dressmaker, a factory owner, a wholesaler or a ___73___. More often than not, it is best for an entrpreneur to start a business from scratch rather than ___74___ in or buy an existing business. One advantage is that he would be independent and not become a ___75___ or get to inherit some bad debt. The ___76___ of a good entrepreneur must include hardwork, innovation and creativity. He must be well-informed and confident to make worthwhile decisions. As it takes a great deal of energy, time and money to operate one's own business, entrepreneurs must seek to possess goo managerial ___77___ in order to manage theor business successfully. But how useful is the entrepreneur to the society? He is an innovator who develops new ____78____ and services to make life easier and more comfortable. He plans, organises, directs and ___79___ his business activities effectively, thus minimizing wastage of limited ____80____ and enhancing productivity. Also, he creates employment and contributes to the generation of revenue for the government by paying taxes.In the passage above, the numbered gaps indicate missing words. Against each number in the passage, four options are given. Choose the word that is the most suitable to fill number 79 in the passage. <br><br> He plans, organises, directs and ___79___ his business activities effectively, thus minimizing wastage of limited ____80____ and enhancing productivity.",
+                                "options": {
+                                  "A": "controls",
+                                  "B": "checks",
+                                  "C": "restrains",
+                                  "D": "bridles"
+                                },
+                                "answer": "A",
+                                "image": null
+                              },
+                              {
+                                "id": 80,
+                                "question": "An entrepreneur is a person who organises and manages any business enterprise, or one who combines the other factors of ___71___ to start a business and make profit, He possesses considerable initiatuve and is willing to take ___72___. An entrpreneur can be a farme, a dressmaker, a factory owner, a wholesaler or a ___73___. More often than not, it is best for an entrpreneur to start a business from scratch rather than ___74___ in or buy an existing business. One advantage is that he would be independent and not become a ___75___ or get to inherit some bad debt. The ___76___ of a good entrepreneur must include hardwork, innovation and creativity. He must be well-informed and confident to make worthwhile decisions. As it takes a great deal of energy, time and money to operate one's own business, entrepreneurs must seek to possess goo managerial ___77___ in order to manage theor business successfully. But how useful is the entrepreneur to the society? He is an innovator who develops new ____78____ and services to make life easier and more comfortable. He plans, organises, directs and ___79___ his business activities effectively, thus minimizing wastage of limited ____80____ and enhancing productivity. Also, he creates employment and contributes to the generation of revenue for the government by paying taxes.In the passage above, the numbered gaps indicate missing words. Against each number in the passage, four options are given. Choose the word that is the most suitable to fill number 80 in the passage. <br><br> He plans, organises, directs and controls his business activities effectively, thus minimizing wastage of limited ___80___ and enhancing productivity.",
+                                "options": {
+                                  "A": "assets",
+                                  "B": "wealth",
+                                  "C": "stock",
+                                  "D": "resources"
+                                },
+                                "answer": "D",
+                                "image": null
+                              }
+
+
+
+
+
+                                      
+
+
+];
+
+
+        const staticTheoryQuestions = [
+      {
+        id: 1,
+        question: "You are dissatisfied with some practices in your school. Write a letter to your friend in another school discussing at least three of these practices and the improvement you desire. ", 
+      
+        marks: 10,
+        image: null
+      },
+      {
+        id: 2,
+        question: "Write an article suitable for publication in a national newspaper on the high cost of living, suggesting at least three ways in which the government of your country can tackle the problem",
+        marks: 10,
+        image: null
+      },
+      {
+        id: 3,
+        question: "Write a letter to the Chairman of the Environmental Protection Agency on the effects of illegal felling of trees and suggest ways to remedy the situation.",  
+        marks: 10,
+        image: null
+      },
+      {
+        id: 4,
+        question: "You are the main speaker in a debate on the topic: Children of literate parents perform better in school than those of illiterate parents. Write your argument for or against the motion.", 
+        marks: 10,
+        image: null
+      },
+      {
+        id: 5,
+        question: "Write a story to illustrate the saying: A bird in hand is worth two in the bush.",    
+        marks: 10,
+        image: null
+      },
+        {
+        id: 6,
+        question: "COMPREHENSION<br><br>Read the following passage carefully and answer the questions on it.<br><br> The crowd was massive. Men, women, boys and girls from every nook and cranny of the village had gathered under the big iroko tree. Also in the crowd was an American couple, tourists, who were enjoying their holiday. At the centre of the large circle of people was the magician who had the reputation of performing unbelievable feats. Everybody was impressed with the feats <u>which went along with the hilarious drumming</u>.<br><br>Then came the next item. The magician's three aides each took out a local gun while the magician danced even wilder. The gun-totting aides took up position in three different corners. The drumming became more frenzied and the magician performed more acrobatics. The people were not to wonder for long what the guns had to do with the whole show. One after the other, the aides aimed at the magician while he<u> steadied</u> himself to receive the shots. Each gun boomed with a loud report and the magician jumped up in celebration of his survival. The three shots seemingly got to him but he simply laughed to scorn the shooters.<br><br>The American tourist was more than<u> mystified.</u> He could not explain it. How could a man receive bullet shots in his chest and still remain <u>unscathed</u>? In disbelief he shouted  ``This is amazing can't be explained But wait a minute. I II join the show myself.`` There and then, he went to his car took out his riffle and returned to the crowd ``I'm gonna get this guy!`` he proclaimed.<br><br>He took aim. The magician saw him out of the corner of his eye. He surveyed the scenario and decided that he was not prepared for this. Quickly,<u> he showed a clean pair of heels.</u> Tearing through the crowd he ran for dear life. Some thought this was still part of the show. but when the man would not return it was clear that he had bidden the audience a hasty farewell.<br><br>What the American and most others did not realise all the time was that the local guns had no bullets whatsoever only the gunpowder.<br><br>(a) What suggests that the show was free?<br><br>(b) What evidence is there that the performance was not a one-man show?<br><br>(c) Why was the magician confident to receive the shots from his aides?<br><br>(d) What did the American tourist set out to prove?<br><br>(f) ....he showed a clean pair of heels. What does this expression mean?<br><br>(g) ... which went along with the hilarious drumming.<br><br>(i) What is the grammatical name given to this expression as it is used in the passage?<br><br>(ii) What is its function?<br><br>(h) For each of the following words, find another word or phrase which means the same and which can replace it as it is used in the passage<br><br> (i) feats <br><br>(ii) aides  <br><br>(iii) steadied <br><br>(iv) mystified <br><br>(v) unscathed <br><br>(vi) hasty",    
+         marks: 10,
+        image: null
+      },
+      {
+        id: 7,
+        question: "Summary Pasage<br><br>Read the following passage carefully and answer the question on it.<br><br> Drug abuse is a menace in many countries The continued abuse of drugs usually leads to addiction. This problem is more common among youths The drugs that can be abused vary from prescribed medication to more controlled substances. Alcohol cigarette and controlled substances such as cocaine heroin, methamphetamine and so on are addictive drugs that are often used by many young people They can be smoked, swallowed, inhaled or injected into the bloodstream.<br><br>There are numerous adverse medical and psychological consequences associated with drug addiction Individuals have been known to suffer irreversible damage from the abuse of drugs. It can affect the central nervous system as well as cause memory loss, brain damage and depression. .<br><br>Drug addicts may display psychotic behaviours, mood swings and may be predisposed to irascible decision making. They are also likely to suffer general health problems related to the lungs, heart and kidneys. In fact, the adverse behavioural and physical effects of drug addiction on the individual are enormous. .<br><br>Apart from the problems for the individual the families of drug addicts are not spared Since addicts are usually incapable of functioning as 'normal' members of the society they abuse their families. They are prone to abusing spouses and children. There have been reports of children harming their parents because the latter did not give them .<br><br>money to buy drugs. Drugs addicts may eventually require expensive treatment and rehabilitation. These have huge cost implications that put a lot of pressure on the family budget. In addition their families face stigmatization in their communities. .<br><br>The society at large also suffers. Drug addicts are more likely to be involved in criminal activities than people who are not. Many of the heinous crimes reported have been attributed to drug addiction. The abuse of alcohol is one of the reasons for the increasing number of road accidents. An increase in crime rate forces the government to commit huge resources to fighting crime resources that could have been used to provide more social amenities. Moreover, most criminal gangs are formed and thrive on money from drugs. Although the addicts have made the drug trade seemingly attractive and profitable no one should promote it. .<br><br>Regardless of the apparently insurmountable nature of the problems associated with drug addiction some measures could be taken to curb this menace People need to be more educated on the effects of addiction on themselves and their families. Children must be taught in schools and at home the need to stay away from drugs. The law-enforcement agencies should also be better empowered and resourced to apprehend dealers in order to curtail the availability of drugs in circulation. Another step is to ensure that drug addicts receive early treatment. Such treatment should be based on the specific drug the individual is addicted to. While it may appear impossible to eliminate the problems of addiction, relentless efforts in taking the steps above will help to weaken the grip of drug abuse on our society.<br><br>(a) In three sentences, one for each state three categories of people that are affected by drug addiction and what they suffer. .<br><br>(b) In three sentences one for each, identify three ways to combat drug addiction in the society. .<br><br>",    
+        marks: 10,
+        image: null
+      },
+       {
+        id: 8,
+        question: "Your parents want you to study a particular course but you know you do not have a flair for it. Write a letter to them, giving at least three reasons why a course of your course will suit you better", 
+      
+        marks: 10,
+        image: null
+      },
+       {
+        id: 9,
+        question: "Tourism is an area which has not been fully explored by the government to boost the economy of your country. Write an article suitable for publication in a national newspaper on the need to develop the tourism industry", 
+      
+        marks: 10,
+        image: null
+      },
+];
+        // ================== APPLICATION VARIABLES ==================
+        let questions = [];
+        let currentQuestion = 0;
+        let userAnswers = [];
+        let theoryQuestions = [];
+        let currentTheory = 0;
+        let theoryAnswers = [];
+        let currentSection = 'objectives';
+       
+        // ================== INITIALIZATION ==================
+        window.onload = function () {
+            // Extract exam info from the page
+            const examInfoElement = document.getElementById('examInfo');
+            if (examInfoElement) {
+                const examInfoText = examInfoElement.textContent;
+                // Parse the text to extract subject and class
+                // This is a simple example - adjust based on your actual text format
+                localStorage.setItem('examSubject', 'EXAM');
+                localStorage.setItem('examClass', 'RESULT');
+            }
+            localStorage.setItem('examTerm', 'FIRST TERM 2026/2027');
+             /*let username = sessionStorage.getItem('username');
+             const userImage = sessionStorage.getItem('image');
+            document.getElementById("usernameDisplay").innerText = "WELCOME:" + " " + username;
+            document.getElementById('userImage').src = "img/student.png";
+            document.getElementById('userName').innerText = username;
+            document.getElementById('userImage').src = userImage;
+
+
+            const username = sessionStorage.getItem('username') || 'Student';
+            const userImageFile = sessionStorage.getItem('image');
+            const userImagePath = userImageFile ? `img/${userImageFile}` : 'img/default_user.jpg';
+
+            // Set username
+            const usernameElements = [document.getElementById('userName'), document.getElementById('usernameDisplay')];
+            usernameElements.forEach(el => { if(el) el.innerText = username; });
+
+            // Set user image
+            const userImageElement = document.getElementById('userImage');
+            if(userImageElement){
+                userImageElement.src = userImagePath;
+                userImageElement.onerror = function(){
+                    this.src = 'img/default_user.jpg'; // fallback if image not found
+                };
+            }*/
+             const username = sessionStorage.getItem('username');
+                const image = sessionStorage.getItem('image');
+
+                if (!username) {
+                  window.location.href = 'index.html';
+                } else {
+                  document.getElementById('username').innerText = username;
+                  
+              
+                document.getElementById('userImage').src =
+              'img/' + (sessionStorage.getItem('image') || 'default_user.jpg');
+                }
+           
+            // Load static questions
+            questions = staticObjectivesQuestions;
+            theoryQuestions = staticTheoryQuestions;
+           
+            userAnswers = new Array(questions.length);
+            theoryAnswers = new Array(theoryQuestions.length).fill('');
+           
+            updateDateTime();
+            setInterval(updateDateTime, 1000);
+           
+            displayQuestion();
+            renderQuestionButtons();
+            countUserSelections();
+            updateTheoryStatus();
+        };
+       
+        // ================== TIMER ==================
+        let timeLeft = 60 * 90; // 60 minutes
+        const timerEl = document.getElementById('timer');
+        const timerInterval = setInterval(() => {
+            let min = Math.floor(timeLeft / 60);
+            let sec = timeLeft % 60;
+            timerEl.textContent = `Time Remaining: ${min}:${sec < 10 ? '0' + sec : sec}`;
+            timeLeft--;
+           
+            // Change color when time is running out
+            if (timeLeft < 300) { // 5 minutes
+                timerEl.style.color = 'red';
+                timerEl.style.animation = 'pulse 1s infinite';
+            }
+           
+            if (timeLeft < 0) {
+                clearInterval(timerInterval);
+                alert("Time is up! Your exam will be submitted automatically.");
+                submitExam();
+            }
+        }, 1000);
+       
+        // ================== SECTION TOGGLE ==================
+        function showSection(section) {
+            currentSection = section;
+            // Update button states
+            document.getElementById('objectivesBtn').classList.toggle('active', section === 'objectives');
+            document.getElementById('theoryBtn').classList.toggle('active', section === 'theory');
+           
+            // Show/hide sections
+            document.getElementById('objectivesSection').style.display = section === 'objectives' ? 'block' : 'none';
+            document.getElementById('theorySection').style.display = section === 'theory' ? 'block' : 'none';
+           
+            // Update navigation
+            if (section === 'theory') {
+                displayTheoryQuestion();
+            }
+        }
+       
+        // ================== MATH SYMBOL MAPPING ==================
+        function mapMathSymbol(text) {
+            if (!text) return '';
+           
+            return text
+                .replace(/&theta;/g, 'θ')
+                .replace(/&Theta;/g, 'Θ')
+                .replace(/&pi;/g, 'π')
+                .replace(/&Pi;/g, 'Π')
+                .replace(/&alpha;/g, 'α')
+                .replace(/&beta;/g, 'β')
+                .replace(/&gamma;/g, 'γ')
+                .replace(/&delta;/g, 'δ')
+                .replace(/&epsilon;/g, 'ε')
+                .replace(/&phi;/g, 'φ')
+                .replace(/&omega;/g, 'ω')
+                .replace(/&mu;/g, 'μ')
+                .replace(/&sigma;/g, 'σ')
+                .replace(/&lambda;/g, 'λ')
+                .replace(/&radic;/g, '√')
+                .replace(/&infin;/g, '∞')
+                .replace(/&int;/g, '∫')
+                .replace(/&sum;/g, '∑')
+                .replace(/&prod;/g, '∏')
+                .replace(/&part;/g, '∂')
+                .replace(/&deg;/g, '°')
+                .replace(/&times;/g, '×')
+                .replace(/&divide;/g, '÷')
+                .replace(/&plusmn;/g, '±')
+                .replace(/&le;/g, '≤')
+                .replace(/&ge;/g, '≥')
+                .replace(/&ne;/g, '≠')
+                .replace(/&frac12;/g, '½')
+                .replace(/&frac14;/g, '¼')
+                .replace(/&frac34;/g, '¾')
+                .replace(/\^(\d+)/g, '<sup>$1</sup>')
+                .replace(/\^\(([^)]+)\)/g, '<sup>$1</sup>')
+                .replace(/_(\d+)/g, '<sub>$1</sub>')
+                .replace(/_\(([^)]+)\)/g, '<sub>$1</sub>');
+        }
+       
+        // ================== OBJECTIVES FUNCTIONS ==================
+        function saveAnswer() {
+            const selected = document.querySelector('input[name="option"]:checked');
+            if (selected) {
+                userAnswers[currentQuestion] = selected.value;
+                countUserSelections();
+            }
+        }
+       
+        function displayQuestion() {
+            if (currentQuestion >= questions.length) return;
+           
+            const q = questions[currentQuestion];
+           
+            // Apply math symbol mapping
+            const questionText = mapMathSymbol(q.question);
+            const optA = mapMathSymbol(q.options.A);
+            const optB = mapMathSymbol(q.options.B);
+            const optC = mapMathSymbol(q.options.C);
+            const optD = mapMathSymbol(q.options.D);
+           
+            // Display question and options
+            document.getElementById('questionText').innerHTML = `${currentQuestion + 1}. ${questionText}`;
+            document.getElementById('optA').innerHTML = optA;
+            document.getElementById('optB').innerHTML = optB;
+            document.getElementById('optC').innerHTML = optC;
+            document.getElementById('optD').innerHTML = optD;
+           
+            // Handle question image
+            const imageContainer = document.getElementById('questionImageContainer');
+            if (q.image) {
+                imageContainer.innerHTML = `
+                    <div class="theory-image-wrapper">
+                        <img src="${q.image}" alt="Question Diagram" class="question-image">
+                    </div>
+                `;
+            } else {
+                imageContainer.innerHTML = '';
+            }
+           
+            // Clear and set radio buttons
+            const radios = document.getElementsByName('option');
+            radios.forEach(r => r.checked = false);
+           
+            if (userAnswers[currentQuestion]) {
+                document.querySelector(`input[name="option"][value="${userAnswers[currentQuestion]}"]`).checked = true;
+            }
+           
+            highlightCurrentButton();
+        }
+       
+        function nextQuestion() {
+            saveAnswer();
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                displayQuestion();
+            }
+        }
+       
+        function prevQuestion() {
+            saveAnswer();
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                displayQuestion();
+            }
+        }
+       
+        function renderQuestionButtons() {
+            const container = document.getElementById('questionButtons');
+            container.innerHTML = '';
+           
+            for (let i = 0; i < questions.length; i++) {
+                const btn = document.createElement('button');
+                btn.textContent = i + 1;
+                btn.className = 'question-btn';
+                btn.onclick = () => {
+                    saveAnswer();
+                    currentQuestion = i;
+                    displayQuestion();
+                };
+                container.appendChild(btn);
+            }
+            highlightCurrentButton();
+        }
+       
+        function highlightCurrentButton() {
+            document.querySelectorAll('.question-btn').forEach((btn, index) => {
+                const answered = userAnswers[index] !== undefined;
+                const current = index === currentQuestion;
+               
+                btn.style.backgroundColor = current ? '#5cb85c' : (answered ? '#337ab7' : '#eee');
+                btn.style.color = current || answered ? 'white' : 'black';
+                btn.style.border = current ? '2px solid #2e7d32' : '1px solid #444';
+            });
+        }
+       
+        function countUserSelections() {
+            let totalQuestions = questions.length;
+            let answeredCount = userAnswers.filter(answer => answer !== undefined).length;
+            let unansweredCount = totalQuestions - answeredCount;
+           
+            document.getElementById("answeredLabel").innerText = `Answered: ${answeredCount}/${totalQuestions}`;
+            document.getElementById("unansweredLabel").innerText = `Unanswered: ${unansweredCount}`;
+        }
+       
+        /*function submitExam() {
+            saveAnswer();
+            let score = 0;
+            questions.forEach((q, i) => {
+                if (userAnswers[i] === q.answer) score++;
+            });
+           
+            clearInterval(timerInterval);
+            alert(`Objective Exam Completed!\n\nYour Score: ${score} out of ${questions.length}`);
+        }*/
+         function submitExam() {
+            saveAnswer();
+            showResult();
+        }
+       
+        /*function showResult() {
+            clearInterval(timerInterval);
+            let score = 0;
+            questions.forEach((q, i) => {
+                if (userAnswers[i] === q.answer) score++;
+            });
+           
+            const username = localStorage.getItem("username") || "Guest";
+            localStorage.setItem("examUser", username);
+            localStorage.setItem("examScore", score);
+            localStorage.setItem("totalQuestions", questions.length);
+
+
+            // Save exam data before going to result page
+            localStorage.setItem("student_name", username);
+            localStorage.setItem("student_class", selectedClass);
+            localStorage.setItem("exam_subject", selectedSubject);
+            localStorage.setItem("student_image", studentImageURL);
+            localStorage.setItem("exam_score", score);
+            localStorage.setItem("total_questions", totalQuestions);
+
+                // Redirect to results page
+                window.location.href = "results.html";
+           
+            alert(`Objective Exam Completed!\n\nYour Score: ${score} out of ${questions.length}`);
+            window.location.href = "results.html";
+        }*/
+        /*function showResult() {
+            clearInterval(timerInterval);
+            let score = 0;
+            questions.forEach((q, i) => {
+                if (userAnswers[i] === q.answer) score++;
+            });
+           
+            const username = localStorage.getItem("username") || "Guest";
+            const cls = sessionStorage.getItem("class");
+            const sub = sessionStorage.getItem("subject");
+           
+            localStorage.setItem("examUser", username);
+            localStorage.setItem("examScore", score);
+            localStorage.setItem("totalQuestions", questions.length);
+            localStorage.setItem("examInfo", document.getElementById('examInfo').textContent.trim());
+           
+            // ✅ Mark exam as completed
+            if (cls && sub) {
+                const attempts = getExamAttempts(cls);
+                if (!attempts[username]) {
+                    attempts[username] = {};
+                }
+                attempts[username][sub] = true;
+                saveExamAttempts(cls, attempts);
+            }
+           
+            alert(`Objective Exam Completed!\n\nYour Score: ${score} out of ${questions.length}`);
+            window.location.href = "results.html";
+    }*/
+       /*function showResult() {
+                    clearInterval(timerInterval);
+                    let score = 0;
+                    questions.forEach((q, i) => {
+                        if (userAnswers[i] === q.answer) score++;
+                    });
+                   
+                    const username = sessionStorage.getItem('username') || "Guest";
+                    const cls = sessionStorage.getItem('class');
+                    const sub = sessionStorage.getItem('subject');
+                   
+                    localStorage.setItem("examUser", username);
+                    localStorage.setItem("examScore", score);
+                    localStorage.setItem("totalQuestions", questions.length);
+                    localStorage.setItem("pendingClass", cls);
+                    localStorage.setItem("pendingSubject", sub);
+                    localStorage.setItem("pendingUsername", username);
+                   
+                    // ✅ Get exam info from sessionStorage or use default
+                    const examInfo = sessionStorage.getItem('examInfo') || 'EXAMINATION - RERSULT (2ND TERM)';
+                    localStorage.setItem("examInfo", examInfo);
+                   
+                    // ✅ DO NOT mark exam as completed here - wait for confirmation on results page
+                    console.log(`Exam completed but not marked as attempted yet. Waiting for confirmation.`);
+                   
+                    alert(`Objective Exam Completed!\n\nYour Score: ${score} out of ${questions.length}\n\nClick OK to view your results and confirm your attempt.`);
+                    window.location.href = "results.html";
+        }*/
+
+            function showResult() {
+				    clearInterval(timerInterval);
+				    let score = 0;
+				    questions.forEach((q, i) => {
+				        if (userAnswers[i] === q.answer) score++;
+				    });
+				    
+				    const username = sessionStorage.getItem('username') || "Guest";
+				    const cls = sessionStorage.getItem('class');
+				    const sub = sessionStorage.getItem('subject');
+				    
+				    localStorage.setItem("examUser", username);
+				    localStorage.setItem("examScore", score);
+				    localStorage.setItem("totalQuestions", questions.length);
+				    localStorage.setItem("pendingClass", cls);
+				    localStorage.setItem("pendingSubject", sub);
+				    localStorage.setItem("pendingUsername", username);
+				    
+				    // ✅ Get exam info from sessionStorage or use default
+				    const examInfo = sessionStorage.getItem('examInfo') || 'TEST - RESULT (SECOND TERM)';
+				    localStorage.setItem("examInfo", examInfo);
+				    
+				    // ✅ Secretly download score details to downloads folder
+				    const scoreDetails = {
+				        username: username,
+				        class: cls,
+				        subject: sub,
+				        score: score,
+				        totalQuestions: questions.length,
+				        percentage: ((score / questions.length) * 100).toFixed(2) + '%',
+				        examInfo: examInfo,
+				        timestamp: new Date().toISOString(),
+				        userAnswers: userAnswers,
+				        correctAnswers: questions.map(q => q.answer)
+				    };
+				    
+				    // Create a blob with the data
+				    const blob = new Blob([JSON.stringify(scoreDetails, null, 2)], { type: 'application/json' });
+				    const url = URL.createObjectURL(blob);
+				    
+				    // Create a hidden anchor element and trigger download
+				    const a = document.createElement('a');
+				    a.href = url;
+				    a.download = `exam_results_${username}_${new Date().getTime()}.json`;
+				    a.style.display = 'none';
+				    document.body.appendChild(a);
+				    a.click();
+				    
+				    // Clean up
+				    document.body.removeChild(a);
+				    URL.revokeObjectURL(url);
+				    
+				    // ✅ DO NOT mark exam as completed here - wait for confirmation on results page
+				    console.log(`Exam completed but not marked as attempted yet. Waiting for confirmation.`);
+				    
+				    alert(`Objective Exam Completed!\n\nYour Score: ${score} out of ${questions.length}\n\nClick OK to view your results and confirm your attempt.`);
+				    window.location.href = "results.html";
+				}
+
+
+
+            // Add these helper functions to your exam page
+            function getExamAttempts(cls) {
+                const key = `${cls}_exam_attempts`;
+                const stored = localStorage.getItem(key);
+                return stored ? JSON.parse(stored) : {};
+            }
+
+            function saveExamAttempts(cls, data) {
+                const key = `${cls}_exam_attempts`;
+                localStorage.setItem(key, JSON.stringify(data));
+            }
+                   
+        // ================== THEORY QUESTIONS ==================
+       /* function displayTheoryQuestion() {
+            if (theoryQuestions.length === 0) {
+                document.getElementById('theoryQuestionText').innerText = "No theory questions available.";
+                return;
+            }
+           
+            const tq = theoryQuestions[currentTheory];
+           
+            // Display question text (without math symbol mapping for theory)
+            document.getElementById('theoryQuestionText').innerText = mapMathSymbol(`${currentTheory + 1}. ${tq.question} ${tq.marks ? `[${tq.marks} marks]` : ''}`);
+                
+            document.getElementById('theoryAnswer').value = theoryAnswers[currentTheory] || "";
+           
+            // Handle theory question image
+            const theoryImageContainer = document.getElementById('theoryImageContainer');
+            if (tq.image) {
+                theoryImageContainer.innerHTML = `
+                    <div class="theory-image-wrapper">
+                        <img src="${tq.image}" alt="Theory Question Diagram" class="theory-question-image">
+                        <div class="image-caption">${tq.imageCaption || 'Diagram for question'}</div>
+                    </div>
+                `;
+            } else {
+                theoryImageContainer.innerHTML = '';
+            }
+           
+            updateTheoryStatus();
+        }
+       
+        function updateTheoryStatus() {
+            const savedCount = theoryAnswers.filter(answer => answer.trim() !== "").length;
+            document.getElementById("theoryStatus").innerText =
+                `Question ${currentTheory + 1} of ${theoryQuestions.length} | Saved: ${savedCount}/${theoryQuestions.length}`;
+        }
+       
+        function saveTheoryAnswer() {
+            const answer = document.getElementById('theoryAnswer').value.trim();
+            theoryAnswers[currentTheory] = answer;
+            localStorage.setItem(`theoryAnswer_${currentTheory}`, answer);
+            updateTheoryStatus();
+            alert("Theory answer saved successfully!");
+        }
+       
+        function nextTheoryQuestion() {
+            if (currentTheory < theoryQuestions.length - 1) {
+                currentTheory++;
+                displayTheoryQuestion();
+            } else {
+                alert("You've reached the last theory question.");
+            }
+        }
+       
+        function prevTheoryQuestion() {
+            if (currentTheory > 0) {
+                currentTheory--;
+                displayTheoryQuestion();
+            }
+        }
+       
+        function submitTheoryExam() {
+            const savedCount = theoryAnswers.filter(answer => answer.trim() !== "").length;
+            const confirmSubmit = confirm(
+                `Theory section completed!\n\n` +
+                `You have answered ${savedCount} out of ${theoryQuestions.length} theory questions.\n\n` +
+                `Are you sure you want to submit?`
+            );
+           
+            if (confirmSubmit) {
+                alert("Theory answers submitted successfully!");
+            }
+        }*/
+
+        // ================== THEORY QUESTIONS ==================
+        function displayTheoryQuestion() {
+            if (theoryQuestions.length === 0) {
+                document.getElementById('theoryQuestionText').innerHTML = "No theory questions available.";
+                return;
+            }
+            
+            const tq = theoryQuestions[currentTheory];
+            
+            // IMPORTANT CHANGE: Use innerHTML instead of innerText to render HTML tags
+            // Display question text (without math symbol mapping for theory)
+            const questionText = `${currentTheory + 1}. ${tq.question} ${tq.marks ? `[${tq.marks} marks]` : ''}`;
+            document.getElementById('theoryQuestionText').innerHTML = mapMathSymbol(questionText);
+            
+            document.getElementById('theoryAnswer').value = theoryAnswers[currentTheory] || "";
+            
+            // Handle theory question image
+            const theoryImageContainer = document.getElementById('theoryImageContainer');
+            if (tq.image) {
+                theoryImageContainer.innerHTML = `
+                    <div class="theory-image-wrapper">
+                        <img src="${tq.image}" alt="Theory Question Diagram" class="theory-question-image">
+                        <div class="image-caption">${tq.imageCaption || 'Diagram for question'}</div>
+                    </div>
+                `;
+            } else {
+                theoryImageContainer.innerHTML = '';
+            }
+            
+            updateTheoryStatus();
+        }
+
+        function updateTheoryStatus() {
+            const savedCount = theoryAnswers.filter(answer => answer && answer.trim() !== "").length;
+            document.getElementById("theoryStatus").innerHTML = // Using innerHTML here too for consistency
+                `Question ${currentTheory + 1} of ${theoryQuestions.length} | Saved: ${savedCount}/${theoryQuestions.length}`;
+        }
+
+        function saveTheoryAnswer() {
+            const answer = document.getElementById('theoryAnswer').value.trim();
+            theoryAnswers[currentTheory] = answer;
+            localStorage.setItem(`theoryAnswer_${currentTheory}`, answer);
+            updateTheoryStatus();
+            
+            // Visual feedback without alert (more user-friendly)
+            const saveBtn = document.querySelector('.theory-save-btn');
+            if (saveBtn) {
+                const originalText = saveBtn.textContent;
+                saveBtn.textContent = '✓ Saved!';
+                saveBtn.style.backgroundColor = '#27ae60';
+                setTimeout(() => {
+                    saveBtn.textContent = originalText;
+                    saveBtn.style.backgroundColor = ''; // Revert to original color
+                }, 1500);
+            } else {
+                // Fallback if button not found
+                alert("Theory answer saved successfully!");
+            }
+        }
+
+        function nextTheoryQuestion() {
+            // Save current answer before moving
+            saveTheoryAnswer();
+            
+            if (currentTheory < theoryQuestions.length - 1) {
+                currentTheory++;
+                displayTheoryQuestion();
+            } else {
+                alert("You've reached the last theory question.");
+            }
+        }
+
+        function prevTheoryQuestion() {
+            // Save current answer before moving
+            saveTheoryAnswer();
+            
+            if (currentTheory > 0) {
+                currentTheory--;
+                displayTheoryQuestion();
+            }
+        }
+
+        function submitTheoryExam() {
+            // Save current answer before submitting
+            saveTheoryAnswer();
+            
+            const savedCount = theoryAnswers.filter(answer => answer && answer.trim() !== "").length;
+            const confirmSubmit = confirm(
+                `Theory section completed!\n\n` +
+                `You have answered ${savedCount} out of ${theoryQuestions.length} theory questions.\n\n` +
+                `Are you sure you want to submit?`
+            );
+            
+            if (confirmSubmit) {
+                // Prepare data for submission
+                const submissionData = {
+                    username: username,
+                    answers: theoryAnswers.map((answer, index) => ({
+                        question_id: theoryQuestions[index]?.id || index,
+                        question: theoryQuestions[index]?.question,
+                        answer: answer,
+                        marks: theoryQuestions[index]?.marks || 0
+                    }))
+                };
+                
+                // Submit to server (uncomment when backend is ready)
+                /*
+                fetch('save_theory_answers.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(submissionData)
+                })
+                .then(response => response.json())
+                .then(result => {
+                    if (result.success) {
+                        alert('Theory answers submitted successfully!');
+                        // Optionally switch back to objectives or show summary
+                    } else {
+                        alert('Error submitting theory answers: ' + result.error);
+                    }
+                })
+                .catch(error => {
+                    console.error('Submission error:', error);
+                    alert('Error submitting theory answers. Please try again.');
+                });
+                */
+                
+                // Temporary success message
+                alert("Theory answers submitted successfully! (Demo mode)");
+                
+                // Optional: Clear localStorage after submission
+                // for (let i = 0; i < theoryQuestions.length; i++) {
+                //     localStorage.removeItem(`theoryAnswer_${i}`);
+                // }
+            }
+        }
+
+        // ================== ADD CSS FOR THEORY TEXT RENDERING ==================
+        // Add this to your existing CSS or in a style tag
+        const theoryStyles = `
+            <style>
+                #theoryQuestionText {
+                    font-size: 16px;
+                    line-height: 1.6;
+                    margin-bottom: 20px;
+                    padding: 15px;
+                    background-color: #f9f9f9;
+                    border-left: 4px solid #d35400;
+                    border-radius: 0 8px 8px 0;
+                    min-height: 100px;
+                    overflow-x: auto;
+                }
+                
+                /* Style for underlined text */
+                #theoryQuestionText u {
+                    text-decoration: underline;
+                    text-decoration-color: #d35400;
+                    text-decoration-thickness: 2px;
+                }
+                
+                /* Style for bold text */
+                #theoryQuestionText strong,
+                #theoryQuestionText b {
+                    color: #2c3e50;
+                    font-weight: 700;
+                }
+                
+                /* Style for italic text */
+                #theoryQuestionText em,
+                #theoryQuestionText i {
+                    font-style: italic;
+                    color: #7f8c8d;
+                }
+                
+                /* Style for paragraphs */
+                #theoryQuestionText p {
+                    margin-bottom: 10px;
+                }
+                
+                /* Style for lists */
+                #theoryQuestionText ul,
+                #theoryQuestionText ol {
+                    margin-left: 20px;
+                    margin-bottom: 10px;
+                }
+                
+                #theoryQuestionText li {
+                    margin-bottom: 5px;
+                }
+                
+                /* Style for images within theory questions */
+                #theoryQuestionText img {
+                    max-width: 100%;
+                    height: auto;
+                    border-radius: 5px;
+                    margin: 10px 0;
+                }
+                
+                /* Style for tables */
+                #theoryQuestionText table {
+                    border-collapse: collapse;
+                    width: 100%;
+                    margin: 10px 0;
+                }
+                
+                #theoryQuestionText th,
+                #theoryQuestionText td {
+                    border: 1px solid #ddd;
+                    padding: 8px;
+                    text-align: left;
+                }
+                
+                #theoryQuestionText th {
+                    background-color: #d35400;
+                    color: white;
+                }
+                
+                /* Style for code blocks */
+                #theoryQuestionText pre,
+                #theoryQuestionText code {
+                    background-color: #2c3e50;
+                    color: #ecf0f1;
+                    padding: 10px;
+                    border-radius: 5px;
+                    overflow-x: auto;
+                    font-family: 'Courier New', monospace;
+                }
+                
+                /* Style for blockquotes */
+                #theoryQuestionText blockquote {
+                    border-left: 3px solid #d35400;
+                    padding-left: 15px;
+                    margin-left: 0;
+                    color: #555;
+                    font-style: italic;
+                }
+            </style>
+        `;
+
+        // Append the styles to the document head
+        document.head.insertAdjacentHTML('beforeend', theoryStyles);
+       
+        // ================== DATE & TIME ==================
+        function updateDateTime() {
+            let now = new Date();
+            let day = now.getDate();
+            let month = now.toLocaleString('default', { month: 'long' });
+            let year = now.getFullYear();
+            let suffix = "th";
+           
+            if (day === 1 || day === 21 || day === 31) suffix = "st";
+            else if (day === 2 || day === 22) suffix = "nd";
+            else if (day === 3 || day === 23) suffix = "rd";
+           
+            let hours = now.getHours();
+            let minutes = now.getMinutes();
+            let seconds = now.getSeconds();
+            let ampm = hours >= 12 ? "PM" : "AM";
+            hours = hours % 12 || 12;
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+           
+            let formattedDateTime = `${month} ${day}${suffix} ${year}, ${hours}:${minutes}:${seconds} ${ampm}`;
+            document.getElementById("datetime").innerText = formattedDateTime;
+        }
+       
+        // ================== KEYBOARD SHORTCUTS ==================
+        document.addEventListener('keydown', function (event) {
+            if (currentSection === 'objectives') {
+                const key = event.key.toUpperCase();
+               
+                // Answer selection for objectives
+                if (['A', 'B', 'C', 'D'].includes(key)) {
+                    const radio = document.querySelector(`input[name="option"][value="${key}"]`);
+                    if (radio) {
+                        radio.checked = true;
+                        saveAnswer();
+                    }
+                }
+               
+                // Navigation with arrows
+                if (event.key === 'ArrowRight') {
+                    nextQuestion();
+                } else if (event.key === 'ArrowLeft') {
+                    prevQuestion();
+                }
+            } else if (currentSection === 'theory') {
+                // Navigation for theory
+                if (event.key === 'ArrowRight') {
+                    nextTheoryQuestion();
+                } else if (event.key === 'ArrowLeft') {
+                    prevTheoryQuestion();
+                }
+               
+                // Save with Ctrl+S
+                if (event.ctrlKey && event.key === 's') {
+                    event.preventDefault();
+                    saveTheoryAnswer();
+                }
+            }
+        });
+       
+        // ================== ANTI-CHEAT & LOGOUT ==================
+        document.addEventListener('keydown', function (event) {
+            const key = event.key.toLowerCase();
+            if ((event.ctrlKey && (key === 'p' || key === 's')) && currentSection === 'objectives') {
+                event.preventDefault();
+                alert("Right-click and view source are disabled during examination.");
+                return false;
+            }
+        });
+       
+        document.addEventListener('contextmenu', (event) => {
+            event.preventDefault();
+            alert("Right-click is disabled during examination.");
+        });
+       
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I') ||
+                (e.ctrlKey && e.shiftKey && e.key === 'J') || (e.ctrlKey && e.key === 'u')) {
+                e.preventDefault();
+                alert("Developer tools are disabled during examination.");
+            }
+        });
+       
+        function logout() {
+            const confirmLogout = confirm("Are you sure you want to logout? Your progress may be lost.");
+            if (confirmLogout) {
+                window.location.href = "index.html";
+            }
+        }
+    </script>
+</body>
+</html>
